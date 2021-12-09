@@ -1,0 +1,8 @@
+Params
+winsize: 40
+overlap: 20
+dt: 0.02
+ROI: [132   8 691 805]
+circle: [416. 417. 395.]
+Thu Dec  9 23:18:14 2021 // 06972-06973 calculated
+Thu Dec  9 23:18:16 2021 // 06974-06975 calculated
