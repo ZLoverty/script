@@ -1,0 +1,2 @@
+Start to convert test_images\batch_extractImages\day2\exp1\RawImage.raw to raw tif images.
+Sat Dec 11 23:27:46 2021 // frame 00000
