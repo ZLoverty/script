@@ -2,6 +2,7 @@ import sys
 import time
 import os
 from myImageLib import dirrec
+from shutil import copy
 
 """
 Generete preview images of given folder.
@@ -23,18 +24,21 @@ USAGE
 =====
 python gen_preview.py folder
 
-folder should be two levels above the 00000.tif file. 
+folder should be two levels above the 00000.tif file.
 Deeper directories won't be searched.
 
 TEST
 ====
+python gen_preview.py test_images\gen_preview\day1
 
 LOG
 ===
+test_images\gen_preview\day1\00\8-bit\00000.tif -> test_images\gen_preview\day1\preview\00.tif
 
 EDIT
 ====
 Dec 12, 2021 -- Initial commit
+Dec 13, 2021 -- `cp` command is not platform independent. Use python native tools `shutil.copy` instead.
 """
 
 if __name__=="__main__":
@@ -50,4 +54,5 @@ if __name__=="__main__":
         img_dir = os.path.join(subfolder, "8-bit", "00000.tif")
         if os.path.exists(img_dir):
             dest_dir = os.path.join(preview_folder, sf + ".tif")
-            os.system("cp {0} {1} -v".format(img_dir, dest_dir))
+            print(time.asctime() + " \\ {0} -> {1}".format(img_dir, dest_dir))
+            copy(img_dir, dest_dir)
