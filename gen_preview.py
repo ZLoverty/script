@@ -62,7 +62,6 @@ if __name__=="__main__":
     preview_folder = os.path.split(outDir)[0]
     if os.path.exists(preview_folder) == False:
         os.makedirs(preview_folder)
-    nd2Dir = r"test_images\batch_to_tif\day1\00.nd2"
     img = extract_first_frame(nd2Dir)
     io.imsave(outDir, img)
     print("{0} -> {1}".format(nd2Dir, outDir))
