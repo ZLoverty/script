@@ -6,4 +6,7 @@
 - Optimal PIV box size need to be determined.
 - Reorganize test_images: smaller, more similar to real folder structure (with different folders intertwining together)
 - `batch_gen_preview.py`
-- 
+- orientational order calculation
+- Solve the memory issue of reading large .raw file (np.fromfile)
+
+## Done list
