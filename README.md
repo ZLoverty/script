@@ -8,5 +8,6 @@
 - `batch_gen_preview.py`
 - orientational order calculation
 - Solve the memory issue of reading large .raw file (np.fromfile)
+- modify `gen_preview.py`: work on single .nd2 files
 
 ## Done list
