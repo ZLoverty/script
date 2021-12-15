@@ -38,8 +38,9 @@ Tue Dec 14 14:10:49 2021 \ Generating preview for test_images\batch_to_tif\day2\
 EDIT
 ====
 Dec 14, 2021 -- i) Use system argument as input main folder. ii) Implement main log file. iii) Better doc string.
+Dec 15, 2021 -- Remove the last os.sep of main_folder, so that it is ok to pass main_folder with "\" (win) or "/" (linux) at the end.
 """
-main_folder = sys.argv[1]
+main_folder = sys.argv[1].rstrip(os.sep)
 out_folder = os.path.join(main_folder, "preview")
 if os.path.exists(out_folder) == False:
     os.makedirs(out_folder)

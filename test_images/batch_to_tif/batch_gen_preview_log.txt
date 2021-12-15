@@ -1,8 +1,8 @@
-Tue Dec 14 14:10:47 2021 \ Start batch_gen_preview in test_images\batch_to_tif
+Thu Dec 16 00:06:37 2021 \ Start batch_gen_preview in test_images\batch_to_tif
 The following files will be converted:
   Name                                   Dir
 0   00  test_images\batch_to_tif\day1\00.nd2
 1   01  test_images\batch_to_tif\day2\01.nd2
 
-Tue Dec 14 14:10:47 2021 \ Generating preview for test_images\batch_to_tif\day1\00.nd2
-Tue Dec 14 14:10:49 2021 \ Generating preview for test_images\batch_to_tif\day2\01.nd2
+Thu Dec 16 00:06:37 2021 \ Generating preview for test_images\batch_to_tif\day1\00.nd2
+Thu Dec 16 00:06:38 2021 \ Generating preview for test_images\batch_to_tif\day2\01.nd2
