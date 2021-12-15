@@ -1,0 +1,13 @@
+Wed Dec 15 23:05:09 2021 \ Start batch_spatial_correlation in 
+Wed Dec 15 23:05:09 2021 \ Computing test_images\batch_extractImages
+Wed Dec 15 23:05:11 2021 \ Computing test_images\batch_spatial_correlation
+Wed Dec 15 23:05:13 2021 \ Computing test_images\batch_to_tif
+Wed Dec 15 23:05:15 2021 \ Computing test_images\batch_to_vid
+Wed Dec 15 23:05:17 2021 \ Computing test_images\cav_imseq
+Wed Dec 15 23:05:18 2021 \ Computing test_images\extractImages
+Wed Dec 15 23:05:20 2021 \ Computing test_images\gen_preview
+Wed Dec 15 23:05:22 2021 \ Computing test_images\piv_drop
+Wed Dec 15 23:05:24 2021 \ Computing test_images\test
+Wed Dec 15 23:05:25 2021 \ Computing test_images\to_vid
+Wed Dec 15 23:05:27 2021 \ Computing test_images\velocity_autocorr
+Wed Dec 15 23:05:29 2021 \ Computing finished!

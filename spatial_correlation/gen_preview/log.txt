@@ -1,0 +1,2 @@
+Input folder: test_images\gen_preview
+Ouput folder: spatial_correlation\gen_preview

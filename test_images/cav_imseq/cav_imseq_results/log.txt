@@ -1,0 +1,3 @@
+Input folder: test_images\cav_imseq
+Ouput folder: test_images\cav_imseq\cav_imseq_results
+Wed Dec 15 22:17:43 2021 // 00000-00001 calculated

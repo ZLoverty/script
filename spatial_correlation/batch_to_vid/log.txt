@@ -1,0 +1,2 @@
+Input folder: test_images\batch_to_vid
+Ouput folder: spatial_correlation\batch_to_vid

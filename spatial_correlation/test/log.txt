@@ -1,0 +1,2 @@
+Input folder: test_images\test
+Ouput folder: spatial_correlation\test

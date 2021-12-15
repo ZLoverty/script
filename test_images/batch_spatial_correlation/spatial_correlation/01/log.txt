@@ -1,0 +1,3 @@
+Input folder: test_images\batch_spatial_correlation\piv_folder\01
+Ouput folder: test_images\batch_spatial_correlation\spatial_correlation\01
+Wed Dec 15 23:07:05 2021 // 06974-06975 calculated

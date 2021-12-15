@@ -1,0 +1,4 @@
+Wed Dec 15 23:07:01 2021 \ Start batch_spatial_correlation in test_images\batch_spatial_correlation
+Wed Dec 15 23:07:01 2021 \ Computing test_images\batch_spatial_correlation\piv_folder\00
+Wed Dec 15 23:07:03 2021 \ Computing test_images\batch_spatial_correlation\piv_folder\01
+Wed Dec 15 23:07:05 2021 \ Computing finished!

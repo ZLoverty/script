@@ -1,0 +1,2 @@
+Input folder: test_images\batch_extractImages
+Ouput folder: spatial_correlation\batch_extractImages

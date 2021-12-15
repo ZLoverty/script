@@ -1,0 +1,4 @@
+Input folder: test_images\piv_drop
+Ouput folder: spatial_correlation\piv_drop
+Wed Dec 15 23:05:23 2021 // 06972-06973 calculated
+Wed Dec 15 23:05:24 2021 // 06974-06975 calculated
