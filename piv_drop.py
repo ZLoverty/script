@@ -1,12 +1,15 @@
-from openpiv import tools, pyprocess, validation, filters, scaling
+# from openpiv import tools, pyprocess, validation, filters, scaling
+from pivLib import PIV_masked
 import numpy as np
 from skimage import io
 import os
-from scipy.signal import medfilt2d
+# from scipy.signal import medfilt2d
 import pandas as pd
 import sys
 from corrLib import readdata
 import time
+from multiprocessing import Pool
+from itertools import repeat
 
 """
 Perform PIV analysis on an image sequence of **bacteria in a droplet**.
@@ -15,22 +18,16 @@ Notebook for this script: DE/code/PIV/PIV analysis in droplets
 
 USAGE
 =====
-python piv_drop.py image_folder save_folder params_file 
+python piv_drop.py image_folder save_folder winsize overlap dt mask_dir
 
 image_folder -- folder containing .tif image sequence
 save_folder -- folder to save PIV data
-params_file -- a text file containing all the required parameters.
-               Parameter list:
-                   PIV -- winsize, overlap, dt
-                   ROI -- x0, y0, w, h
-                   circle (mask) -- xc, yc, r
-               The file should contain these 10 numbers in order.
+winsize, overlap, dt -- regular params
+mask_dir -- mask image dir
 
 TEST PARAMS
 ===========
-image_folder = test_images\piv_drop
-save_folder = test_images\piv_drop
-params_file = test_images\piv_drop\params.txt
+python piv_drop.py test_images\piv_drop test_images\piv_drop 40 20 0.02 test_images\piv_drop\mask.tif
 
 LOG
 ===
@@ -46,70 +43,25 @@ Thu Dec  9 23:18:16 2021 // 06974-06975 calculated
 EDIT
 ====
 12092021 -- Initial commit.
+Dec 16, 2021 -- i) use `PIV_masked()` as the core algorithm, ii) implement multiprocessing with `Pool`
 """
 
-def PIV_droplet(I0, I1, ROI, circle, winsize=40, overlap=20, dt=0.02):
+def PIV_droplet(I0dir, I1dir, I0name, I1name, winsize, overlap, dt, mask, save_folder):
     """Perform PIV analysis on the image sequence in given folder. Specific for images of droplets.
     Args:
     I0, I1 -- adjacent images in a sequence
-    ROI -- 4-tuple, (x0, y0, w, h)
-    circle -- indicate droplet position (wrt raw image upper left corner) and size
+    winsize, overlap, dt -- regular PIV params
+    mask -- a binary image of the same size as I0 and I1
     Returns:
-    frame_data -- x, y, u, v DataFrame, here x, y is wrt original image, (u, v) are in px/s"""
+    None"""
     # apply ROI
-    I0_crop = apply_ROI(I0, *ROI).astype(np.int32)
-    I1_crop = apply_ROI(I1, *ROI).astype(np.int32)
-    # PIV
-    u0, v0, sig2noise = pyprocess.extended_search_area_piv(
-        I0_crop.astype(np.int32),
-        I1_crop.astype(np.int32),
-        window_size=winsize,
-        overlap=overlap,
-        dt=dt,
-        search_area_size=winsize,
-        sig2noise_method='peak2peak',
-    )
-    # get x, y
-    x, y = pyprocess.get_coordinates(
-        image_size=I0_crop.shape,
-        search_area_size=winsize,
-        overlap=overlap,
-        window_size=winsize
-    )
-    x0, y0, w, h = ROI
-    x, y = x + x0, y + y0
-    # generate circle mask
-    xc, yc, r = circle
-    xcr, ycr = xc-x0, yc-y0
-    mask = (x-xc) ** 2 + (y-yc) ** 2 <= (r-winsize) ** 2
-    # apply mask to velocities and coordinates
+    I0 = io.imread(I0dir)
+    I1 = io.imread(I1dir)
+    x, y, u, v = PIV_masked(I0, I1, winsize, overlap, dt, mask)
+    frame_data = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
+    frame_data.to_csv(os.path.join(save_folder, "{0}-{1}.csv".format(I0name, I1name)), index=False)
 
-#     xm = x * mask
-#     ym = y * mask
-    # signal to noise validation
-    u1, v1, mask_s2n = validation.sig2noise_val(
-        u0, v0,
-        sig2noise,
-        threshold = 1.05,
-    )
-    # replace_outliers
-    u2, v2 = filters.replace_outliers(
-        u1, v1,
-        method='localmean',
-        max_iter=3,
-        kernel_size=3,
-    )
-    # median filter smoothing
-    u3 = medfilt2d(u2, 3)
-    v3 = medfilt2d(v2, 3)
-    u3[~mask] = np.nan
-    v3[~mask] = np.nan
-    # generate DataFrame data
-    frame_data = pd.DataFrame(
-        data=np.array([x.flatten(), y.flatten(), u3.flatten(), v3.flatten()]).T, 
-        columns=['x', 'y', 'u', 'v'])
-    return frame_data
-
+# deprecated
 def read_params(params_file):
     """Read piv_drop parameters from params_file.
     params_file template:
@@ -144,10 +96,11 @@ def apply_ROI(img, x0, y0, w, h):
 if __name__=="__main__":
     image_folder = sys.argv[1]
     save_folder = sys.argv[2]
-    params_file = sys.argv[3]
-    
-    winsize, overlap, dt, ROI, circle = read_params(params_file)
-    
+    winsize = int(sys.argv[3])
+    overlap = int(sys.argv[4])
+    dt = float(sys.argv[5])
+    mask = io.imread(sys.argv[6])
+
     if os.path.exists(save_folder) == 0:
         os.makedirs(save_folder)
     with open(os.path.join(save_folder, 'log.txt'), 'w') as f:
@@ -155,22 +108,29 @@ if __name__=="__main__":
         f.write('winsize: ' + str(winsize) + '\n')
         f.write('overlap: ' + str(overlap) + '\n')
         f.write('dt: ' + str(dt) + '\n')
-        f.write('ROI: ' + str(ROI) + '\n')
-        f.write('circle: ' + str(circle) + '\n')
-    
-    l = readdata(image_folder, 'tif')
-    
-    k = 0 # serve as a flag for I0 and I1
 
-    for num, i in l.iterrows():
-        if k % 2 == 0:
-            I0 = io.imread(i.Dir)
-            n0 = i.Name
-            k += 1
-        else:
-            I1 = io.imread(i.Dir)
-            k += 1
-            frame_data = PIV_droplet(I0, I1, ROI, circle, winsize, overlap, (int(i.Name)-int(n0))*dt)
-            frame_data.to_csv(os.path.join(save_folder, n0 + '-' + i.Name+'.csv'), index=False)
-            with open(os.path.join(save_folder, 'log.txt'), 'a') as f:
-                f.write(time.asctime() + ' // ' + n0 + '-' + i.Name + ' calculated\n')
+    l = readdata(image_folder, 'tif')
+
+    l = l.loc[l.Name!="mask"]
+    if len(l) % 2 != 0:
+        l = l[:-1]
+
+    with Pool(10) as p:
+        p.starmap(PIV_droplet,
+                zip(l[::2].Dir, l[1::2].Dir, l[::2].Name, l[1::2].Name, repeat(winsize), repeat(overlap),
+                repeat(dt), repeat(mask), repeat(save_folder)))
+
+    # k = 0 # serve as a flag for I0 and I1
+    #
+    # for num, i in l.iterrows():
+    #     if k % 2 == 0:
+    #         I0 = io.imread(i.Dir)
+    #         n0 = i.Name
+    #         k += 1
+    #     else:
+    #         I1 = io.imread(i.Dir)
+    #         k += 1
+    #         frame_data = PIV_droplet(I0, I1, ROI, circle, winsize, overlap, (int(i.Name)-int(n0))*dt)
+    #         frame_data.to_csv(os.path.join(save_folder, n0 + '-' + i.Name+'.csv'), index=False)
+    #         with open(os.path.join(save_folder, 'log.txt'), 'a') as f:
+    #             f.write(time.asctime() + ' // ' + n0 + '-' + i.Name + ' calculated\n')
