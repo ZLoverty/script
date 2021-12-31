@@ -30,7 +30,7 @@ Fri Dec 31 23:32:00 2021 \ Start computing mean velocity of test_images\piv_drop
 Fri Dec 31 23:32:00 2021 \ Finish!
 ```
 
-```piv_drop
+```piv_drop.csv
 frame,mean_v
 6972,7.259217406587053
 6974,7.9069235460355465
@@ -63,12 +63,12 @@ def test():
 if __name__=="__main__":
     piv_folder = sys.argv[1]
     out_folder = sys.argv[2]
-    out_filename = os.path.split(piv_folder)[1]
+    out_filename = os.path.split(piv_folder)[1] + ".csv"
     l = readdata(piv_folder, 'csv')
     if os.path.exists(out_folder) == False:
         os.makedirs(out_folder)
-    with open(os.path.join(out_folder, "log.txt"), "w") as f:
-        f.write(time.asctime() + " \\ Start computing mean velocity of {}\n".format(piv_folder))
+    # with open(os.path.join(out_folder, "log.txt"), "w") as f:
+    #     f.write(time.asctime() + " \\ Start computing mean velocity of {}\n".format(piv_folder))
     frame_list = []
     v_list = []
     for num, i in l.iterrows():
@@ -79,5 +79,5 @@ if __name__=="__main__":
         v_list.append(v)
     result = pd.DataFrame({"frame": frame_list, "mean_v": v_list})
     result.to_csv(os.path.join(out_folder, out_filename), index=False)
-    with open(os.path.join(out_folder, "log.txt"), "a") as f:
-        f.write(time.asctime() + " \\ Finish!".format(piv_folder))
+    # with open(os.path.join(out_folder, "log.txt"), "a") as f:
+    #     f.write(time.asctime() + " \\ Finish!".format(piv_folder))

@@ -1,2 +1,0 @@
-Fri Dec 31 23:32:00 2021 \ Start computing mean velocity of test_images\piv_drop
-Fri Dec 31 23:32:00 2021 \ Finish!

@@ -1,0 +1,4 @@
+Fri Dec 31 23:48:12 2021 \ Start batch_mean_velocity in test_images\batch_spatial_correlation
+Fri Dec 31 23:48:12 2021 \ Computing test_images\batch_spatial_correlation\piv_folder\00
+Fri Dec 31 23:48:13 2021 \ Computing test_images\batch_spatial_correlation\piv_folder\01
+Fri Dec 31 23:48:14 2021 \ Computing finished!
