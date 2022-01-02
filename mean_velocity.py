@@ -6,16 +6,18 @@ import time
 from corrLib import readdata
 
 """
+GENERAL
+=======
 Compute mean velocity of PIV data.
 1. Compute the magnitude of each PIV arrow
 2. Take average of these arrows
 
 USAGE
 =====
-python mean_velocity.py piv_folder out_file
+python mean_velocity.py piv_folder out_folder
 
 piv_folder -- folder containing PIV data (.csv), file names indicate frame number
-out_file -- mean velocity data file (.csv), contain frame and mean_v columns
+out_folder -- mean velocity data file (.csv), contain frame and mean_v columns
 
 A folder of PIV files are used to generate a single mean velocity data file.
 
@@ -39,6 +41,7 @@ frame,mean_v
 EDIT
 ====
 Dec 31, 2021 -- Initial commit.
+Jan 02, 2021 -- Minor changes in docstring.
 """
 
 
