@@ -89,7 +89,7 @@ if __name__=="__main__": # whether the following script will be executed when ru
         ax = fig.add_axes([0, 0, 1, 1])
         ax.imshow(img, cmap='gray')
         ax.quiver(xs, ys, us, vs, color='yellow', width=0.003, \
-                    scale_units="dots", scale=1) # it's better to set a fixed scale
+                    scale_units="dots", scale=2) # it's better to set a fixed scale
         ax.axis('off')
         # outfolder = folder.replace(pivDataFolder, output_folder) #
         # if os.path.exists(outfolder) == False:
