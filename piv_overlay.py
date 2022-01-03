@@ -42,6 +42,7 @@ EDIT
 ====
 Jan 03, 2022 -- i) move from PIV to script, ii) set scale, iii) update docstring
                 iv) minor structural changes
+                See Analysis of Collective Motions in Droplets Sec IV.A.2 for the reasoning of scale settings. 
 """
 
 def determine_arrow_scale(u, v):
@@ -66,6 +67,12 @@ if __name__=="__main__": # whether the following script will be executed when ru
     # pivDataDir = dirrec(pivDataFolder, '*.csv')
 
     l = readdata(pivDataFolder, "csv")
+
+    # compute scale factor of quiver
+    x, y, u, v = read_piv(l.Dir[0])
+    row, col = x.shape
+    scale = max(np.nanmax(u), np.nanmax(v)) * col
+
     for num, i in l.iterrows():
         # PIV data
         folder, pivname = os.path.split(i.Dir)
@@ -82,14 +89,14 @@ if __name__=="__main__": # whether the following script will be executed when ru
         # bp = bpass(img, 2, 100)
         # fig = plt.figure(figsize=(3, 3*row/col))
         dpi = 300
-        scale = .5
+        figscale = 1
         w, h = img.shape[1] / dpi, img.shape[0] / dpi
-        fig = Figure(figsize=(w*scale, h*scale)) # on some server `plt` is not supported
+        fig = Figure(figsize=(w*figscale, h*figscale)) # on some server `plt` is not supported
         canvas = FigureCanvas(fig) # necessary?
         ax = fig.add_axes([0, 0, 1, 1])
         ax.imshow(img, cmap='gray')
         ax.quiver(xs, ys, us, vs, color='yellow', width=0.003, \
-                    scale_units="dots", scale=2) # it's better to set a fixed scale
+                    scale=scale, scale_units='width') # it's better to set a fixed scale, see *Analysis of Collective Motions in Droplets* Section IV.A.2 for more info.
         ax.axis('off')
         # outfolder = folder.replace(pivDataFolder, output_folder) #
         # if os.path.exists(outfolder) == False:
