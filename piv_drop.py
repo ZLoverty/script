@@ -14,7 +14,6 @@ from itertools import repeat
 """
 Perform PIV analysis on an image sequence of **bacteria in a droplet**.
 Written by Z. L.
-Notebook for this script: DE/code/PIV/PIV analysis in droplets
 
 USAGE
 =====
