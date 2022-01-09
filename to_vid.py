@@ -49,6 +49,8 @@ def main(folder, **kwargs):
                 print("\nConversion of {0} is successful!\nA video is saved at {1}\n\n".format(name, output_file))
             else:
                 print("{} already exists, skipping ============".format(output_file))
+        else:
+            print("Cannot find 8-bit folder in {}".format(i))
 
 if __name__=="__main__":
     folder = sys.argv[1]

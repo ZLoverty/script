@@ -46,6 +46,7 @@ if __name__=="__main__":
     print(folders)
     for sf in folders:
         folder = os.path.join(main_folder, sf)
-        cmd = "python to_vid.py {} fmt=8b%05d.tif fps=50".format(folder)
+        print("Looking for 8-bit image sequences in {}".format(sf))
+        cmd = "python to_vid.py {} fmt=%05d.tif fps=50".format(folder)
         os.system(cmd)
 
