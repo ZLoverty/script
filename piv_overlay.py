@@ -42,11 +42,11 @@ EDIT
 ====
 Jan 03, 2022 -- i) move from PIV to script, ii) set scale, iii) update docstring
                 iv) minor structural changes
-                See Analysis of Collective Motions in Droplets Sec IV.A.2 for the reasoning of scale settings. 
+                See PIV technical report Sec II.A.1 for the reasoning of scale settings.
 """
 
-def determine_arrow_scale(u, v):
-    pass # implement in the future
+def determine_arrow_scale(u, v, sparcity):
+    return max(np.nanmax(u), np.nanmax(v)) * col / sparcity
 
 if __name__=="__main__": # whether the following script will be executed when run this code
     pivDataFolder = sys.argv[1]
@@ -71,7 +71,7 @@ if __name__=="__main__": # whether the following script will be executed when ru
     # compute scale factor of quiver
     x, y, u, v = read_piv(l.Dir[0])
     row, col = x.shape
-    scale = max(np.nanmax(u), np.nanmax(v)) * col
+    scale = determine_arrow_scale(u, v, sparcity)
 
     for num, i in l.iterrows():
         # PIV data

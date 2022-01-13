@@ -1,6 +1,6 @@
 piv_folder: test_images\piv_drop
 img_folder: test_images\piv_drop
 output_folder: test_images\piv_overlay
-sparcity: 1
-Tue Jan  4 00:07:02 2022 // 06972 calculated
-Tue Jan  4 00:07:02 2022 // 06974 calculated
+sparcity: 2
+Thu Jan 13 13:01:32 2022 // 06972 calculated
+Thu Jan 13 13:01:33 2022 // 06974 calculated
