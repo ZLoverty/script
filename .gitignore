@@ -112,3 +112,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# run.py is used as local script and does not need to be synced
+run.py
