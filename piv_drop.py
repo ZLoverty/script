@@ -34,15 +34,12 @@ Params
 winsize: 40
 overlap: 20
 dt: 0.02
-ROI: [132   8 691 805]
-circle: [416. 417. 395.]
-Thu Dec  9 23:18:14 2021 // 06972-06973 calculated
-Thu Dec  9 23:18:16 2021 // 06974-06975 calculated
 
 EDIT
 ====
 12092021 -- Initial commit.
 Dec 16, 2021 -- i) use `PIV_masked()` as the core algorithm, ii) implement multiprocessing with `Pool`
+Jan 16, 2021 -- add info print, can be used with ">>" to write log.
 """
 
 def PIV_droplet(I0dir, I1dir, I0name, I1name, winsize, overlap, dt, mask, save_folder):
@@ -59,6 +56,7 @@ def PIV_droplet(I0dir, I1dir, I0name, I1name, winsize, overlap, dt, mask, save_f
     x, y, u, v = PIV_masked(I0, I1, winsize, overlap, dt, mask)
     frame_data = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
     frame_data.to_csv(os.path.join(save_folder, "{0}-{1}.csv".format(I0name, I1name)), index=False)
+    print("Processing {0}-{1}".format(I0name, I1name))
 
 # deprecated
 def read_params(params_file):
@@ -107,6 +105,12 @@ if __name__=="__main__":
         f.write('winsize: ' + str(winsize) + '\n')
         f.write('overlap: ' + str(overlap) + '\n')
         f.write('dt: ' + str(dt) + '\n')
+
+    print('Params:')
+    print('image folder: {}'.format(image_folder))
+    print('winsize: ' + str(winsize))
+    print('overlap: ' + str(overlap))
+    print('dt: ' + str(dt))
 
     l = readdata(image_folder, 'tif')
 
