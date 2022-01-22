@@ -37,30 +37,34 @@ Tue Dec 14 11:59:30 2021 \ Converting test_images\batch_to_tif\day2\01.nd2 to ti
 EDIT
 ====
 Dec 14, 2021 -- i) Use system argument as input main folder. ii) Implement main log file. iii) Better doc string.
+Jan 22, 2022 -- i) Remove the log file and print all the information to stdout.
+                When using the code, use `>>` to save the screen message to a file.
+                It's easier to locate the log file...
+                This change should be applied to all the batch code.
 """
 main_folder = sys.argv[1]
 l = readdata(main_folder, 'nd2')
-
-log_file = os.path.join(main_folder, 'batch_to_tif_log.txt')
-with open(log_file, 'w') as f:
-    f.write(time.asctime() + " \\ Start batch_to_tif in {}\n".format(main_folder))
-    f.write("The following files will be converted:\n")
-    f.write(repr(l))
-    f.write("\n\n")
+print(time.asctime())
+print("------------------------")
+print("Start batch_to_tif on {}".format(main_folder))
+print("The following nd2 files will be converted to tif sequences:")
+for num, i in l.iterrows():
+    print("\t{}".format(i.Dir))
+# log_file = os.path.join(main_folder, 'batch_to_tif_log.txt')
+# with open(log_file, 'w') as f:
+#     f.write(time.asctime() + " // Start batch_to_tif in {}\n".format(main_folder))
+#     f.write("The following files will be converted:\n")
+#     f.write(repr(l))
+#     f.write("\n\n")
 
 if len(l) > 0:
     for num, i in l.iterrows():
         out_folder = os.path.splitext(i.Dir)[0]
         if os.path.exists(out_folder) == False:
-            print("Converting {} to tif".format(i.Dir))
-            with open(log_file, 'a') as f:
-                f.write(time.asctime() + " \\ Converting {} to tif\n".format(i.Dir))
+            print(time.asctime() + " // Converting {} to tif".format(i.Dir))
             cmd = "python to_tif.py {}".format(i.Dir)
             os.system(cmd)
         else:
-            print("tif folder exists already, skipping")
-            with open(log_file, 'a') as f:
-                f.write(time.asctime() + " \\ tif folder exists already, skipping\n".format(i.Dir))
+            print(time.asctime() + " // {} tif folder exists already, skipping".format(i.Dir))
 else:
-    with open(log_file, 'a') as f:
-        f.write(time.asctime() + " \\ No nd2 file exists in the given folder.")
+    print(time.asctime() + " // No nd2 file exists in the given folder.")

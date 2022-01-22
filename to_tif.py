@@ -6,6 +6,40 @@ import os
 import sys
 import shutil
 
+"""
+GENERAL
+=======
+Convert *.nd2 file to image sequence of 8-bit grayscale images. Save this image sequence in a subfolder under the same folder as the *.nd2 file with corresponding name as the *.nd2 file name.
+
+This script does not apply auto-contrast and save both 16-bit and 8-bit images.
+
+USAGE
+=====
+python to_tif.py nd2Dir remove
+
+TEST
+====
+nd2Dir = E:\Github\Python\generic_proc\test_images\test.nd2
+
+LOG
+===
+Tue Jan 14 20:54:03 2020 // Frame 00000 converted
+
+EDIT
+====
+06162020 - No longer export 16-bit images.
+08162020 - 1. write input arguments in log.txt
+           2. (important) add illumination correction. All frames will be corrected according to the whole video.
+08182020 - Add argument 'remove', determining if background subtraction is applied or not. Default to False.
+10282021 - Remove "8-bit" folder, export original images instead of converting to 8-bit
+11042021 - 1. Set `check_contrast` to False to avoid CLI spamming
+           2. Add 'exp1' before the image number, in accordance to Cristian's image naming convention
+11262021 - 1. Remove the 'exp1' flag at the beginning of each image file
+           2. Add saturated 8-bit image output for visualization (this means we need a big overhead of disk space!)
+11302021 - Add disk_capacity_check function to avoid running out disk space
+Jan 22, 2022 - disk_capacity_check, use os.split(file)[1] to check, because windows does not recognize file directory as a valid directory for disk size check
+"""
+
 def to8bit(img16):
     """
     Enhance contrast and convert to 8-bit
@@ -38,8 +72,9 @@ def disk_capacity_check(file):
     Returns:
     flag -- bool, True if capacity is enough.
     """
+    d = os.path.split(file)[0]
     fs = os.path.getsize(file) / 2**30
-    ds = shutil.disk_usage(file)[2] / 2**30
+    ds = shutil.disk_usage(d)[2] / 2**30
     print("File size {0:.1f} GB, Disk size {1:.1f} GB".format(fs, ds))
     return ds > 2 * fs
 
@@ -97,32 +132,6 @@ with ND2Reader(nd2Dir) as images:
         with open(os.path.join(saveDir, 'log.txt'), 'a') as f:
             f.write(time.asctime() + ' // Frame {0:04d} converted\n'.format(num))
 
-""" DESCRIPTION
-Convert *.nd2 file to image sequence of 8-bit grayscale images. Save this image sequence in a subfolder under the same folder as the *.nd2 file with corresponding name as the *.nd2 file name.
 
-This script does not apply auto-contrast and save both 16-bit and 8-bit images.
-
-- Edit:
-06162020 - No longer export 16-bit images.
-08162020 - 1. write input arguments in log.txt
-           2. (important) add illumination correction. All frames will be corrected according to the whole video.
-08182020 - Add argument 'remove', determining if background subtraction is applied or not. Default to False.
-10282021 - Remove "8-bit" folder, export original images instead of converting to 8-bit
-11042021 - 1. Set `check_contrast` to False to avoid CLI spamming
-           2. Add 'exp1' before the image number, in accordance to Cristian's image naming convention
-11262021 - 1. Remove the 'exp1' flag at the beginning of each image file
-           2. Add saturated 8-bit image output for visualization (this means we need a big overhead of disk space!)
-11302021 - Add disk_capacity_check function to avoid running out disk space
-"""
-
-""" SYNTAX
-python to_tif.py nd2Dir remove
-"""
-
-""" TEST PARAMS
-nd2Dir = E:\Github\Python\generic_proc\test_images\test.nd2
-"""
-
-""" LOG
-Tue Jan 14 20:54:03 2020 // Frame 00000 converted
-"""
+file = os.path.join("test_images", "batch_to_tif", "day1")
+shutil.disk_usage(file)[2] / 2**30
