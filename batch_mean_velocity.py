@@ -33,10 +33,11 @@ Sat Jan 22 15:32:41 2022 // Computing mean velocity of test_images\batch_spatial
 EDIT
 ====
 Dec 31, 2021 -- Initial commit.
+Jan 22, 2022 -- Strip the os.sep at the end of the given PIV directory, if exists.
 """
 
 if __name__=="__main__":
-    main_piv_folder = sys.argv[1]
+    main_piv_folder = sys.argv[1].rstrip(os.sep)
     parent_folder = os.path.split(main_piv_folder)[0]
     main_save_folder = os.path.join(parent_folder, "mean_velocity")
     sfL = next(os.walk(main_piv_folder))[1]
