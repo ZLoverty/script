@@ -63,6 +63,7 @@ print("The following files will be processed:")
 for num, i in l.iterrows():
     print("\t{}".format(i.Dir))
 print("------------------------")
+
 if len(l) > 0:
     for num, i in l.iterrows():
         out_file = i.Dir.replace(main_folder, out_folder).replace(".nd2", ".tif")

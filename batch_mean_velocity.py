@@ -20,10 +20,15 @@ python batch_mean_velocity.py test_images\batch_spatial_correlation\piv_folder
 
 LOG
 ===
-Fri Dec 31 23:48:12 2021 \ Start batch_mean_velocity in test_images\batch_spatial_correlation
-Fri Dec 31 23:48:12 2021 \ Computing test_images\batch_spatial_correlation\piv_folder\00
-Fri Dec 31 23:48:13 2021 \ Computing test_images\batch_spatial_correlation\piv_folder\01
-Fri Dec 31 23:48:14 2021 \ Computing finished!
+Run batch_mean_velocity on test_images\batch_spatial_correlation\piv_folder
+Results will be saved in test_images\batch_spatial_correlation\mean_velocity
+The following files will be processed:
+        test_images\batch_spatial_correlation\piv_folder\00
+        test_images\batch_spatial_correlation\piv_folder\01
+
+------------------------
+Sat Jan 22 15:32:40 2022 // Computing mean velocity of test_images\batch_spatial_correlation\piv_folder\00
+Sat Jan 22 15:32:41 2022 // Computing mean velocity of test_images\batch_spatial_correlation\piv_folder\01
 
 EDIT
 ====
@@ -34,17 +39,20 @@ if __name__=="__main__":
     main_piv_folder = sys.argv[1]
     parent_folder = os.path.split(main_piv_folder)[0]
     main_save_folder = os.path.join(parent_folder, "mean_velocity")
+    sfL = next(os.walk(main_piv_folder))[1]
     if os.path.exists(main_save_folder) == False:
         os.makedirs(main_save_folder)
-    log_file = os.path.join(parent_folder, "batch_mean_velocity_log.txt")
-    with open(log_file, 'w') as f:
-        f.write(time.asctime() + " \\ Start batch_mean_velocity in {}\n".format(parent_folder))
 
-    sfL = next(os.walk(main_piv_folder))[1]
+    print(time.asctime())
+    print("------------------------")
+    print("Run batch_mean_velocity on {}".format(main_piv_folder))
+    print("Results will be saved in {}".format(main_save_folder))
+    print("The following files will be processed:")
+    for sf in sfL:
+        print("\t{}".format(os.path.join(main_piv_folder, sf)))
+    print("------------------------")
+
     for sf in sfL:
         piv_folder = os.path.join(main_piv_folder, sf)
-        with open(log_file, 'a') as f:
-            f.write(time.asctime() + " \\ Computing {}\n".format(piv_folder))
+        print(time.asctime() + " // Computing mean velocity of {}".format(piv_folder))
         os.system("python mean_velocity.py {0} {1}".format(piv_folder, main_save_folder))
-    with open(log_file, 'a') as f:
-        f.write(time.asctime() + " \\ Computing finished!")
