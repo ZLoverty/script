@@ -34,19 +34,21 @@ LOG
 piv_folder: test_images\piv_drop
 img_folder: test_images\piv_drop
 output_folder: test_images\piv_overlay
-sparcity: 1
-Mon Jan  3 12:31:44 2022 // 06972 calculated
-Mon Jan  3 12:31:44 2022 // 06974 calculated
+sparcity: 2
+Sat Jan 22 14:20:09 2022 // 06972 calculated
+Sat Jan 22 14:20:09 2022 // 06974 calculated
 
 EDIT
 ====
 Jan 03, 2022 -- i) move from PIV to script, ii) set scale, iii) update docstring
                 iv) minor structural changes
                 See PIV technical report Sec II.A.1 for the reasoning of scale settings.
+Jan 22, 2022 -- reduce scale by 1.5 to increase the arrow size
 """
 
 def determine_arrow_scale(u, v, sparcity):
-    return max(np.nanmax(u), np.nanmax(v)) * col / sparcity
+    row, col = u.shape
+    return max(np.nanmax(u), np.nanmax(v)) * col / sparcity / 1.5
 
 if __name__=="__main__": # whether the following script will be executed when run this code
     pivDataFolder = sys.argv[1]
