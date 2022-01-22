@@ -25,15 +25,23 @@ python batch_gen_preview.py test_images\batch_to_tif
 
 LOG
 ===
-Tue Dec 14 11:59:29 2021 \ Start batch_to_tif in test_images\batch_to_tif
-Tue Dec 14 14:10:47 2021 \ Start batch_gen_preview in test_images\batch_to_tif
-The following files will be converted:
-  Name                                   Dir
-0   00  test_images\batch_to_tif\day1\00.nd2
-1   01  test_images\batch_to_tif\day2\01.nd2
+Sat Jan 22 15:20:44 2022
+------------------------
+Run batch_gen_preview on test_images\batch_to_tif
+Results will be saved in test_images\batch_to_tif\preview
+The following files will be processed:
+        test_images\batch_to_tif\day1\00.nd2
+        test_images\batch_to_tif\day2\01.nd2
+------------------------
+Generating preview for test_images\batch_to_tif\day1\00.nd2
+D:\miniconda\lib\site-packages\nd2reader\raw_metadata.py:187: UserWarning: Z-levels details missing in metadata. Using Z-coordinates instead.
+  warnings.warn("Z-levels details missing in metadata. Using Z-coordinates instead.")
+test_images\batch_to_tif\day1\00.nd2 -> test_images\batch_to_tif\preview\day1\00.tif
+Generating preview for test_images\batch_to_tif\day2\01.nd2
 
-Tue Dec 14 14:10:47 2021 \ Generating preview for test_images\batch_to_tif\day1\00.nd2
-Tue Dec 14 14:10:49 2021 \ Generating preview for test_images\batch_to_tif\day2\01.nd2
+D:\miniconda\lib\site-packages\nd2reader\raw_metadata.py:187: UserWarning: Z-levels details missing in metadata. Using Z-coordinates instead.
+  warnings.warn("Z-levels details missing in metadata. Using Z-coordinates instead.")
+test_images\batch_to_tif\day2\01.nd2 -> test_images\batch_to_tif\preview\day2\01.tif
 
 EDIT
 ====
@@ -47,26 +55,23 @@ if os.path.exists(out_folder) == False:
 
 l = readdata(main_folder, 'nd2')
 
-log_file = os.path.join(main_folder, 'batch_gen_preview_log.txt')
-with open(log_file, 'w') as f:
-    f.write(time.asctime() + " \\ Start batch_gen_preview in {}\n".format(main_folder))
-    f.write("The following files will be converted:\n")
-    f.write(repr(l))
-    f.write("\n\n")
+print(time.asctime())
+print("------------------------")
+print("Run batch_gen_preview on {}".format(main_folder))
+print("Results will be saved in {}".format(out_folder))
+print("The following files will be processed:")
+for num, i in l.iterrows():
+    print("\t{}".format(i.Dir))
+print("------------------------")
 
 if len(l) > 0:
     for num, i in l.iterrows():
         out_file = i.Dir.replace(main_folder, out_folder).replace(".nd2", ".tif")
         if os.path.exists(out_file) == False:
             print("Generating preview for {}".format(i.Dir))
-            with open(log_file, 'a') as f:
-                f.write(time.asctime() + " \\ Generating preview for {}\n".format(i.Dir))
             cmd = "python gen_preview.py {0} {1}".format(i.Dir, out_file)
             os.system(cmd)
         else:
             print("{} exists already, skipping".format(out_file))
-            with open(log_file, 'a') as f:
-                f.write(time.asctime() + " \\ {} exists already, skipping\n".format(out_file))
 else:
-    with open(log_file, 'a') as f:
-        f.write(time.asctime() + " \\ No nd2 file exists in the given folder.")
+    print(time.asctime() + " \\ No nd2 file exists in the given folder.")
