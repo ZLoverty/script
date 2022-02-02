@@ -19,7 +19,7 @@ python to_tif.py nd2Dir remove
 
 TEST
 ====
-nd2Dir = E:\Github\Python\generic_proc\test_images\test.nd2
+python to_tif.py test_images\test.nd2
 
 LOG
 ===
@@ -82,6 +82,9 @@ nd2Dir = sys.argv[1]
 remove = False
 if len(sys.argv) > 2:
     remove = bool(int(sys.argv[2]))
+
+print("Exporting {}".format(nd2Dir))
+print("Checking disk capacity ...")
 
 # disk capacity check
 if disk_capacity_check(nd2Dir) == False:
