@@ -19,7 +19,7 @@ python to_tif.py nd2Dir remove
 
 TEST
 ====
-nd2Dir = E:\Github\Python\generic_proc\test_images\test.nd2
+python to_tif.py test_images\test.nd2
 
 LOG
 ===
@@ -38,6 +38,7 @@ EDIT
            2. Add saturated 8-bit image output for visualization (this means we need a big overhead of disk space!)
 11302021 - Add disk_capacity_check function to avoid running out disk space
 Jan 22, 2022 - disk_capacity_check, use os.split(file)[1] to check, because windows does not recognize file directory as a valid directory for disk size check
+Feb 02, 2022 - Print dir info, so in batch_to_tif I can follow the progress.
 """
 
 def to8bit(img16):
@@ -82,6 +83,9 @@ nd2Dir = sys.argv[1]
 remove = False
 if len(sys.argv) > 2:
     remove = bool(int(sys.argv[2]))
+
+print("Exporting {}".format(nd2Dir))
+print("Checking disk capacity ...")
 
 # disk capacity check
 if disk_capacity_check(nd2Dir) == False:
