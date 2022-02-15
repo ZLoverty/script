@@ -100,13 +100,13 @@ if __name__=="__main__":
 
     if os.path.exists(save_folder) == 0:
         os.makedirs(save_folder)
-    with open(os.path.join(save_folder, 'log.txt'), 'w') as f:
-        f.write('Params\n')
-        f.write('winsize: ' + str(winsize) + '\n')
-        f.write('overlap: ' + str(overlap) + '\n')
-        f.write('dt: ' + str(dt) + '\n')
+    # with open(os.path.join(save_folder, 'log.txt'), 'w') as f:
+    #     f.write('Params\n')
+    #     f.write('winsize: ' + str(winsize) + '\n')
+    #     f.write('overlap: ' + str(overlap) + '\n')
+    #     f.write('dt: ' + str(dt) + '\n')
 
-    print('Params:')
+    print(time.asctime())
     print('image folder: {}'.format(image_folder))
     print('winsize: ' + str(winsize))
     print('overlap: ' + str(overlap))
