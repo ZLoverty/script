@@ -39,7 +39,8 @@ EDIT
 ====
 12092021 -- Initial commit.
 Dec 16, 2021 -- i) use `PIV_masked()` as the core algorithm, ii) implement multiprocessing with `Pool`
-Jan 16, 2021 -- add info print, can be used with ">>" to write log.
+Jan 16, 2022 -- add info print, can be used with ">>" to write log.
+Feb 15, 2022 -- remove printing steps to avoid log file spamming.
 """
 
 def PIV_droplet(I0dir, I1dir, I0name, I1name, winsize, overlap, dt, mask, save_folder):
@@ -56,7 +57,6 @@ def PIV_droplet(I0dir, I1dir, I0name, I1name, winsize, overlap, dt, mask, save_f
     x, y, u, v = PIV_masked(I0, I1, winsize, overlap, dt, mask)
     frame_data = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
     frame_data.to_csv(os.path.join(save_folder, "{0}-{1}.csv".format(I0name, I1name)), index=False)
-    print("Processing {0}-{1}".format(I0name, I1name))
 
 # deprecated
 def read_params(params_file):
