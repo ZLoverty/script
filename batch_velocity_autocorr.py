@@ -30,11 +30,6 @@ The following files will be processed:
 ------------------------
 
 Mon Feb 21 17:58:33 2022 // Computing VACF of test_images\batch_spatial_correlation\piv_folder\00
-C:\Users\liuzy\Documents\Github\Python\mylib\corrLib.py:706: RuntimeWarning: invalid value encountered in true_divide
-  corr = np.correlate(xn, xn, mode="same")[len(xn)//2:] / np.inner(xn, xn)
-Mon Feb 21 17:58:34 2022 // Computing VACF of test_images\batch_spatial_correlation\piv_folder\01
-C:\Users\liuzy\Documents\Github\Python\mylib\corrLib.py:706: RuntimeWarning: invalid value encountered in true_divide
-  corr = np.correlate(xn, xn, mode="same")[len(xn)//2:] / np.inner(xn, xn)
 
 EDIT
 ====
