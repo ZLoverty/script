@@ -100,11 +100,6 @@ if __name__=="__main__":
 
     if os.path.exists(save_folder) == 0:
         os.makedirs(save_folder)
-    # with open(os.path.join(save_folder, 'log.txt'), 'w') as f:
-    #     f.write('Params\n')
-    #     f.write('winsize: ' + str(winsize) + '\n')
-    #     f.write('overlap: ' + str(overlap) + '\n')
-    #     f.write('dt: ' + str(dt) + '\n')
 
     print(time.asctime())
     print('image folder: {}'.format(image_folder))
@@ -122,18 +117,3 @@ if __name__=="__main__":
         p.starmap(PIV_droplet,
                 zip(l[::2].Dir, l[1::2].Dir, l[::2].Name, l[1::2].Name, repeat(winsize), repeat(overlap),
                 repeat(dt), repeat(mask), repeat(save_folder)))
-
-    # k = 0 # serve as a flag for I0 and I1
-    #
-    # for num, i in l.iterrows():
-    #     if k % 2 == 0:
-    #         I0 = io.imread(i.Dir)
-    #         n0 = i.Name
-    #         k += 1
-    #     else:
-    #         I1 = io.imread(i.Dir)
-    #         k += 1
-    #         frame_data = PIV_droplet(I0, I1, ROI, circle, winsize, overlap, (int(i.Name)-int(n0))*dt)
-    #         frame_data.to_csv(os.path.join(save_folder, n0 + '-' + i.Name+'.csv'), index=False)
-    #         with open(os.path.join(save_folder, 'log.txt'), 'a') as f:
-    #             f.write(time.asctime() + ' // ' + n0 + '-' + i.Name + ' calculated\n')
