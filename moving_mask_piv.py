@@ -195,6 +195,7 @@ if __name__ == "__main__":
     maskw = int(sys.argv[9])
     maskh = int(sys.argv[10])
 
+    image_sequence = readdata()
     for i0, i1 in zip(di.sequence.index[::2], di.sequence.index[1::2]):
         I0 = di.get_cropped_image(i0)
         I1 = di.get_cropped_image(i1)
