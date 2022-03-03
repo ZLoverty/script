@@ -37,8 +37,11 @@ x0, y0, maskw, maskh: initial mask information, for computing the offset of the 
 
 TEST
 ====
-python moving_mask_piv.py test_images\moving_mask_piv\raw test_images\moving_mask_piv\piv_result 20 10 0.02 test_images\moving_mask_piv\mask.tif 173 165 174 174
+python moving_mask_piv.py test_images\moving_mask_piv\raw test_images\moving_mask_piv\piv_result 20 10 0.02 test_images\moving_mask_piv\mask.tif 178 161 174 174
 
+EDIT
+====
+Mar 03, 2022 -- Initial commit.
 """
 
 if __name__ == "__main__":
