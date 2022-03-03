@@ -8,6 +8,7 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
 from pivLib import read_piv
 from corrLib import readdata
+from deLib import droplet_image
 
 """
 GENERAL
@@ -29,21 +30,13 @@ python piv_overlay.py test_images\piv_drop test_images\piv_drop test_images\piv_
 
 > generate files 06972.jpg 069740jpg log.txt
 
-LOG
-===
-piv_folder: test_images\piv_drop
-img_folder: test_images\piv_drop
-output_folder: test_images\piv_overlay
-sparcity: 2
-Sat Jan 22 14:20:09 2022 // 06972 calculated
-Sat Jan 22 14:20:09 2022 // 06974 calculated
-
 EDIT
 ====
 Jan 03, 2022 -- i) move from PIV to script, ii) set scale, iii) update docstring
                 iv) minor structural changes
                 See PIV technical report Sec II.A.1 for the reasoning of scale settings.
 Jan 22, 2022 -- reduce scale by 1.5 to increase the arrow size
+Mar 03, 2022 -- i) Use `droplet_image` class to rewrite the script, ii) remove logging
 """
 
 def determine_arrow_scale(u, v, sparcity):
@@ -51,23 +44,22 @@ def determine_arrow_scale(u, v, sparcity):
     return max(np.nanmax(u), np.nanmax(v)) * col / sparcity / 1.5
 
 if __name__=="__main__": # whether the following script will be executed when run this code
-    pivDataFolder = sys.argv[1]
-    imgFolder = sys.argv[2]
-    output_folder = sys.argv[3]
-    if len(sys.argv) == 5:
+    piv_folder = sys.argv[1]
+    image_folder = sys.argv[2]
+    out_folder = sys.argv[3]
+    sparcity = 1
+    if len(sys.argv) > 4:
         sparcity = int(sys.argv[4])
-    else:
-        sparcity = 1
-    if os.path.exists(output_folder) == False:
-        os.makedirs(output_folder)
-    with open(os.path.join(output_folder, 'log.txt'), 'w') as f:
-        f.write('piv_folder: ' + pivDataFolder + '\n')
-        f.write('img_folder: ' + imgFolder + '\n')
-        f.write('output_folder: ' + output_folder + '\n')
-        f.write('sparcity: ' + str(sparcity) + '\n')
 
-    # pivDataDir = dirrec(pivDataFolder, '*.csv')
+    if os.path.exists(out_folder) == False:
+        os.makedirs(out_folder)
 
+    seq = readdata(image_folder, "tif")
+    DI = droplet_image(seq)
+
+    DI.piv_overlay_fixed(piv_folder, out_folder, sparcity=sparcity)
+
+    """
     l = readdata(pivDataFolder, "csv")
 
     # compute scale factor of quiver
@@ -106,3 +98,4 @@ if __name__=="__main__": # whether the following script will be executed when ru
         fig.savefig(os.path.join(output_folder, imgname + '.jpg'), dpi=dpi)
         with open(os.path.join(output_folder, 'log.txt'), 'a') as f:
             f.write(time.asctime() + ' // ' + imgname + ' calculated\n')
+    """

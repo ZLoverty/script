@@ -10,6 +10,7 @@ from corrLib import readdata
 import time
 from multiprocessing import Pool
 from itertools import repeat
+from deLib import droplet_image
 
 """
 Perform PIV analysis on an image sequence of **bacteria in a droplet**.
@@ -28,21 +29,16 @@ TEST PARAMS
 ===========
 python piv_drop.py test_images\piv_drop test_images\piv_drop 40 20 0.02 test_images\piv_drop\mask.tif
 
-LOG
-===
-Params
-winsize: 40
-overlap: 20
-dt: 0.02
-
 EDIT
 ====
 12092021 -- Initial commit.
 Dec 16, 2021 -- i) use `PIV_masked()` as the core algorithm, ii) implement multiprocessing with `Pool`
 Jan 16, 2022 -- add info print, can be used with ">>" to write log.
 Feb 15, 2022 -- remove printing steps to avoid log file spamming.
+Mar 03, 2022 -- i) Reverse the multi-thread code to linear, ii) use `droplet_image` class for the script, iii) no longer print PIV settings to screen, save a `piv_params` json instead
 """
 
+# temporarily deprecated
 def PIV_droplet(I0dir, I1dir, I0name, I1name, winsize, overlap, dt, mask, save_folder):
     """Perform PIV analysis on the image sequence in given folder. Specific for images of droplets.
     Args:
@@ -58,62 +54,31 @@ def PIV_droplet(I0dir, I1dir, I0name, I1name, winsize, overlap, dt, mask, save_f
     frame_data = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
     frame_data.to_csv(os.path.join(save_folder, "{0}-{1}.csv".format(I0name, I1name)), index=False)
 
-# deprecated
-def read_params(params_file):
-    """Read piv_drop parameters from params_file.
-    params_file template:
-        winsize, overlap, dt,
-        x0, y0, w, h,
-        xc, yc, r
-    """
-    with open(params_file, 'r') as f:
-        a = f.read()
-    params = np.char.strip(np.array(a.split(','))).astype('float')
-    assert(len(params)==10)
-    return params[0].astype('int'), params[1].astype('int'), params[2], \
-        params[3:7].astype('int'), params[7:]
-
-def apply_ROI(img, x0, y0, w, h):
-    """Apply ROI to the input image
-    Args:
-    img -- input image, an numpy.array
-    x0, y0, w, h -- upper left corner coords, width and height of ROI
-    Returns:
-    cropped -- image within the ROI, cropped image
-    Test:
-    x0, y0 = 132, 8
-    w, h = 691, 805
-    test_img = io.imread(os.path.join('test_images', 'bf_images', '06972.tif'))
-    test_img_cropped = apply_ROI(test_img, x0, y0, w, h)
-    fig, ax = plt.subplots(nrows=1, ncols=2)
-    ax[0].imshow(test_img)
-    ax[1].imshow(test_img_cropped)"""
-    return img[y0:y0+h, x0:x0+w]
-
 if __name__=="__main__":
     image_folder = sys.argv[1]
     save_folder = sys.argv[2]
     winsize = int(sys.argv[3])
     overlap = int(sys.argv[4])
     dt = float(sys.argv[5])
-    mask = io.imread(sys.argv[6])
+    mask_dir = sys.argv[6]
 
     if os.path.exists(save_folder) == 0:
         os.makedirs(save_folder)
 
     print(time.asctime())
-    print('image folder: {}'.format(image_folder))
-    print('winsize: ' + str(winsize))
-    print('overlap: ' + str(overlap))
-    print('dt: ' + str(dt))
+    print("Fixed mask PIV on {}".format(image_folder))
 
     l = readdata(image_folder, 'tif')
-
     l = l.loc[l.Name!="mask"]
     if len(l) % 2 != 0:
         l = l[:-1]
 
+    DI = droplet_image(l)
+    DI.fixed_mask_piv(save_folder, winsize, overlap, dt, mask_dir)
+
+    """ Old code
     with Pool(10) as p:
         p.starmap(PIV_droplet,
                 zip(l[::2].Dir, l[1::2].Dir, l[::2].Name, l[1::2].Name, repeat(winsize), repeat(overlap),
                 repeat(dt), repeat(mask), repeat(save_folder)))
+    """
