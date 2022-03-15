@@ -21,12 +21,8 @@ python to_tif.py nd2Dir remove
 
 TEST
 ====
-python to_tif.py test_images\test.nd2
-python to_tif.py test_images\raw\RawImage.raw
-
-LOG
-===
-Tue Jan 14 20:54:03 2020 // Frame 00000 converted
+python to_tif.py test_images\test.nd2 (for *.nd2 files)
+python to_tif.py test_images\raw\RawImage.raw (for *.raw files)
 
 EDIT
 ====
@@ -44,6 +40,8 @@ Jan 22, 2022 - disk_capacity_check, use os.split(file)[1] to check, because wind
 Feb 02, 2022 - Print dir info, so in batch_to_tif I can follow the progress.
 Mar 15, 2022 - 1. Rewrite using the rawImage class defined in myImageLib.
                2. Temporarily discontinue the "remove background functionality".
+               3. Include .raw functionality -- with memory check.
+               4. Update the doc string.
 """
 
 nd2Dir = sys.argv[1]
