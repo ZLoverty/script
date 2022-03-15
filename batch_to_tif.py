@@ -2,7 +2,7 @@ import os
 from corrLib import readdata
 import sys
 import time
-
+import pandas as pd
 """
 GENERAL
 =======
@@ -43,11 +43,13 @@ Jan 22, 2022 -- i) Remove the log file and print all the information to stdout.
                 This change should be applied to all the batch code.
 """
 main_folder = sys.argv[1]
-l = readdata(main_folder, 'nd2')
+l0 = readdata(main_folder, 'nd2')
 print(time.asctime())
 print("------------------------")
 print("Start batch_to_tif on {}".format(main_folder))
 print("The following nd2 files will be converted to tif sequences:")
+l1 = readdata(main_folder, "raw")
+l = pd.concat([l0, l1], axis=0)
 for num, i in l.iterrows():
     print("\t{}".format(i.Dir))
 # log_file = os.path.join(main_folder, 'batch_to_tif_log.txt')

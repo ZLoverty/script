@@ -6,6 +6,8 @@ import sys
 """
 GENERAL
 =======
+Merge with batch_to_tif.py
+
 Run `extractImages.py` on multiple .raw files.
 
 Folder structure:
@@ -18,7 +20,7 @@ folder
   |- ...
 |- ...
 
-The script will search for all the .raw files under the given folder, then use `extractImages.py` on them. 
+The script will search for all the .raw files under the given folder, then use `extractImages.py` on them.
 
 Steps:
 i) search for .raw
@@ -48,12 +50,12 @@ Sat Dec 11 23:29:15 2021 \ test_images\batch_extractImages: Output folders exist
 """
 
 if __name__ == "__main__":
-    folder = sys.argv[1]    
+    folder = sys.argv[1]
     # create export log
     export_log = os.path.join(folder, "batch_extractImages_log.txt")
     with open(export_log, 'w') as f:
         f.write(time.asctime() + ' \\ start extracting .raw files in {}\n'.format(folder))
-        
+
     # search for .raw files
     l = readdata(folder, 'raw')
     for num, i in l.iterrows():
@@ -70,5 +72,3 @@ if __name__ == "__main__":
             os.system("python extractImages.py {}".format(parent_folder))
             with open(export_log, 'a') as f:
                 f.write(time.asctime() + ' \\ {}: Extraction DONE!\n'.format(folder))
-                
-            

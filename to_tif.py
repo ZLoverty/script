@@ -51,7 +51,7 @@ remove = False
 if len(sys.argv) > 2:
     remove = bool(int(sys.argv[2]))
 
-print(time.asctime() + " Exporting {}".format(nd2Dir))
+print(time.asctime() + " // Exporting {}".format(nd2Dir))
 
 raw = rawImage(nd2Dir)
 raw.extract_tif()
