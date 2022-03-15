@@ -5,13 +5,15 @@ import time
 import os
 import sys
 import shutil
+from myImageLib import rawImage
 
 """
 GENERAL
 =======
-Convert *.nd2 file to image sequence of 8-bit grayscale images. Save this image sequence in a subfolder under the same folder as the *.nd2 file with corresponding name as the *.nd2 file name.
-
-This script does not apply auto-contrast and save both 16-bit and 8-bit images.
+Convert *.nd2 or *.raw file to image sequence of raw and 8-bit grayscale images.
+For nd2, output image sequences are saved in a subfolder under the same folder as the *.nd2 file with corresponding name as the *.nd2 file name.
+For raw, output image sequences are saved in subfolders in the same folder as the .raw files.
+This script does not apply auto-contrast on the raw images, but apply autocontrast on 8-bit images.
 
 USAGE
 =====
@@ -20,6 +22,7 @@ python to_tif.py nd2Dir remove
 TEST
 ====
 python to_tif.py test_images\test.nd2
+python to_tif.py test_images\raw\RawImage.raw
 
 LOG
 ===
@@ -39,103 +42,16 @@ EDIT
 11302021 - Add disk_capacity_check function to avoid running out disk space
 Jan 22, 2022 - disk_capacity_check, use os.split(file)[1] to check, because windows does not recognize file directory as a valid directory for disk size check
 Feb 02, 2022 - Print dir info, so in batch_to_tif I can follow the progress.
+Mar 15, 2022 - 1. Rewrite using the rawImage class defined in myImageLib.
+               2. Temporarily discontinue the "remove background functionality".
 """
-
-def to8bit(img16):
-    """
-    Enhance contrast and convert to 8-bit
-    """
-    # if img16.dtype != 'uint16':
-        # raise ValueError('16-bit grayscale image is expected')
-    maxx = img16.max()
-    minn = img16.min()
-    img8 = (img16 - minn) / (maxx - minn) * 255
-    return img8.astype('uint8')
-
-def illumination_correction(img, avg):
-    """
-    Correct the illumination inhomogeneity in microscope images.
-
-    Args:
-    img -- input image with illumination inhomogeneity
-    avg -- average of (a large number of) raw images
-
-    Returns:
-    corrected -- corrected image
-    """
-    corrected = (img / avg * img.mean() / (img / avg).mean()).astype('uint8')
-    return corrected
-
-def disk_capacity_check(file):
-    """Check if the capacity of disk is larger than twice of the file size.
-    Args:
-    file -- directory of the (.nd2) file being converted
-    Returns:
-    flag -- bool, True if capacity is enough.
-    """
-    d = os.path.split(file)[0]
-    fs = os.path.getsize(file) / 2**30
-    ds = shutil.disk_usage(d)[2] / 2**30
-    print("File size {0:.1f} GB, Disk size {1:.1f} GB".format(fs, ds))
-    return ds > 2 * fs
 
 nd2Dir = sys.argv[1]
 remove = False
 if len(sys.argv) > 2:
     remove = bool(int(sys.argv[2]))
 
-print("Exporting {}".format(nd2Dir))
-print("Checking disk capacity ...")
+print(time.asctime() + " Exporting {}".format(nd2Dir))
 
-# disk capacity check
-if disk_capacity_check(nd2Dir) == False:
-    print("No enough disk capacity!")
-    exit()
-
-print("DISK CAPACITY OK")
-folder, file = os.path.split(nd2Dir)
-
-name, ext = os.path.splitext(file)
-saveDir = os.path.join(folder, name, 'raw')
-saveDir8 = os.path.join(folder, name, '8-bit')
-if os.path.exists(saveDir) == False:
-    os.makedirs(saveDir)
-with open(os.path.join(saveDir, 'log.txt'), 'w') as f:
-    f.write('nd2Dir = ' + str(nd2Dir) + '\n')
-if os.path.exists(saveDir8) == False:
-    os.makedirs(saveDir8)
-with open(os.path.join(saveDir8, 'log.txt'), 'w') as f:
-    f.write('nd2Dir = ' + str(nd2Dir) + '\n')
-# Compute average
-# to minimize the memory needed, I first loop over an nd2 file to get the average
-# Then loop one more time to compute the output
-
-threshold = 100
-if remove == True:
-    with ND2Reader(nd2Dir) as images:
-        count = 0
-        for num, image in enumerate(images):
-            if image.mean() > threshold: # exclude light-off images, typically in kinetics experiment
-                count += 1
-                if count == 1:
-                    avg = image.astype('float64')
-                else:
-                    avg += image
-        avg = avg / count / 8
-
-with ND2Reader(nd2Dir) as images:
-    for num, image in enumerate(images):
-        # img8 = (image/2**3).astype('uint8')
-        # 8-bit image now are only used for visualization, i.e. convert to videos
-        io.imsave(os.path.join(saveDir8, '{:05d}.tif'.format(num)), to8bit(image))
-        if image.mean() > threshold and remove == True:
-            corrected = illumination_correction(image, avg)
-        else:
-            corrected = image
-        io.imsave(os.path.join(saveDir, '%05d.tif' % num), corrected, check_contrast=False)
-        with open(os.path.join(saveDir, 'log.txt'), 'a') as f:
-            f.write(time.asctime() + ' // Frame {0:04d} converted\n'.format(num))
-
-
-file = os.path.join("test_images", "batch_to_tif", "day1")
-shutil.disk_usage(file)[2] / 2**30
+raw = rawImage(nd2Dir)
+raw.extract_tif()
