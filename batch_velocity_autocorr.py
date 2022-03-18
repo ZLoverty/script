@@ -55,4 +55,5 @@ if __name__=="__main__":
 
     for sf in sfL:
         piv_folder = os.path.join(main_piv_folder, sf)
+        print(time.asctime() + " Computing velocity autocorrelation of {}".format(os.path.join(main_piv_folder, sf)))
         os.system("python velocity_autocorr.py {0} {1}".format(piv_folder, main_save_folder))
