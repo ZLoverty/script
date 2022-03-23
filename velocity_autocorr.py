@@ -12,7 +12,7 @@ Apply autocorrelation analysis on sequential PIV data.
 
 USAGE
 =====
-python velocity_autocorr.py piv_folder out_folder [fps=50] [cutoff=250]
+python velocity_autocorr.py piv_folder out_folder [fps=50] [cutoff=2000]
 
 fps is the imaging frame rate and the dt between two adjacent frames is assumed to be 2 / fps
 cutoff is set to analysis only the initial part of the velocity data.
