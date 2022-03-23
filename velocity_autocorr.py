@@ -53,29 +53,3 @@ if __name__=="__main__":
 
     out_filename = os.path.split(piv_folder)[1] + ".csv"
     ac.to_csv(os.path.join(out_folder, out_filename))
-
-
-
-
-
-    # if os.path.exists(out_folder) == False:
-    #     os.makedirs(out_folder)
-    #
-    # out_filename = os.path.split(piv_folder)[1] + ".csv"
-    #
-    # print(time.asctime() + " // Computing VACF of {}".format(piv_folder))
-    #
-    # ustack, vstack = read_piv_stack(piv_folder, cutoff=cutoff)
-    #
-    # # smooth the velocity fields with gaussian filter (4*sigma=3)
-    #
-    # ustack = scipy.ndimage.gaussian_filter(ustack, (3/4,0,0))
-    # vstack = scipy.ndimage.gaussian_filter(vstack, (3/4,0,0))
-    #
-    # # The two step can potentially be combined by using 4-D arrays
-    #
-    # cu = vacf_piv(ustack, dt, mode="direct").rename(columns={"c": "ucorr"})
-    # cv = vacf_piv(vstack, dt, mode="direct").rename(columns={"c": "vcorr"})
-    #
-    # vac_data = pd.concat((cu, cv), axis=1)
-    # vac_data.to_csv(os.path.join(out_folder, out_filename))
