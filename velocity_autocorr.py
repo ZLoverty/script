@@ -38,7 +38,7 @@ if __name__=="__main__":
     piv_folder = sys.argv[1]
     out_folder = sys.argv[2]
     fps = 50
-    cutoff = 250
+    cutoff = 2000
     if len(sys.argv) > 3:
         fps = float(sys.argv[3])
     if len(sys.argv) > 4:
@@ -48,8 +48,8 @@ if __name__=="__main__":
         os.makedirs(out_folder)
 
     l = readdata(piv_folder, "csv")
-    piv = piv_data(l, fps=fps)
-    ac = piv.vacf()
+    piv = piv_data(l, fps=fps, cutoff=cutoff)
+    ac = piv.vacf(smooth_method="smoothn")
 
     out_filename = os.path.split(piv_folder)[1] + ".csv"
     ac.to_csv(os.path.join(out_folder, out_filename))
