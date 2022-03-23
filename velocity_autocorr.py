@@ -32,6 +32,7 @@ Feb 21, 2022 -- Rewrite with new functions.
 Mar 16, 2022 -- 1. Rewrite with piv_data class
                 2. Use fps instead of dt as input argument
                 3. Modify doc string
+Mar 23, 2022 -- add smoothn as an optional smoothing method
 """
 
 if __name__=="__main__":
