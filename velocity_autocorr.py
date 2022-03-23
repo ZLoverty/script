@@ -19,7 +19,7 @@ cutoff is set to analysis only the initial part of the velocity data.
 
 TEST
 ====
-python velocity_autocorr.py test_images\velocity_autocorr test_images\velocity_autocorr\vac_result 0.1 20
+python velocity_autocorr.py test_images\velocity_autocorr test_images\velocity_autocorr\vac_result 50 20
 
 LOG
 ===
@@ -40,13 +40,13 @@ if __name__=="__main__":
     fps = 50
     cutoff = 250
     if len(sys.argv) > 3:
-        dt = float(sys.argv[3])
+        fps = float(sys.argv[3])
     if len(sys.argv) > 4:
         cutoff = int(sys.argv[4])
 
     if os.path.exists(out_folder) == False:
         os.makedirs(out_folder)
-        
+
     l = readdata(piv_folder, "csv")
     piv = piv_data(l, fps=fps)
     ac = piv.vacf()
