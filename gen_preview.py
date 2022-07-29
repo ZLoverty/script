@@ -44,7 +44,7 @@ Dec 13, 2021 -- `cp` command is not platform independent. Use python native tool
 Dec 14, 2021 -- Now work on single .nd2 file, instead of a folder of tif sequences.
 """
 
-def extract_first_frame(nd2):
+def extract_first_frame(nd2Dir):
     """Extract the first image in .nd2 and convert to 8-bit.
     Args:
     nd2 -- directory of .nd2 file
