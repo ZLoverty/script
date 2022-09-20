@@ -60,6 +60,8 @@ EDIT
 10072021 -- Add date stamp to the extracted folders.
             Number format changes to %04d. "{:04d}_yyyy-mm-dd"
             Change the condition to ignore folder. Now ignore everything that has less than 2 "_"'s.
+09202022 -- Only read the first image from binary .raw file, instead of loading whole stack and slice the first image. This should speed up the program.
+            Check if extract exists, if so, continue. 
 """
 
 def check_necessary_files(folder):
@@ -99,16 +101,28 @@ for sf in sfL:
         # this is a reference image folder, only copy the 1st frame of .raw to extract_folder
         if os.path.exists(extract_folder) == False:
             os.makedirs(extract_folder)
+        if os.path.exists(os.path.join(extract_folder, "ref.tif")):
+            print("ref.tif exists, skipping ...")
+            continue
         if check_necessary_files(img_folder):
             info_file = os.path.join(img_folder, 'RawImageInfo.txt')
             raw_file = os.path.join(img_folder, 'RawImage.raw')
             fps, h, w = read_raw_image_info(info_file)
-            images = np.fromfile(raw_file, dtype='uint16')
-            first_image = images[2:2+h*w].reshape(h, w)
+            # images = np.fromfile(raw_file, dtype='uint16')
+            read_size = h * w * 2
+            # first_image = images[2:2+h*w].reshape(h, w)
+            with open(raw_file, "rb") as f:
+                f.seek(2)
+                bytestring = f.read(read_size)
+                first_image_sq = np.frombuffer(bytestring, dtype=np.uint16)
+            first_image = first_image_sq.reshape(h, w)
             io.imsave(os.path.join(extract_folder, 'ref.tif'), first_image)
     elif len(sf.split('_')) == 3:
         if os.path.exists(extract_folder) == False:
             os.makedirs(extract_folder)
+        if os.path.exists(os.path.join(extract_folder, "Track.txt")):
+            print("Track.txt exists, skipping ...")
+            continue
         info_file = os.path.join(img_folder, 'RawImageInfo.txt')
         SP_file = os.path.join(img_folder, 'StagePosition.txt')
         track_file = os.path.join(img_folder, 'Track', 'Track.txt')
