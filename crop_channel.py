@@ -25,6 +25,7 @@ crop_folder: folder to save cropped images
 NOTE
 ====
 1. When creating crop_data in ImageJ, only select "bounding rectangle" in "Set measurements..."
+2. When creating crop_data, DO remember to remove the scale !!!
 
 EDIT
 ====

@@ -29,7 +29,7 @@ EDIT
 """
 
 img_folder = sys.argv[1]
-rb_folder = img_folder.strip(os.sep) + "_rb"
+rb_folder = img_folder.rstrip(os.sep) + "_rb"
 if os.path.exists(rb_folder) == False:
     os.makedirs(rb_folder)
 l = readdata(img_folder, "tif")
