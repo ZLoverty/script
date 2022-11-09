@@ -12,10 +12,10 @@ This script compute "volumetric flow rate" in a channel from 2D PIV data. The un
 
 SYNTAX
 ======
-python flowrate.py main_piv_folder flowrate_folder dt
+python flowrate.py main_piv_folder flowrate_dir dt
 
 main_piv_folder -- the folder contains PIV of all crops (channels).
-flowrate_folder -- folder to save flow rate data. The data will be ["crop-0", "crop-1", "crop-2", "t"].
+flowrate_dir -- full directory of flow rate data file (.csv). The data will be ["crop-0", "crop-1", "crop-2", "t"].
 dt -- time interval between two PIV data (2/FPS)
 
 EDIT
