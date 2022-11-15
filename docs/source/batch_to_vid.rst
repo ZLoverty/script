@@ -1,8 +1,4 @@
-import os
-from corrLib import readdata
-import sys
 
-"""
 batch_to_vid
 ============
 
@@ -42,14 +38,3 @@ The code assumes the following folder structure:
 .. deprecated:: 1.0
 
    Use ``to_vid.py`` instead.
-"""
-
-if __name__=="__main__":
-    main_folder = sys.argv[1]
-    folders = next(os.walk(main_folder))[1]
-    print(folders)
-    for sf in folders:
-        folder = os.path.join(main_folder, sf)
-        print("Looking for 8-bit image sequences in {}".format(sf))
-        cmd = "python to_vid.py {} fmt=%05d.tif fps=50".format(folder)
-        os.system(cmd)

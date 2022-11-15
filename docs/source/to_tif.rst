@@ -1,13 +1,4 @@
-from skimage import io
-# import numpy as np
-from nd2reader import ND2Reader
-import time
-import os
-import sys
-import shutil
-from myImageLib import rawImage
 
-"""
 to_tif
 ======
 
@@ -53,14 +44,3 @@ For raw, output image sequences are saved in subfolders in the same folder as th
     2. Temporarily discontinue the "remove background functionality".
     3. Include .raw functionality -- with memory check.
     4. Update the doc string.
-"""
-
-nd2Dir = sys.argv[1]
-remove = False
-if len(sys.argv) > 2:
-    remove = bool(int(sys.argv[2]))
-
-# print(time.asctime() + " // Exporting {}".format(nd2Dir))
-
-raw = rawImage(nd2Dir)
-raw.extract_tif()

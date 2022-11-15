@@ -4,43 +4,40 @@ import sys
 import time
 import pandas as pd
 """
-GENERAL
-=======
-Batch convert .nd2 files to .tif images by calling `to_tif.py`.
-The code assumes the following folder structure:
+batch_to_tif
+============
 
-main_folder
-|- day1
-  |- 00.nd2
-|- day2
-  |- 01.nd2
+Batch convert *\*.nd2* files to .tif images by calling ``to_tif.py``. The code assumes the following folder structure:
 
-USAGE
-=====
-python batch_to_tif.py main_folder
+.. code-block:: console
 
-TEST
-====
-python batch_to_tif.py test_images\batch_to_tif
+   main_folder
+   |-- day1
+       |-- 00.nd2
+   |-- day2
+       |-- 01.nd2
 
-LOG
-===
-Tue Dec 14 11:59:29 2021 \ Start batch_to_tif in test_images\batch_to_tif
-The following files will be converted:
-  Name                                   Dir
-0   00  test_images\batch_to_tif\day1\00.nd2
-1   01  test_images\batch_to_tif\day2\01.nd2
+.. rubric:: Syntax
 
-Tue Dec 14 11:59:29 2021 \ Converting test_images\batch_to_tif\day1\00.nd2 to tif
-Tue Dec 14 11:59:30 2021 \ Converting test_images\batch_to_tif\day2\01.nd2 to tif
+.. code-block:: console
 
-EDIT
-====
-Dec 14, 2021 -- i) Use system argument as input main folder. ii) Implement main log file. iii) Better doc string.
-Jan 22, 2022 -- i) Remove the log file and print all the information to stdout.
-                When using the code, use `>>` to save the screen message to a file.
-                It's easier to locate the log file...
-                This change should be applied to all the batch code.
+   python batch_to_tif.py main_folder
+
+* main_folder -- the folder containing *\*.nd2* files.
+
+.. rubric:: Test
+
+.. code-block:: console
+
+   python batch_to_tif.py test_images\batch_to_tif
+
+.. rubric:: Edit
+
+* Dec 14, 2021 --
+    * Use system argument as input main folder.
+    * Implement main log file.
+    * Better doc string.
+* Jan 22, 2022 -- Remove the log file and print all the information to stdout. When using the code, use ``>>`` to save the screen message to a file. It's easier to locate the log file... This change should be applied to all the batch code.
 """
 main_folder = sys.argv[1]
 l0 = readdata(main_folder, 'nd2')

@@ -6,37 +6,32 @@ import time
 from corrLib import readdata
 
 """
-GENERAL
-=======
-Compute circulation order parameter according to Wioland 2013.
+circulation_order_parameter
+===========================
 
-USAGE
-=====
-python circulation_order_parameter.py piv_folder out_folder x y
+Compute circulation order parameter according to Wioland 2013. Technical details can be found in `my note <https://github.com/ZLoverty/DE/blob/main/Notes/Analysis_of_collective_motions_in_droplets.pdf>`_.
 
-piv_folder -- folder containing PIV data (.csv), file names indicate frame number
-out_folder -- order parameter data file (.csv), contain frame and OP
+.. rubric:: Syntax
+
+.. code-block:: console
+
+   python circulation_order_parameter.py piv_folder out_folder x y
+
+* piv_folder -- folder containing PIV data (.csv), file names indicate frame number
+* out_folder -- order parameter data file (.csv), contain frame and OP
+* x, y -- the center position
 
 A folder of PIV files are used to generate a single order parameter data file.
 
-TEST
-====
-python circulation_order_parameter.py test_images\circulation_order_parameter\piv test_images\circulation_order_parameter\order_parameter 259 227
+.. rubric:: Test
 
-TEST OUTPUT
-===========
-```piv.csv
-frame,OP
-0,0.21345439343393333
-2,0.4170713363401312
-4,0.44214620766583834
-6,0.26568822288861677
-8,0.20646367966326296
-```
+.. code-block:: console
 
-EDIT
-====
-Jan 02, 2021 -- Initial commit.
+   python circulation_order_parameter.py test_images\circulation_order_parameter\piv test_images\circulation_order_parameter\order_parameter 259 227
+
+.. rubric:: Edit
+
+* Jan 02, 2021 -- Initial commit.
 """
 
 # %% codecell

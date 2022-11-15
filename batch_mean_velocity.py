@@ -4,36 +4,29 @@ import time
 from corrLib import readdata
 
 """
-GENERAL
-=======
-Batch mean velocity computation.
+batch_mean_velocity
+===================
 
-USAGE
-=====
-python batch_mean_velocity.py main_piv_foler
+Batch mean velocity computation from PIV data.
 
-main_piv_folder is the folder containing many folders of PIV data. `piv_drop` for example.
+.. rubric:: Syntax
 
-TEST
-====
-python batch_mean_velocity.py test_images\batch_spatial_correlation\piv_folder
+.. code-block:: console
 
-LOG
-===
-Run batch_mean_velocity on test_images\batch_spatial_correlation\piv_folder
-Results will be saved in test_images\batch_spatial_correlation\mean_velocity
-The following files will be processed:
-        test_images\batch_spatial_correlation\piv_folder\00
-        test_images\batch_spatial_correlation\piv_folder\01
+   python batch_mean_velocity.py main_piv_foler
 
-------------------------
-Sat Jan 22 15:32:40 2022 // Computing mean velocity of test_images\batch_spatial_correlation\piv_folder\00
-Sat Jan 22 15:32:41 2022 // Computing mean velocity of test_images\batch_spatial_correlation\piv_folder\01
+* main_piv_folder -- the folder containing many folders of PIV data. ``piv_drop`` for example.
 
-EDIT
-====
-Dec 31, 2021 -- Initial commit.
-Jan 22, 2022 -- Strip the os.sep at the end of the given PIV directory, if exists.
+.. rubric:: Test
+
+.. code-block:: console
+
+   python batch_mean_velocity.py test_images\batch_spatial_correlation\piv_folder
+
+.. rubric:: Edit
+
+* Dec 31, 2021 -- Initial commit.
+* Jan 22, 2022 -- Strip the os.sep at the end of the given PIV directory, if exists.
 """
 
 if __name__=="__main__":

@@ -4,36 +4,28 @@ import time
 from corrLib import readdata
 
 """
-GENERAL
-=======
+batch_velocity_autocorr
+=======================
+
 Batch velocity autocorrelation computation.
 
-USAGE
-=====
-python batch_mean_velocity.py main_piv_foler
+.. rubric:: Syntax
 
-main_piv_folder is the folder containing many folders of PIV data. `piv_drop` for example.
+.. code-block:: console
 
-TEST
-====
-python batch_velocity_autocorr.py test_images\batch_spatial_correlation\piv_folder
+   python batch_mean_velocity.py main_piv_foler
 
-LOG
-===
-Mon Feb 21 17:58:32 2022
-------------------------
-Run batch_velocity_autocorr on test_images\batch_spatial_correlation\piv_folder
-Results will be saved in test_images\batch_spatial_correlation\velocity_autocorr
-The following files will be processed:
-        test_images\batch_spatial_correlation\piv_folder\00
-        test_images\batch_spatial_correlation\piv_folder\01
-------------------------
+* main_piv_folder -- the folder containing many folders of PIV data. `piv_drop` for example.
 
-Mon Feb 21 17:58:33 2022 // Computing VACF of test_images\batch_spatial_correlation\piv_folder\00
+.. rubric:: Test
 
-EDIT
-====
-Feb 21, 2022 -- Initial commit.
+.. code-block:: console
+
+   python batch_velocity_autocorr.py test_images\batch_spatial_correlation\piv_folder
+
+.. rubric:: Edit
+
+* Feb 21, 2022 -- Initial commit.
 """
 
 

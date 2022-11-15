@@ -5,30 +5,28 @@ from corrLib import corrS, readdata
 from pivLib import read_piv
 
 """
-GENERAL
-=======
+batch_spatial_correlation
+=========================
+
 Batch spatial correlation computation.
 
-USAGE
-=====
-python batch_spatial_correlation.py main_piv_foler
+.. rubric:: Syntax
 
-main_piv_folder is the folder containing many folders of PIV data. `piv_drop` for example.
+.. code-block:: console
 
-TEST
-====
-python batch_spatial_correlation.py test_images\batch_spatial_correlation\piv_folder
+   python batch_spatial_correlation.py main_piv_foler
 
-LOG
-===
-Wed Dec 15 23:07:01 2021 \ Start batch_spatial_correlation in test_images\batch_spatial_correlation
-Wed Dec 15 23:07:01 2021 \ Computing test_images\batch_spatial_correlation\piv_folder\00
-Wed Dec 15 23:07:03 2021 \ Computing test_images\batch_spatial_correlation\piv_folder\01
-Wed Dec 15 23:07:05 2021 \ Computing finished!
+* main_piv_folder -- the folder containing many folders of PIV data. `piv_drop` for example.
 
-EDIT
-====
-Dec 15, 2021 -- Initial commit.
+.. rubric:: Test
+
+.. code-block:: console
+
+   python batch_spatial_correlation.py test_images\batch_spatial_correlation\piv_folder
+
+.. rubric:: Edit
+
+* Dec 15, 2021 -- Initial commit.
 """
 
 if __name__=="__main__":

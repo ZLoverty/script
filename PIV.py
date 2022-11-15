@@ -6,26 +6,29 @@ from myImageLib import readdata, show_progress
 import pandas as pd
 
 """
-DESCRIPTION
-===========
+PIV
+===
+
 This is the most basic version of PIV.
 
-SYNTAX
-======
-python PIV.py img_folder winsize dt piv_folder
+.. rubric:: Syntax
 
-img_folder: tif sequence folder to be analyzed.
-winsize: interrogation window size.
-dt: time interval between adjacent frames (1/FPS).
-piv_folder: folder to save PIV results.
+.. code-block:: console
 
-NOTE
-====
-1. In this implementation, we set overlap as half of winsize.
+   python PIV.py img_folder winsize dt piv_folder
 
-EDIT
-====
-11032022 -- Initial commit.
+* img_folder: tif sequence folder to be analyzed.
+* winsize: interrogation window size.
+* dt: time interval between adjacent frames (1/FPS).
+* piv_folder: folder to save PIV results.
+
+.. note::
+
+   In this implementation, we set overlap as half of winsize.
+
+.. rubric:: Edit
+
+* Nov 03, 2022 -- Initial commit.
 """
 
 img_folder = sys.argv[1]
@@ -34,7 +37,7 @@ dt = float(sys.argv[3])
 piv_folder = sys.argv[4]
 if os.path.exists(piv_folder) == False:
     os.makedirs(piv_folder)
-    
+
 overlap = winsize // 2
 
 l = readdata(img_folder, "tif")
