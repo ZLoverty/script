@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html  lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>to_tif</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="to_vid" href="to_vid.html" />
+  <link rel="prev" title="spatial_correlation" href="spatial_correlation.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="index.html" class="home-link">
+    
+      <span class="site-name">script</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="index.html#contents">contents</a></span>
+      </p>
+      <ul class="current">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="PIV.html" class="reference internal ">PIV</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="apply_mask.html" class="reference internal ">apply_mask</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_gen_preview.html" class="reference internal ">batch_gen_preview</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_mean_velocity.html" class="reference internal ">batch_mean_velocity</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_spatial_correlation.html" class="reference internal ">batch_spatial_correlation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_to_tif.html" class="reference internal ">batch_to_tif</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_to_vid.html" class="reference internal ">batch_to_vid</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_velocity_autocorr.html" class="reference internal ">batch_velocity_autocorr</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="bpass.html" class="reference internal ">bpass</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="bpass_mh.html" class="reference internal ">bpass_mh</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="circulation_order_parameter.html" class="reference internal ">circulation_order_parameter</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="crop_channel.html" class="reference internal ">crop_channel</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="extract.html" class="reference internal ">extract</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="flowrate.html" class="reference internal ">flowrate</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="gen_preview.html" class="reference internal ">gen_preview</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="mean_velocity.html" class="reference internal ">mean_velocity</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="moving_mask_piv.html" class="reference internal ">moving_mask_piv</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="myautodoc.html" class="reference internal ">myautodoc</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="piv_drop.html" class="reference internal ">piv_drop</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="piv_overlay.html" class="reference internal ">piv_overlay</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="remove_background.html" class="reference internal ">remove_background</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="small_imseq.html" class="reference internal ">small_imseq</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="spatial_correlation.html" class="reference internal ">spatial_correlation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 current">
+            
+              <a href="#" class="reference internal current">to_tif</a>
+            
+
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#to-tif" class="reference internal">to_tif</a></li>
+                
+              </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="to_vid.html" class="reference internal ">to_vid</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="velocity_autocorr.html" class="reference internal ">velocity_autocorr</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+    
+    <li>to_tif</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="prev">
+    <a href="spatial_correlation.html"
+       title="previous chapter">← spatial_correlation</a>
+  </li>
+  <li class="next">
+    <a href="to_vid.html"
+       title="next chapter">to_vid →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <div class="section" id="to-tif">
+<h1>to_tif<a class="headerlink" href="#to-tif" title="Permalink to this heading">¶</a></h1>
+<p>Convert <em>*.nd2</em> or <em>*.raw</em> file to image sequence of raw and 8-bit grayscale images. For  <em>*.nd2</em>, output image sequences are saved in a subfolder under the same folder as the  <em>*.nd2</em> file with corresponding name as the  <em>*.nd2</em> file name.
+For raw, output image sequences are saved in subfolders in the same folder as the .raw files.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Autocontrast is applied to <em>8-bit</em> folder, but not to <em>raw</em> folder.</p>
+</div>
+<p class="rubric">Syntax</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python to_tif.py nd2Dir remove</span>
+</pre></div>
+</div>
+<p class="rubric">Test</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python to_tif.py test_images\test.nd2</span>
+<span class="go">python to_tif.py test_images\raw\RawImage.raw</span>
+</pre></div>
+</div>
+<p class="rubric">Edit</p>
+<ul class="simple">
+<li><p>06162020 – No longer export 16-bit images.</p></li>
+<li><dl class="simple">
+<dt>08162020 –</dt><dd><ol class="arabic simple">
+<li><p>write input arguments in log.txt</p></li>
+<li><p>(important) add illumination correction. All frames will be corrected according to the whole video.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>08182020 – Add argument ‘remove’, determining if background subtraction is applied or not. Default to False.</p></li>
+<li><p>10282021 – Remove “8-bit” folder, export original images instead of converting to 8-bit</p></li>
+<li><dl class="simple">
+<dt>11042021 –</dt><dd><ol class="arabic simple">
+<li><p>Set <cite>check_contrast</cite> to False to avoid CLI spamming</p></li>
+<li><p>Add ‘exp1’ before the image number, in accordance to Cristian’s image naming convention</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>11262021 –</dt><dd><ol class="arabic simple">
+<li><p>Remove the ‘exp1’ flag at the beginning of each image file</p></li>
+<li><p>Add saturated 8-bit image output for visualization (this means we need a big overhead of disk space!)</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p>11302021 – Add disk_capacity_check function to avoid running out disk space</p></li>
+<li><p>Jan 22, 2022 – disk_capacity_check, use os.split(file)[1] to check, because windows does not recognize file directory as a valid directory for disk size check</p></li>
+<li><p>Feb 02, 2022 – Print dir info, so in batch_to_tif I can follow the progress.</p></li>
+<li><dl class="simple">
+<dt>Mar 15, 2022 –</dt><dd><ol class="arabic simple">
+<li><p>Rewrite using the rawImage class defined in myImageLib.</p></li>
+<li><p>Temporarily discontinue the “remove background functionality”.</p></li>
+<li><p>Include .raw functionality – with memory check.</p></li>
+<li><p>Update the doc string.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="prev">
+    <a href="spatial_correlation.html"
+       title="previous chapter">← spatial_correlation</a>
+  </li>
+  <li class="next">
+    <a href="to_vid.html"
+       title="next chapter">to_vid →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2022, Zhengyang Liu.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>

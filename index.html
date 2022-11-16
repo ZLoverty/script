@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html  lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+      <title>Welcome to script’s documentation!</title>
+    
+          <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+          <link rel="stylesheet" href="_static/theme.css " type="text/css" />
+      
+      <!-- sphinx script_files -->
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+
+      
+      <!-- bundled in js (rollup iife) -->
+      <!-- <script src="_static/theme-vendors.js"></script> -->
+      <script src="_static/theme.js" defer></script>
+    
+  <link rel="index" title="Index" href="genindex.html" />
+  <link rel="search" title="Search" href="search.html" />
+  <link rel="next" title="PIV" href="PIV.html" /> 
+  </head>
+
+  <body>
+    <div id="app">
+    <div class="theme-container" :class="pageClasses"><navbar @toggle-sidebar="toggleSidebar">
+  <router-link to="#" class="home-link">
+    
+      <span class="site-name">script</span>
+    
+  </router-link>
+
+  <div class="links">
+    <navlinks class="can-hide">
+
+
+
+    </navlinks>
+  </div>
+</navbar>
+
+      
+      <div class="sidebar-mask" @click="toggleSidebar(false)">
+      </div>
+        <sidebar @toggle-sidebar="toggleSidebar">
+          
+          <navlinks>
+            
+
+
+
+            
+          </navlinks><div id="searchbox" class="searchbox" role="search">
+  <div class="caption"><span class="caption-text">Quick search</span>
+    <div class="searchformwrapper">
+      <form class="search" action="search.html" method="get">
+        <input type="text" name="q" />
+        <input type="submit" value="Search" />
+        <input type="hidden" name="check_keywords" value="yes" />
+        <input type="hidden" name="area" value="default" />
+      </form>
+    </div>
+  </div>
+</div><div class="sidebar-links" role="navigation" aria-label="main navigation">
+  
+    <div class="sidebar-group">
+      <p class="caption">
+        <span class="caption-text"><a href="#contents">contents</a></span>
+      </p>
+      <ul class="">
+        
+          <li class="toctree-l1 ">
+            
+              <a href="PIV.html" class="reference internal ">PIV</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="apply_mask.html" class="reference internal ">apply_mask</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_gen_preview.html" class="reference internal ">batch_gen_preview</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_mean_velocity.html" class="reference internal ">batch_mean_velocity</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_spatial_correlation.html" class="reference internal ">batch_spatial_correlation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_to_tif.html" class="reference internal ">batch_to_tif</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_to_vid.html" class="reference internal ">batch_to_vid</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="batch_velocity_autocorr.html" class="reference internal ">batch_velocity_autocorr</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="bpass.html" class="reference internal ">bpass</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="bpass_mh.html" class="reference internal ">bpass_mh</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="circulation_order_parameter.html" class="reference internal ">circulation_order_parameter</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="crop_channel.html" class="reference internal ">crop_channel</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="extract.html" class="reference internal ">extract</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="flowrate.html" class="reference internal ">flowrate</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="gen_preview.html" class="reference internal ">gen_preview</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="mean_velocity.html" class="reference internal ">mean_velocity</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="moving_mask_piv.html" class="reference internal ">moving_mask_piv</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="myautodoc.html" class="reference internal ">myautodoc</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="piv_drop.html" class="reference internal ">piv_drop</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="piv_overlay.html" class="reference internal ">piv_overlay</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="remove_background.html" class="reference internal ">remove_background</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="small_imseq.html" class="reference internal ">small_imseq</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="spatial_correlation.html" class="reference internal ">spatial_correlation</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="to_tif.html" class="reference internal ">to_tif</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="to_vid.html" class="reference internal ">to_vid</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="velocity_autocorr.html" class="reference internal ">velocity_autocorr</a>
+            
+
+            
+          </li>
+
+        
+      </ul>
+    </div>
+  
+</div>
+        </sidebar>
+
+      <page>
+          <div class="body-header" role="navigation" aria-label="navigation">
+  
+  <ul class="breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+    
+    <li>Welcome to script’s documentation!</li>
+  </ul>
+  
+
+  <ul class="page-nav">
+  <li class="next">
+    <a href="PIV.html"
+       title="next chapter">PIV →</a>
+  </li>
+</ul>
+  
+</div>
+<hr>
+          <div class="content" role="main" v-pre>
+            
+  <div class="section" id="welcome-to-script-s-documentation">
+<h1>Welcome to script’s documentation!<a class="headerlink" href="#welcome-to-script-s-documentation" title="Permalink to this heading">¶</a></h1>
+<p>Python scripts to facilitate my data analysis.</p>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="PIV.html">PIV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apply_mask.html">apply_mask</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_gen_preview.html">batch_gen_preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_mean_velocity.html">batch_mean_velocity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_spatial_correlation.html">batch_spatial_correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_to_tif.html">batch_to_tif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_to_vid.html">batch_to_vid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="batch_velocity_autocorr.html">batch_velocity_autocorr</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bpass.html">bpass</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bpass_mh.html">bpass_mh</a></li>
+<li class="toctree-l1"><a class="reference internal" href="circulation_order_parameter.html">circulation_order_parameter</a></li>
+<li class="toctree-l1"><a class="reference internal" href="crop_channel.html">crop_channel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extract.html">extract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="flowrate.html">flowrate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gen_preview.html">gen_preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mean_velocity.html">mean_velocity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="moving_mask_piv.html">moving_mask_piv</a></li>
+<li class="toctree-l1"><a class="reference internal" href="myautodoc.html">myautodoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="piv_drop.html">piv_drop</a></li>
+<li class="toctree-l1"><a class="reference internal" href="piv_overlay.html">piv_overlay</a></li>
+<li class="toctree-l1"><a class="reference internal" href="remove_background.html">remove_background</a></li>
+<li class="toctree-l1"><a class="reference internal" href="small_imseq.html">small_imseq</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spatial_correlation.html">spatial_correlation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="to_tif.html">to_tif</a></li>
+<li class="toctree-l1"><a class="reference internal" href="to_vid.html">to_vid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="velocity_autocorr.html">velocity_autocorr</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <div class="page-nav">
+            <div class="inner"><ul class="page-nav">
+  <li class="next">
+    <a href="PIV.html"
+       title="next chapter">PIV →</a>
+  </li>
+</ul><div class="footer" role="contentinfo">
+      &#169; Copyright 2022, Zhengyang Liu.
+    <br>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+</div>
+            </div>
+          </div>
+      </page>
+    </div></div>
+    
+    
+  </body>
+</html>
