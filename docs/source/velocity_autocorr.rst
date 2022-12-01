@@ -28,5 +28,6 @@ Apply autocorrelation analysis on sequential PIV data.
     1. Rewrite with piv_data class
     2. Use fps instead of dt as input argument
     3. Modify doc string
-    
+
 * Mar 23, 2022 -- add smoothn as an optional smoothing method
+* Nov 15, 2022 -- Make ``fps`` and ``cutoff`` real *keyword* args.

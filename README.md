@@ -1,20 +1,42 @@
 # script
- Useful scripts for batch image processing
+ Useful python scripts for batch image processing. Visit [full documentation](https://zloverty.github.io/script/) for more details on installation and usage.
 
-## To-do list
+## Raw images handling
 
-- orientational order calculation
-- Solve the memory issue of reading large .raw file (np.fromfile)
-- Optimal PIV box size need to be determined.
+- batch_to_tif
+- batch_to_vid
+- batch_gen_preview
+- extract
+- small_imseq
+- to_tif
+- to_vid
+- gen_preview
 
-## Done list
-- All the batch script need to write a log file, recording the progress. For example, when batch_to_tif.py finds tifs for some files exists already, it should state explicitly in the log file that these files are skipped.
-- modify `gen_preview.py`: work on single .nd2 files
-- `batch_gen_preview.py`
-- batch_gen_preview has directory bugs
-```
-generating preview for /media/zhengyang/XinQ/DE/12062021/19.nd2
-/media/zhengyang/XinQ/DE/12062021/19.nd2 -> /media/zhengyang/XinQ/DE/preview12062021/19.tif
-Generating preview for /media/zhengyang/XinQ/DE/12092021/20.nd2
-/media/zhengyang/XinQ/DE/12092021/20.nd2 -> /media/zhengyang/XinQ/DE/preview12092021/20.tif
-```
+## Image processing
+
+- bpass
+- bpass_mh
+- remove_background
+
+## PIV and velocity field analysis
+- PIV
+- piv_drop
+- piv_overlay
+- mean_velocity
+- moving_mask_piv
+- spatial_correlation
+- velocity_autocorr
+- circulation_order_parameter
+- batch_spatial_correlation
+- batch_mean_velocity
+- batch_velocity_autocorr
+- apply_mask
+
+## Active nematics dada analysis
+
+- crop_channel
+- flowrate
+
+## Miscellaneous
+
+- myautodoc
