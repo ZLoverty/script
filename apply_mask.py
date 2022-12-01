@@ -4,7 +4,7 @@ import os
 import sys
 from skimage import io
 from myImageLib import readdata, show_progress
-import cv2
+from pivLib import apply_mask
 
 """
 apply_mask
@@ -16,7 +16,7 @@ Apply mask on PIV data. It sets all the irrelevant (x, y in the False region of 
 
 .. code-block:: console
 
-   python apply_mask.py piv_folder mask_dir [erode=32]
+   python apply_mask.py piv_folder mask_dir
 
 * piv_folder: folder containing PIV data (csv sequence)
 * mask_dir: directory of a tif binary mask, of the same shape as raw images.
@@ -26,27 +26,29 @@ Apply mask on PIV data. It sets all the irrelevant (x, y in the False region of 
 
    The original PIV data will be overwritten, since they are no longer useful.
 
+.. rubric:: Test
+
+.. code-block:: console
+
+   python apply_mask.py test_images\apply_mask test_images\apply_mask\A.tif
+
 .. rubric:: Edit
 
-* 11032022 -- Initial commit.
+* Nov 03, 2022 -- Initial commit.
+* Dec 01, 2022 -- Remove erosion step. Mask should be used as it is.
 """
 
 piv_folder = sys.argv[1]
 mask_dir = sys.argv[2]
-erode = 32
-if len(sys.argv) > 3:
-    erode = sys.argv[3]
-    erode = int(erode)
-mask_raw = io.imread(mask_dir)
+
+mask = io.imread(mask_dir)
 
 l = readdata(piv_folder, "csv")
 numFiles = len(l)
 pivData = pd.read_csv(l.at[0, "Dir"])
-mask_shrink = cv2.erode(mask_raw, np.ones((erode, erode), dtype="uint8"))
-mask_bool_ij = mask_shrink.astype("bool")[pivData.y.astype("int"), pivData.x.astype("int")] # could cause error due to float index
+
 for num, i in l.iterrows():
     show_progress((num+1)/numFiles, num+1)
     pivData = pd.read_csv(i.Dir)
-    pivData.loc[~mask_bool_ij, "u"] = np.nan
-    pivData.loc[~mask_bool_ij, "v"] = np.nan
+    pivData = apply_mask(pivData, mask)
     pivData.to_csv(i.Dir, index=False)
