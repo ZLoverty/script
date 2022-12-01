@@ -29,8 +29,10 @@ Contents
    piv_drop
    piv_overlay
    remove_background
+   rename_ij_piv
    small_imseq
    spatial_correlation
    to_tif
    to_vid
    velocity_autocorr
+   wrap_piv
