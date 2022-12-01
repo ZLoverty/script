@@ -272,6 +272,15 @@
         
           <li class="toctree-l1 ">
             
+              <a href="rename_ij_piv.html" class="reference internal ">rename_ij_piv</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
               <a href="small_imseq.html" class="reference internal ">small_imseq</a>
             
 
@@ -315,6 +324,15 @@
           </li>
 
         
+          <li class="toctree-l1 ">
+            
+              <a href="wrap_piv.html" class="reference internal ">wrap_piv</a>
+            
+
+            
+          </li>
+
+        
       </ul>
     </div>
   
@@ -350,7 +368,7 @@
 <h1>apply_mask<a class="headerlink" href="#apply-mask" title="Permalink to this heading">¶</a></h1>
 <p>Apply mask on PIV data. It sets all the irrelevant (x, y in the False region of the mask) PIV velocity to np.nan.</p>
 <p class="rubric">Syntax</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python apply_mask.py piv_folder mask_dir [erode=32]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python apply_mask.py piv_folder mask_dir</span>
 </pre></div>
 </div>
 <ul class="simple">
@@ -362,9 +380,14 @@
 <p class="admonition-title">Note</p>
 <p>The original PIV data will be overwritten, since they are no longer useful.</p>
 </div>
+<p class="rubric">Test</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python apply_mask.py test_images\apply_mask test_images\apply_mask\A.tif</span>
+</pre></div>
+</div>
 <p class="rubric">Edit</p>
 <ul class="simple">
-<li><p>11032022 – Initial commit.</p></li>
+<li><p>Nov 03, 2022 – Initial commit.</p></li>
+<li><p>Dec 01, 2022 – Remove erosion step. Mask should be used as it is.</p></li>
 </ul>
 </div>
 
