@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>mean_velocity</title>
+      <title>ij_piv</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
@@ -23,8 +23,8 @@
     
   <link rel="index" title="Index" href="genindex.html" />
   <link rel="search" title="Search" href="search.html" />
-  <link rel="next" title="moving_mask_piv" href="moving_mask_piv.html" />
-  <link rel="prev" title="ij_piv" href="ij_piv.html" /> 
+  <link rel="next" title="mean_velocity" href="mean_velocity.html" />
+  <link rel="prev" title="gen_preview" href="gen_preview.html" /> 
   </head>
 
   <body>
@@ -210,26 +210,26 @@
           </li>
 
         
-          <li class="toctree-l1 ">
-            
-              <a href="ij_piv.html" class="reference internal ">ij_piv</a>
-            
-
-            
-          </li>
-
-        
           <li class="toctree-l1 current">
             
-              <a href="#" class="reference internal current">mean_velocity</a>
+              <a href="#" class="reference internal current">ij_piv</a>
             
 
             
               <ul>
                 
-                  <li class="toctree-l2"><a href="#mean-velocity" class="reference internal">mean_velocity</a></li>
+                  <li class="toctree-l2"><a href="#ij-piv" class="reference internal">ij_piv</a></li>
                 
               </ul>
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
+              <a href="mean_velocity.html" class="reference internal ">mean_velocity</a>
+            
+
             
           </li>
 
@@ -354,18 +354,18 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
-    <li>mean_velocity</li>
+    <li>ij_piv</li>
   </ul>
   
 
   <ul class="page-nav">
   <li class="prev">
-    <a href="ij_piv.html"
-       title="previous chapter">← ij_piv</a>
+    <a href="gen_preview.html"
+       title="previous chapter">← gen_preview</a>
   </li>
   <li class="next">
-    <a href="moving_mask_piv.html"
-       title="next chapter">moving_mask_piv →</a>
+    <a href="mean_velocity.html"
+       title="next chapter">mean_velocity →</a>
   </li>
 </ul>
   
@@ -373,30 +373,32 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <div class="section" id="mean-velocity">
-<h1>mean_velocity<a class="headerlink" href="#mean-velocity" title="Permalink to this heading">¶</a></h1>
-<p>Compute mean velocity of PIV data.</p>
-<ol class="arabic simple">
-<li><p>Compute the magnitude of each PIV arrow</p></li>
-<li><p>Take average of these arrows</p></li>
-</ol>
+  <div class="section" id="ij-piv">
+<h1>ij_piv<a class="headerlink" href="#ij-piv" title="Permalink to this heading">¶</a></h1>
+<p>Invoke ImageJ2 to run PIV macro “PIV_STACK_directory.ijm” based on “<a href="#id1"><span class="problematic" id="id2">PIV_</span></a>.jar” plugin, in headless mode. For more information about ImageJ headless mode, see <a class="reference external" href="https://imagej.net/learn/headless">here</a>.</p>
+<p>The macro itself is capable of iterating over all the *.tif files in a given directory, so there is no need to repeat in the python script.</p>
 <p class="rubric">Syntax</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python mean_velocity.py piv_folder out_folder</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python ij_piv.py img_folder</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>piv_folder – folder containing PIV data (.csv), file names indicate frame number</p></li>
-<li><p>out_folder – mean velocity data file (.csv), contain frame and mean_v columns</p></li>
+<li><p>img_folder: folder containing *.tif images</p></li>
 </ul>
-<p>A folder of PIV files are used to generate a single mean velocity data file.</p>
-<p class="rubric">Test</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python mean_velocity.py test_images\piv_drop test_images\mean_velocity</span>
-</pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To be able to run the command <cite>ImageJ</cite> or <cite>ImageJ-win64</cite> (or other variants of ImageJ in different OS), we need to include the directory of the executable (.exe on windows) in the system path.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I put the actual macro file “PIV_STACK_directory.ijm” in the main macro folder of FIJI (in my case “C:Fiji.appmacro”), so that ImageJ can find it without specifying the full path. On a different computer, I need to repeat this step.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I did a slight modification on the <a href="#id3"><span class="problematic" id="id4">PIV_</span></a>.jar, just to suppress the tedious logging info every step. The core algorithm should be the same as the original plugin.</p>
 </div>
 <p class="rubric">Edit</p>
 <ul class="simple">
-<li><p>Dec 31, 2021 – Initial commit.</p></li>
-<li><p>Jan 02, 2021 – Minor changes in docstring.</p></li>
+<li><p>Dec 2, 2022 – Initial commit.</p></li>
 </ul>
 </div>
 
@@ -405,12 +407,12 @@
           <div class="page-nav">
             <div class="inner"><ul class="page-nav">
   <li class="prev">
-    <a href="ij_piv.html"
-       title="previous chapter">← ij_piv</a>
+    <a href="gen_preview.html"
+       title="previous chapter">← gen_preview</a>
   </li>
   <li class="next">
-    <a href="moving_mask_piv.html"
-       title="next chapter">moving_mask_piv →</a>
+    <a href="mean_velocity.html"
+       title="next chapter">mean_velocity →</a>
   </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2022, Zhengyang Liu.
