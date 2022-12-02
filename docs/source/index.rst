@@ -23,6 +23,7 @@ Contents
    extract
    flowrate
    gen_preview
+   ij_piv
    mean_velocity
    moving_mask_piv
    myautodoc
