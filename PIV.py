@@ -30,7 +30,7 @@ This is the most basic version of PIV.
 .. rubric:: Edit
 
 * Nov 03, 2022 -- Initial commit.
-* Dec 06, 2022 -- Enable this script to process \*.nd2 files.
+* Dec 06, 2022 -- i) Enable this script to process \*.nd2 files. ii) Check if reults already exist. iii) Pick up job from middle. (Only work for nd2 PIV for the moment)
 """
 
 img = sys.argv[1]
@@ -39,14 +39,31 @@ dt = float(sys.argv[3])
 piv_folder = sys.argv[4]
 if os.path.exists(piv_folder) == False:
     os.makedirs(piv_folder)
-
+else: 
+    # this means we have created a folder to save the results already
+    # possibly, there are some results in this folder, but not completed
+    # try to analyze the folder and determine if it's needed to pick up the job
+    print("piv_folder {} exists, analyzing contents".format(piv_folder))
+    lr = readdata(piv_folder, "csv")
+    if len(lr) > 0:
+        print("The folder has {:d} csv files".format(len(lr)))
+        last_name = lr.iloc[-1]["Name"]
+        # analyze the name
+        print("The last csv file has name: {}".format(last_name))
+        start = int(last_name.split("-")[0])
+        print("Start doing PIV from frame {:d}".format(start))
+        if start > len(lr) * 2: # check if there are missing results before
+            print("There are files missing, start from beginning.")
+            start = 0
+    else:
+        start = 0 
 overlap = winsize // 2
 
 if os.path.isdir(img):
     l = readdata(img, "tif")
     nImages = len(l)
     for ind0, ind1 in zip(l.index[::2], l.index[1::2]):
-        show_progress((ind0+1)/nImages, ind0+1)
+        show_progress((ind0+2)/nImages, ind0+1)
         I0 = io.imread(l.at[ind0, "Dir"])
         I1 = io.imread(l.at[ind1, "Dir"])
         x, y, u, v = PIV(I0, I1, winsize, overlap, dt)
@@ -56,7 +73,7 @@ if os.path.isdir(img):
 elif img.endswith(".nd2"):
     with ND2Reader(img) as images:
         nImages = images.shape[0]
-        for i in range(0, nImages, 2):
+        for i in range(start, nImages, 2):
             show_progress((i+1)/nImages, i+1)
             I0 = images[i]
             I1 = images[i+1]
