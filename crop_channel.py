@@ -68,7 +68,7 @@ for j in range(0, len(crop_data)//2):
 with ND2Reader(nd2Dir) as images:
     nImages = len(images)
     for num, image in enumerate(images):
-        show_progress((num+1)/nImages, num)
+        show_progress((num+1)/nImages, str(num))
         for j in range(0, len(crop_data)//2): # loop over all possible croppings
             # convert to angle, xy, wh
             angle = 90 - crop_data.at[2*j, "Angle"]

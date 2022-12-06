@@ -89,6 +89,6 @@ for n, g in l.groupby("np1"):
             ###########################################################################################
             Q_list.append(Q)
         df[i.np2] = Q_list
-    df["t"] = df.index * dt
+    df["t"] = np.array(df.index) * dt
     df.to_csv(os.path.join(flowrate_folder, "{}.csv".format(n)), index=False)
     print("Computing flow rate for {}".format(n))
