@@ -19,6 +19,7 @@ Contents
    bpass
    bpass_mh
    circulation_order_parameter
+   correction
    crop_channel
    extract
    flowrate
@@ -35,5 +36,6 @@ Contents
    spatial_correlation
    to_tif
    to_vid
+   tracking
    velocity_autocorr
    wrap_piv

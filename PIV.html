@@ -182,6 +182,15 @@
         
           <li class="toctree-l1 ">
             
+              <a href="correction.html" class="reference internal ">correction</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
               <a href="crop_channel.html" class="reference internal ">crop_channel</a>
             
 
@@ -326,6 +335,15 @@
         
           <li class="toctree-l1 ">
             
+              <a href="tracking.html" class="reference internal ">tracking</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
               <a href="velocity_autocorr.html" class="reference internal ">velocity_autocorr</a>
             
 
@@ -377,11 +395,11 @@
 <h1>PIV<a class="headerlink" href="#piv" title="Permalink to this heading">¶</a></h1>
 <p>This is the most basic version of PIV.</p>
 <p class="rubric">Syntax</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python PIV.py img_folder winsize dt piv_folder</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python PIV.py img winsize dt piv_folder</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>img_folder: tif sequence folder to be analyzed.</p></li>
+<li><p>img: can be i) tif sequence folder, ii) nd2 file dir to be analyzed.</p></li>
 <li><p>winsize: interrogation window size.</p></li>
 <li><p>dt: time interval between adjacent frames (1/FPS).</p></li>
 <li><p>piv_folder: folder to save PIV results.</p></li>
@@ -393,6 +411,7 @@
 <p class="rubric">Edit</p>
 <ul class="simple">
 <li><p>Nov 03, 2022 – Initial commit.</p></li>
+<li><p>Dec 06, 2022 – Enable this script to process *.nd2 files.</p></li>
 </ul>
 </div>
 
