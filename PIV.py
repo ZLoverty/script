@@ -30,7 +30,7 @@ This is the most basic version of PIV.
 .. rubric:: Edit
 
 * Nov 03, 2022 -- Initial commit.
-* Dec 06, 2022 -- i) Enable this script to process \*.nd2 files. ii) Check if reults already exist. iii) Pick up job from middle. (Only work for nd2 PIV for the moment)
+* Dec 06, 2022 -- i) Enable this script to process \*.nd2 files. ii) Check if reults already exist. iii) Pick up job from middle. (Only work for nd2 PIV for the moment) iv) query num frames using metadata, rather than ``images.shape``
 """
 
 img = sys.argv[1]
@@ -72,7 +72,7 @@ if os.path.isdir(img):
    
 elif img.endswith(".nd2"):
     with ND2Reader(img) as images:
-        nImages = images.shape[0]
+        nImages = images.metadata["num_frames"]
         for i in range(start, nImages, 2):
             show_progress((i+1)/nImages, i+1)
             I0 = images[i]
