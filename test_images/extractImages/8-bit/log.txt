@@ -1,2 +1,0 @@
-Start to convert Documents\Github\script\test_images\extractImages\RawImage.raw to 8-bit tif images.
-Sat Dec 11 22:07:17 2021 // frame 00000
