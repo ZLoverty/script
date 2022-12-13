@@ -36,6 +36,7 @@ Apply mask on PIV data. It sets all the irrelevant (x, y in the False region of 
 
 * Nov 03, 2022 -- Initial commit.
 * Dec 01, 2022 -- Remove erosion step. Mask should be used as it is.
+* Dec 13, 2022 -- Fix a bug.
 """
 
 piv_folder = sys.argv[1]
@@ -45,7 +46,6 @@ mask = io.imread(mask_dir)
 
 l = readdata(piv_folder, "csv")
 numFiles = len(l)
-pivData = pd.read_csv(l.at[0, "Dir"])
 
 for num, i in l.iterrows():
     show_progress((num+1)/numFiles, num+1)
