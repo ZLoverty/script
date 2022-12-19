@@ -1,5 +1,5 @@
 import pandas as pd
-from myImageLib import readdata
+from myimagelib.myImageLib import readdata
 import sys
 import os
 
