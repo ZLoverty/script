@@ -182,6 +182,15 @@
         
           <li class="toctree-l1 ">
             
+              <a href="collect_preview.html" class="reference internal ">collect_preview</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
               <a href="correction.html" class="reference internal ">correction</a>
             
 
@@ -393,7 +402,7 @@
             
   <div class="section" id="apply-mask">
 <h1>apply_mask<a class="headerlink" href="#apply-mask" title="Permalink to this heading">¶</a></h1>
-<p>Apply mask on PIV data. It sets all the irrelevant (x, y in the False region of the mask) PIV velocity to np.nan.</p>
+<p>Apply mask on PIV data. It calls <code class="xref py py-func docutils literal notranslate"><span class="pre">pivLib.apply_mask()</span></code> to treat the input PIV data, and save the results (masked PIV data) in the same files. See <a class="reference external" href="https://zloverty.github.io/mylib/pivLib/pivLib.apply_mask.html">here</a> for more details.</p>
 <p class="rubric">Syntax</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python apply_mask.py piv_folder mask_dir</span>
 </pre></div>
@@ -403,10 +412,6 @@
 <li><p>mask_dir: directory of a tif binary mask, of the same shape as raw images.</p></li>
 <li><p>erode: number of pixels to erode from the True region (this makes the mask smaller, reducing boundary effect). Default to 32, a good value is the winsize of PIV.</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The original PIV data will be overwritten, since they are no longer useful.</p>
-</div>
 <p class="rubric">Test</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python apply_mask.py test_images\apply_mask test_images\apply_mask\A.tif</span>
 </pre></div>
@@ -415,6 +420,8 @@
 <ul class="simple">
 <li><p>Nov 03, 2022 – Initial commit.</p></li>
 <li><p>Dec 01, 2022 – Remove erosion step. Mask should be used as it is.</p></li>
+<li><p>Dec 13, 2022 – Fix a bug.</p></li>
+<li><p>Dec 19, 2022 – More accurate docstring.</p></li>
 </ul>
 </div>
 

@@ -2,7 +2,7 @@
 apply_mask
 ==========
 
-Apply mask on PIV data. It sets all the irrelevant (x, y in the False region of the mask) PIV velocity to np.nan.
+Apply mask on PIV data. It calls :py:func:`pivLib.apply_mask` to treat the input PIV data, and save the results (masked PIV data) in the same files. See `here <https://zloverty.github.io/mylib/pivLib/pivLib.apply_mask.html>`_ for more details.
 
 .. rubric:: Syntax
 
@@ -14,10 +14,6 @@ Apply mask on PIV data. It sets all the irrelevant (x, y in the False region of 
 * mask_dir: directory of a tif binary mask, of the same shape as raw images.
 * erode: number of pixels to erode from the True region (this makes the mask smaller, reducing boundary effect). Default to 32, a good value is the winsize of PIV.
 
-.. note::
-
-   The original PIV data will be overwritten, since they are no longer useful.
-
 .. rubric:: Test
 
 .. code-block:: console
@@ -28,3 +24,5 @@ Apply mask on PIV data. It sets all the irrelevant (x, y in the False region of 
 
 * Nov 03, 2022 -- Initial commit.
 * Dec 01, 2022 -- Remove erosion step. Mask should be used as it is.
+* Dec 13, 2022 -- Fix a bug.
+* Dec 19, 2022 -- More accurate docstring.

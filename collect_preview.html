@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-      <title>PIV</title>
+      <title>collect_preview</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
@@ -23,8 +23,8 @@
     
   <link rel="index" title="Index" href="genindex.html" />
   <link rel="search" title="Search" href="search.html" />
-  <link rel="next" title="apply_mask" href="apply_mask.html" />
-  <link rel="prev" title="Welcome to script’s documentation!" href="index.html" /> 
+  <link rel="next" title="correction" href="correction.html" />
+  <link rel="prev" title="circulation_order_parameter" href="circulation_order_parameter.html" /> 
   </head>
 
   <body>
@@ -75,17 +75,11 @@
       </p>
       <ul class="current">
         
-          <li class="toctree-l1 current">
+          <li class="toctree-l1 ">
             
-              <a href="#" class="reference internal current">PIV</a>
+              <a href="PIV.html" class="reference internal ">PIV</a>
             
 
-            
-              <ul>
-                
-                  <li class="toctree-l2"><a href="#piv" class="reference internal">PIV</a></li>
-                
-              </ul>
             
           </li>
 
@@ -180,11 +174,17 @@
           </li>
 
         
-          <li class="toctree-l1 ">
+          <li class="toctree-l1 current">
             
-              <a href="collect_preview.html" class="reference internal ">collect_preview</a>
+              <a href="#" class="reference internal current">collect_preview</a>
             
 
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#collect-preview" class="reference internal">collect_preview</a></li>
+                
+              </ul>
             
           </li>
 
@@ -381,18 +381,18 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
-    <li>PIV</li>
+    <li>collect_preview</li>
   </ul>
   
 
   <ul class="page-nav">
   <li class="prev">
-    <a href="index.html"
-       title="previous chapter">← Welcome to script’s documentation!</a>
+    <a href="circulation_order_parameter.html"
+       title="previous chapter">← circulation_order_parameter</a>
   </li>
   <li class="next">
-    <a href="apply_mask.html"
-       title="next chapter">apply_mask →</a>
+    <a href="correction.html"
+       title="next chapter">correction →</a>
   </li>
 </ul>
   
@@ -400,29 +400,50 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <div class="section" id="piv">
-<h1>PIV<a class="headerlink" href="#piv" title="Permalink to this heading">¶</a></h1>
-<p>This is the most basic version of PIV.</p>
+  <div class="section" id="collect-preview">
+<h1>collect_preview<a class="headerlink" href="#collect-preview" title="Permalink to this heading">¶</a></h1>
+<p>Collect all the tif files under preview folder into the main folder. Assume file structure is shown below. All the tif files are put in folder “collect preview”.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">main_folder</span>
+<span class="go">|-- parent1</span>
+<span class="go">    |-- preview</span>
+<span class="go">        |-- 0.tif</span>
+<span class="go">        |-- 1.tif</span>
+<span class="go">        |-- ...</span>
+<span class="go">|-- parent2</span>
+<span class="go">    |-- preview</span>
+<span class="go">        |-- 0.tif</span>
+<span class="go">        |-- 1.tif</span>
+<span class="go">        |-- ..</span>
+<span class="go">|-- collect_preview</span>
+<span class="go">    |-- parent1-0.tif</span>
+<span class="go">    |-- parent1-1.tif</span>
+<span class="go">    |-- parent2-0.tif</span>
+<span class="go">    |-- parent2-1.tif</span>
+</pre></div>
+</div>
 <p class="rubric">Syntax</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python PIV.py img winsize dt piv_folder</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python collect_preview main_folder</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>img: can be i) tif sequence folder, ii) nd2 file dir to be analyzed.</p></li>
-<li><p>winsize: interrogation window size.</p></li>
-<li><p>dt: time interval between adjacent frames (1/FPS).</p></li>
-<li><p>piv_folder: folder to save PIV results.</p></li>
+<li><p>crop_data: the folder that contains subfolders named “preview”.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In this implementation, we set overlap as half of winsize.</p>
+<ul class="simple">
+<li><p>preview folder need not be immediate subfolder of main_folder.</p></li>
+</ul>
+</div>
+<p class="rubric">Test</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python collect_preview.py test_images\gen_preview</span>
+</pre></div>
 </div>
 <p class="rubric">Edit</p>
-<ul class="simple">
-<li><p>Nov 03, 2022 – Initial commit.</p></li>
-<li><p>Dec 06, 2022 – i) Enable this script to process *.nd2 files. ii) Check if reults already exist. iii) Pick up job from middle. (Only work for nd2 PIV for the moment) iv) query num frames using metadata, rather than <code class="docutils literal notranslate"><span class="pre">images.shape</span></code></p></li>
-<li><p>Dec 07, 2022 – Fix undefined “start” issue.</p></li>
-</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Dec 06, 2022</dt>
+<dd class="field-odd"><p>Initial commit.</p>
+</dd>
+</dl>
 </div>
 
 
@@ -430,12 +451,12 @@
           <div class="page-nav">
             <div class="inner"><ul class="page-nav">
   <li class="prev">
-    <a href="index.html"
-       title="previous chapter">← Welcome to script’s documentation!</a>
+    <a href="circulation_order_parameter.html"
+       title="previous chapter">← circulation_order_parameter</a>
   </li>
   <li class="next">
-    <a href="apply_mask.html"
-       title="next chapter">apply_mask →</a>
+    <a href="correction.html"
+       title="next chapter">correction →</a>
   </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2022, Zhengyang Liu.
