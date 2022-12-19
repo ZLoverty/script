@@ -19,6 +19,7 @@ Contents
    bpass
    bpass_mh
    circulation_order_parameter
+   collect_preview
    correction
    crop_channel
    extract

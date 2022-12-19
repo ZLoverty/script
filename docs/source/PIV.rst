@@ -22,4 +22,5 @@ This is the most basic version of PIV.
 .. rubric:: Edit
 
 * Nov 03, 2022 -- Initial commit.
-* Dec 06, 2022 -- Enable this script to process \*.nd2 files.
+* Dec 06, 2022 -- i) Enable this script to process \*.nd2 files. ii) Check if reults already exist. iii) Pick up job from middle. (Only work for nd2 PIV for the moment) iv) query num frames using metadata, rather than ``images.shape``
+* Dec 07, 2022 -- Fix undefined "start" issue.
