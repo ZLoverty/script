@@ -115,3 +115,6 @@ dmypy.json
 
 # run.py is used as local script and does not need to be synced
 run.py
+
+# tmp is used as local temporary log for debugging purposes
+tmp
