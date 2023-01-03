@@ -1,5 +1,5 @@
 import os
-from corrLib import readdata
+from myImageLib import readdata
 import sys
 import time
 
