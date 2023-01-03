@@ -43,7 +43,7 @@ out_folder = os.path.join(main_folder, "preview")
 if os.path.exists(out_folder) == False:
     os.makedirs(out_folder)
 
-l = readdata(main_folder, 'nd2')
+l = readdata(main_folder, 'nd2', mode="r")
 
 print(time.asctime())
 print("------------------------")
@@ -59,7 +59,7 @@ if len(l) > 0:
         out_file = i.Dir.replace(main_folder, out_folder).replace(".nd2", ".tif")
         if os.path.exists(out_file) == False:
             print("Generating preview for {}".format(i.Dir))
-            cmd = "python gen_preview.py {0} {1}".format(i.Dir, out_file)
+            cmd = "python gen_preview.py {0}".format(i.Dir)
             os.system(cmd)
         else:
             print("{} exists already, skipping".format(out_file))
