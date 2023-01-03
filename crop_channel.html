@@ -2,7 +2,8 @@
 <html  lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
       <title>crop_channel</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -10,9 +11,6 @@
       
       <!-- sphinx script_files -->
         <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
         <script src="_static/doctools.js"></script>
         <script src="_static/sphinx_highlight.js"></script>
 
@@ -400,7 +398,7 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <div class="section" id="crop-channel">
+  <section id="crop-channel">
 <h1>crop_channel<a class="headerlink" href="#crop-channel" title="Permalink to this heading">¶</a></h1>
 <p>Crop channels from bifurcation AN images. In a typical bifurcation experiment, we have a 3-way micro-channel photoprinted on a resin. This micro-channel is cast on the active microtubule system at an oil-water interface. The chaotic turbulent-like motions of microtubules will be rectified by the micro-channels. Ratchet structures are used to set one of the channels as inlet. The flow then goes into either remaining channels, or into both at certain fractions. We study what is the “preferred” bifurcation of the flow. In the cropped images, predetermined positive (+) direction always points upward.</p>
 <p>This code crops the original multi-microchannel images into single channels, to allow more efficient PIV analysis. Ono top of cropping, the code also remove the background static feature from the images, by dividing the images by the median of the image stack. The images are then converted from float64 to 8-bit to save the storage space.</p>
@@ -432,14 +430,14 @@
 </div>
 <p class="rubric">Edit</p>
 <dl class="field-list simple">
-<dt class="field-odd">Nov 03, 2022</dt>
+<dt class="field-odd">Nov 03, 2022<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Initial commit.</p>
 </dd>
-<dt class="field-even">Nov 23, 2022</dt>
+<dt class="field-even">Nov 23, 2022<span class="colon">:</span></dt>
 <dd class="field-even"><p>To make the workflow consistent with Claire’s, it is more convenient to crop the channel region directly from the *.nd2 file, and save as tifstack. Now crop directly from *.nd2 files to  tifstack.</p>
 </dd>
 </dl>
-</div>
+</section>
 
 
           </div>
@@ -456,7 +454,7 @@
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2022, Zhengyang Liu.
     <br>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 5.3.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 6.0.0 with <a href="https://github.com/schettino72/sphinx_press_theme">Press Theme</a> 0.8.0.
 </div>
             </div>
           </div>
