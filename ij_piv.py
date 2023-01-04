@@ -33,9 +33,10 @@ The macro itself is capable of iterating over all the \*.tif files in a given di
 
 .. rubric:: Edit
 
-* Dec 2, 2022 -- Initial commit.
+* Dec 02, 2022 -- Initial commit.
+* Jan 04, 2023 -- Add quotation marks \" around directories, to make it capable of processing directories with spaces.
 """
 
 img_folder = sys.argv[1]
 
-os.system("ImageJ-win64 --headless --console -macro PIV_STACK_directory.ijm {}".format(img_folder))
+os.system("ImageJ-win64 --headless --console -macro PIV_STACK_directory.ijm \"{}\"".format(img_folder))

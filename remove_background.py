@@ -2,7 +2,8 @@ from skimage import io
 import numpy as np
 import os
 import sys
-from myImageLib import readdata, show_progress
+from myImageLib import readdata, show_progress, to8bit
+from tifffile import imwrite
 
 """
 remove_background
@@ -13,7 +14,7 @@ This script removes the stationary background of a tif sequence in a given folde
 - Median z-projection
 - divide raw images by the projection
 
-By default, it saves the output images to a "..._rb" folder, where "..." is the original folder name. For example, images from crop_channel/crop-0 will be processed and saved in crop_channel/crop-0_rb.
+By default, it replaces the original images with background removed images. 
 
 .. rubric:: Syntax
 
@@ -21,39 +22,29 @@ By default, it saves the output images to a "..._rb" folder, where "..." is the 
 
    python remove_background.py img_folder
 
-* img_folder -- tif sequence folder to be processed.
+* img_folder -- A folder of tiffstacks.
 
 .. note::
 
    Here the processed images are converted to 8-bit images. Autocontrast is applied.
 
+.. warning::
+
+   Since the bifurcation images always require background subtraction, this procedure is included in the "crop_channel.py" script. We can still apply this script, but it essentially has no effect.
+   
 .. rubric:: Edit
 
 * Nov 03, 2022 -- Initial commit.
+* Jan 04, 2023 -- (i) Target on a folder of tiffstacks. Remove the background of each tiffstack, based on their own median image. (ii) Change default saving behavior: now REPLACE the original images with background removed images.
 """
 
 img_folder = sys.argv[1]
-rb_folder = img_folder.rstrip(os.sep) + "_rb"
-if os.path.exists(rb_folder) == False:
-    os.makedirs(rb_folder)
 l = readdata(img_folder, "tif")
-numImages = len(l)
-imgs = []
-
 print("Reading images ...")
 for num, i in l.iterrows():
-    img = io.imread(i.Dir)
-    imgs.append(img)
-stack = np.stack(imgs, axis=0) # TXY image stack
-
-med = np.median(stack, axis=0)
-
-# set rescaling factor according to the first image
-# to convert float32 images to 8-bit, save storage capacity
-imgr0 = stack[0] / med
-low, high = imgr0.min(), imgr0.max()
-for num, img in enumerate(stack):
-    show_progress((num+1)/numImages, num+1)
-    imgr = img / med
-    img8 = ((imgr - low) / (high - low) * 255).astype(np.uint8)
-    io.imsave(os.path.join(rb_folder, "{:05d}.tif".format(num)), img8)
+    print(i.Dir)
+    stack = io.imread(i.Dir)
+    med = np.median(stack, axis=0)
+    stackr = stack / med
+    stackr8 = to8bit(stackr)
+    imwrite(i.Dir, stackr8)
