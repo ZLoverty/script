@@ -2,7 +2,7 @@ from skimage import io
 import numpy as np
 import os
 import sys
-from myImageLib import readdata, show_progress, to8bit
+from myimagelib.myImageLib import readdata, show_progress, to8bit
 from tifffile import imwrite
 
 """
@@ -36,6 +36,7 @@ By default, it replaces the original images with background removed images.
 
 * Nov 03, 2022 -- Initial commit.
 * Jan 04, 2023 -- (i) Target on a folder of tiffstacks. Remove the background of each tiffstack, based on their own median image. (ii) Change default saving behavior: now REPLACE the original images with background removed images.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 img_folder = sys.argv[1]

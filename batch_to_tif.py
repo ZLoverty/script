@@ -1,5 +1,5 @@
 import os
-from corrLib import readdata
+from myimagelib.myImageLib import readdata
 import sys
 import time
 import pandas as pd
@@ -38,6 +38,7 @@ Batch convert *\*.nd2* files to .tif images by calling ``to_tif.py``. The code a
     * Implement main log file.
     * Better doc string.
 * Jan 22, 2022 -- Remove the log file and print all the information to stdout. When using the code, use ``>>`` to save the screen message to a file. It's easier to locate the log file... This change should be applied to all the batch code.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 main_folder = sys.argv[1]
 l0 = readdata(main_folder, 'nd2')

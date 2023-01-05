@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import sys
 import time
-from corrLib import readdata
+from myimagelib.myImageLib import readdata
 
 """
 circulation_order_parameter
@@ -32,6 +32,7 @@ A folder of PIV files are used to generate a single order parameter data file.
 .. rubric:: Edit
 
 * Jan 02, 2021 -- Initial commit.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 # %% codecell

@@ -1,11 +1,12 @@
-from corrLib import corrS, readdata
+from myimagelib.corrLib import corrS
+from myimagelib.myImageLib import readdata
 import numpy as np
 import pandas as pd
 import os
 import time
 import sys
 import pdb
-from pivLib import read_piv
+from myimagelib.pivLib import read_piv
 
 """
 spatial_correlation
@@ -41,6 +42,7 @@ Compute correlation length of velocity and velocity orientation.
     1. Rename to `spatial_correlation.py`,
     2. modify test script,
     3. replace PIV data loading snippet with `read_piv` function.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 if __name__=="__main__":

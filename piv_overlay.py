@@ -1,14 +1,13 @@
 import os
 import sys
 import numpy as np
-from myImageLib import to8bit
+from myimagelib.myImageLib import to8bit, readdata
 from skimage import io
 import time
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
-from pivLib import read_piv
-from corrLib import readdata
-from deLib import droplet_image
+from myimagelib.pivLib import read_piv
+from myimagelib.deLib import droplet_image
 
 """
 piv_overlay
@@ -48,6 +47,7 @@ Generate PIV arrow overlayed images for PIV visual inspection and illustration.
 * Mar 03, 2022 --
     1. Use `droplet_image` class to rewrite the script,
     2. remove logging
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 def determine_arrow_scale(u, v, sparcity):

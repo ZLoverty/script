@@ -1,7 +1,7 @@
-from pivLib import compact_PIV
+from myimagelib.pivLib import compact_PIV
 import numpy as np
 import pandas as pd
-from myImageLib import readdata, show_progress
+from myimagelib.myImageLib import readdata, show_progress
 import sys
 import os
 from scipy.io import loadmat
@@ -46,6 +46,7 @@ We assume the following folder structure. We will generate flow rate data files 
 
 * Nov 03, 2022 -- Initial commit.
 * Dec 01, 2022 -- We now adopt the "compact PIV" data structure, so the downstream processing needs to be modified.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 main_piv_folder = sys.argv[1]

@@ -4,9 +4,8 @@ import os
 import matplotlib.pyplot as plt
 import cv2
 import matplotlib.patches as mpatch
-from corrLib import readdata
 import pandas as pd
-from myImageLib import to8bit, show_progress, bestcolor, gauss1
+from myimagelib.myImageLib import to8bit, show_progress, bestcolor, gauss1, readdata
 import time
 import trackpy as tp
 import json
@@ -23,6 +22,10 @@ tracking
 ========
 
 This code is intended for tracking droplets using ``cv2.HoughCircle()`` algorithm. The code is apparently written in a rush, so no formal test has been done. Therefore, do not use it until it's tested.
+
+.. rubric:: Edit
+
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 # system args

@@ -1,5 +1,5 @@
-from myImageLib import readdata, show_progress
-from pivLib import compact_PIV
+from myimagelib.myImageLib import readdata, show_progress
+from myimagelib.pivLib import compact_PIV
 import os
 import sys
 
@@ -29,6 +29,7 @@ Put PIV data from separated text files into a .mat file, in order to keep the nu
 
 * Dec 01, 2022 -- Initial commit.
 * Dec 19, 2022 -- Add a warning of deleting original .csv files.
+* Jan 05, 2023 -- (i) Adapt myimagelib import style. (ii) Add screen info.
 """
 
 piv_folder = sys.argv[1]
@@ -36,6 +37,7 @@ piv_folder = sys.argv[1]
 l = readdata(piv_folder, "csv")
 nFiles = len(l)
 print("{:d} files found".format(nFiles))
+print("Wrapping into .mat file ...")
 
 cpiv = compact_PIV(l)
 cpiv.to_mat(piv_folder.rstrip(os.sep) + ".mat")

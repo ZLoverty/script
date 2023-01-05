@@ -1,7 +1,7 @@
 import os
 import sys
 import time
-from corrLib import readdata
+from myimagelib.corrLib import readdata
 
 """
 batch_mean_velocity
@@ -27,6 +27,7 @@ Batch mean velocity computation from PIV data.
 
 * Dec 31, 2021 -- Initial commit.
 * Jan 22, 2022 -- Strip the os.sep at the end of the given PIV directory, if exists.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 if __name__=="__main__":

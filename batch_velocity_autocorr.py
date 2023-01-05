@@ -1,7 +1,7 @@
 import os
 import sys
 import time
-from corrLib import readdata
+from myimagelib.myImageLib import readdata
 
 """
 batch_velocity_autocorr
@@ -26,6 +26,7 @@ Batch velocity autocorrelation computation.
 .. rubric:: Edit
 
 * Feb 21, 2022 -- Initial commit.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 

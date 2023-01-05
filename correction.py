@@ -4,9 +4,8 @@ import os
 import matplotlib.pyplot as plt
 import cv2
 import matplotlib.patches as mpatch
-from corrLib import readdata
 import pandas as pd
-from myImageLib import to8bit, show_progress, bestcolor, gauss1
+from myimagelib.myImageLib import to8bit, show_progress, bestcolor, gauss1, readdata
 import time
 import trackpy as tp
 import json
@@ -24,9 +23,10 @@ correction
 
 Subpixel correction of droplet trajectory data, based on cross-boundary fitting and circle fitting.
 
-Edit:
-Jul 05, 2022 -- If corrected_quality < 0.5, repeat the correction process once.
-                This can effectively correct trackings that are very far off.
+.. rubric:: Edit
+
+* Jul 05, 2022 -- If corrected_quality < 0.5, repeat the correction process once. This can effectively correct trackings that are very far off.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 analysis_folder = sys.argv[1]

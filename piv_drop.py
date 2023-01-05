@@ -1,16 +1,16 @@
 # from openpiv import tools, pyprocess, validation, filters, scaling
-from pivLib import PIV_masked
+from myimagelib.pivLib import PIV_masked
 import numpy as np
 from skimage import io
 import os
 # from scipy.signal import medfilt2d
 import pandas as pd
 import sys
-from corrLib import readdata
+from myimagelib.myImageLib import readdata
 import time
 from multiprocessing import Pool
 from itertools import repeat
-from deLib import droplet_image
+from myimagelib.deLib import droplet_image
 
 """
 piv_drop
@@ -42,6 +42,7 @@ Perform PIV analysis on an image sequence of **bacteria in a droplet**.
 * Jan 16, 2022 -- add info print, can be used with ">>" to write log.
 * Feb 15, 2022 -- remove printing steps to avoid log file spamming.
 * Mar 03, 2022 -- i) Reverse the multi-thread code to linear, ii) use `droplet_image` class for the script, iii) no longer print PIV settings to screen, save a `piv_params` json instead
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 # temporarily deprecated

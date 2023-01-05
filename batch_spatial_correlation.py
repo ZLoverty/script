@@ -1,8 +1,9 @@
 import os
 import sys
 import time
-from corrLib import corrS, readdata
-from pivLib import read_piv
+from myimagelib.corrLib import corrS
+from myimagelib.myImageLib import readdata
+from myimagelib.pivLib import read_piv
 
 """
 batch_spatial_correlation
@@ -27,6 +28,7 @@ Batch spatial correlation computation.
 .. rubric:: Edit
 
 * Dec 15, 2021 -- Initial commit.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 if __name__=="__main__":

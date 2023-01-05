@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import math
 import skimage.io
 from scipy import fftpack
-from myImageLib import dirrec, to8bit, bpass
+from myimagelib.myImageLib import dirrec, to8bit, bpass
 import trackpy as tp
 import time
 import os
@@ -31,6 +31,7 @@ Convert *\*.nd2* file to image sequence and apply bandpass filter to each image.
 .. rubric:: Edit
 
 * Nov 15, 2022 -- Modify docstring.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 

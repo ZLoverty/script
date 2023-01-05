@@ -1,8 +1,8 @@
-from pivLib import PIV
+from myimagelib.pivLib import PIV
 import sys
 import os
 from skimage import io
-from myImageLib import readdata, show_progress
+from myimagelib.myImageLib import readdata, show_progress
 import pandas as pd
 from nd2reader import ND2Reader
 
@@ -32,12 +32,17 @@ This is the most basic version of PIV.
 * Nov 03, 2022 -- Initial commit.
 * Dec 06, 2022 -- i) Enable this script to process \*.nd2 files. ii) Check if reults already exist. iii) Pick up job from middle. (Only work for nd2 PIV for the moment) iv) query num frames using metadata, rather than ``images.shape``
 * Dec 07, 2022 -- Fix undefined "start" issue.
+* Jan 05, 2023 -- (i) Check if img exists. (ii) Adapt myimagelib import style.
 """
 
 img = sys.argv[1]
 winsize = int(sys.argv[2])
 dt = float(sys.argv[3])
 piv_folder = sys.argv[4]
+
+if os.path.exists(img) == False:
+    raise ValueError("The specified image dir does not exist!")
+
 if os.path.exists(piv_folder) == False:
     os.makedirs(piv_folder)
     start = 0
@@ -82,3 +87,4 @@ elif img.endswith(".nd2"):
             x, y, u, v = PIV(I0, I1, winsize, overlap, dt)
             pivData = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
             pivData.to_csv(os.path.join(piv_folder, "{0:05d}-{1:05d}.csv".format(i, i+1)), index=False)
+

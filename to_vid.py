@@ -1,5 +1,5 @@
 import os
-from myImageLib import dirrec
+from myimagelib.myImageLib import dirrec
 import sys
 
 """
@@ -24,6 +24,7 @@ Convert all the image sequence in a given folder to videos (avi). It is a wrappe
 * Nov 24, 2021 -- initial commit.
 * Nov 26, 2021 -- Major change: now convert all the 8-bit folder in given folder to videos Change name to ``to_vid.py``
 * Dec 08, 2021 -- Check if the target .avi file exists already. If so, skip the conversion.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 def main(folder, **kwargs):

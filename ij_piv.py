@@ -1,5 +1,3 @@
-from myImageLib import readdata, show_progress
-from pivLib import compact_PIV
 import os
 import sys
 
@@ -35,6 +33,7 @@ The macro itself is capable of iterating over all the \*.tif files in a given di
 
 * Dec 02, 2022 -- Initial commit.
 * Jan 04, 2023 -- Add quotation marks \" around directories, to make it capable of processing directories with spaces.
+* Jan 05, 2023 -- Remove unused import.
 """
 
 img_folder = sys.argv[1]

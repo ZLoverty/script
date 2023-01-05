@@ -3,8 +3,8 @@ import numpy as np
 import os
 import sys
 from skimage import io
-from myImageLib import readdata, show_progress
-from pivLib import apply_mask
+from myimagelib.myImageLib import readdata, show_progress
+from myimagelib.pivLib import apply_mask
 
 """
 apply_mask
@@ -34,6 +34,7 @@ Apply mask on PIV data. It calls :py:func:`pivLib.apply_mask` to treat the input
 * Dec 01, 2022 -- Remove erosion step. Mask should be used as it is.
 * Dec 13, 2022 -- Fix a bug.
 * Dec 19, 2022 -- More accurate docstring.
+* Jan 05, 2023 -- (i) Adapt myimagelib import style. (ii) Add screen info.
 """
 
 piv_folder = sys.argv[1]
@@ -43,6 +44,8 @@ mask = io.imread(mask_dir)
 
 l = readdata(piv_folder, "csv")
 numFiles = len(l)
+
+print("applying mask to {}".format(piv_folder))
 
 for num, i in l.iterrows():
     show_progress((num+1)/numFiles, num+1)

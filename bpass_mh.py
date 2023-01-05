@@ -4,12 +4,12 @@ import math
 from skimage import io
 import pdb
 from scipy import fftpack
-from myImageLib import dirrec, to8bit, bpass
+from myimagelib.myImageLib import dirrec, to8bit, bpass
 import trackpy as tp
 import time
 import os
 import sys
-import corrLib as cl
+import myimagelib.corrLib as cl
 
 """
 bpass_mh
@@ -27,6 +27,10 @@ Convert *\*.nd2* file to image sequence and apply bandpass filter to each image.
 * saveDir = E:\Github\Python\Correlation\test_images\ixdiv_autocorr\bp_mh
 * bpassLow = 3
 * bpassHigh = 500
+
+.. rubric:: Edit
+
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 bpassLow = 3

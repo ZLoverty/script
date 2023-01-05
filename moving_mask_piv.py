@@ -7,11 +7,11 @@ import os
 import pandas as pd
 import time
 # from xcorr_funcs import *
-from corrLib import readdata
+from myimagelib.myImageLib import readdata
 import sys
 import time
 import matplotlib.pyplot as plt
-from deLib import droplet_image
+from myimagelib.deLib import droplet_image
 import json
 # %% codecell
 """
@@ -47,6 +47,7 @@ For more information, see my note `here <https://github.com/ZLoverty/DE/blob/mai
 .. rubric:: Edit
 
 * Mar 03, 2022 -- Initial commit.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 if __name__ == "__main__":

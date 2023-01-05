@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import sys
 import time
-from corrLib import readdata
+from myimagelib.myImageLib import readdata
 
 """
 mean_velocity
@@ -35,6 +35,7 @@ A folder of PIV files are used to generate a single mean velocity data file.
 
 * Dec 31, 2021 -- Initial commit.
 * Jan 02, 2021 -- Minor changes in docstring.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 

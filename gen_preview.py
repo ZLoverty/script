@@ -1,6 +1,6 @@
 import sys
 import os
-from myImageLib import to8bit
+from myimagelib.myImageLib import to8bit
 from skimage import io
 from tifffile import imwrite
 from nd2reader import ND2Reader
@@ -45,6 +45,7 @@ The script will extract the images of each \*.nd2 file and save as a tif image w
 * Dec 13, 2021 -- `cp` command is not platform independent. Use python native tools `shutil.copy` instead.
 * Dec 14, 2021 -- Now work on single .nd2 file, instead of a folder of tif sequences.
 * Dec 06, 2022 -- Now save first and last frames for a single nd2. Change of default behavior!
+* Jan 05, 2023 -- Adapt myimagelib import style.
 """
 
 def extract_first_frame(nd2Dir):
