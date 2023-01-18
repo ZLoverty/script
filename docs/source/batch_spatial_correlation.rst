@@ -21,3 +21,4 @@ Batch spatial correlation computation.
 .. rubric:: Edit
 
 * Dec 15, 2021 -- Initial commit.
+* Jan 05, 2023 -- Adapt myimagelib import style.

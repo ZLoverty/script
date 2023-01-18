@@ -14,3 +14,7 @@ Convert *\*.nd2* file to image sequence and apply bandpass filter to each image.
 * saveDir = E:\Github\Python\Correlation\test_images\ixdiv_autocorr\bp_mh
 * bpassLow = 3
 * bpassHigh = 500
+
+.. rubric:: Edit
+
+* Jan 05, 2023 -- Adapt myimagelib import style.

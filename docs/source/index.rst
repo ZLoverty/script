@@ -22,6 +22,7 @@ Contents
    collect_preview
    correction
    crop_channel
+   de_piv_script
    extract
    flowrate
    gen_preview

@@ -32,3 +32,4 @@ Compute correlation length of velocity and velocity orientation.
     1. Rename to `spatial_correlation.py`,
     2. modify test script,
     3. replace PIV data loading snippet with `read_piv` function.
+* Jan 05, 2023 -- Adapt myimagelib import style.

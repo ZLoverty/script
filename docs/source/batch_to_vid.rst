@@ -34,6 +34,7 @@ The code assumes the following folder structure:
 .. rubric:: Edit
 
 * Dec 11, 2021 -- add main_folder argument: it's better not to edit the script too often! (issue) to_vid.py alone now performs the function of batch_to_vid.py. Although the work can be done, it's not a consistent design with the to_tif. Need to work on this later.
+* Jan 05, 2023 -- Adapt myimagelib import style.
 
 .. deprecated:: 1.0
 

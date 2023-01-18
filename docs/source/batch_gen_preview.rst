@@ -32,3 +32,4 @@ Batch generate preview images from nd2 files. The code assumes the following fol
     1. Use system argument as input main folder.
     2. Implement main log file. iii) Better doc string.
 * Dec 15, 2021 -- Remove the last os.sep of main_folder, so that it is ok to pass main_folder with "\" (win) or "/" (linux) at the end.
+* Jan 05, 2023 -- Adapt myimagelib import style.

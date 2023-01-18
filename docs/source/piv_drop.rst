@@ -28,3 +28,4 @@ Perform PIV analysis on an image sequence of **bacteria in a droplet**.
 * Jan 16, 2022 -- add info print, can be used with ">>" to write log.
 * Feb 15, 2022 -- remove printing steps to avoid log file spamming.
 * Mar 03, 2022 -- i) Reverse the multi-thread code to linear, ii) use `droplet_image` class for the script, iii) no longer print PIV settings to screen, save a `piv_params` json instead
+* Jan 05, 2023 -- Adapt myimagelib import style.
