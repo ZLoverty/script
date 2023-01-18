@@ -201,6 +201,15 @@
         
           <li class="toctree-l1 ">
             
+              <a href="de_piv_script.html" class="reference internal ">de_piv_script</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
               <a href="extract.html" class="reference internal ">extract</a>
             
 
@@ -400,7 +409,7 @@
             
   <section id="ij-piv">
 <h1>ij_piv<a class="headerlink" href="#ij-piv" title="Permalink to this heading">¶</a></h1>
-<p>Invoke ImageJ2 to run PIV macro “PIV_STACK_directory.ijm” based on “<a href="#id1"><span class="problematic" id="id2">PIV_</span></a>.jar” plugin, in headless mode. For more information about ImageJ headless mode, see <a class="reference external" href="https://imagej.net/learn/headless">here</a>.</p>
+<p>Invoke ImageJ2 to run PIV macro <code class="docutils literal notranslate"><span class="pre">PIV_STACK_directory.ijm</span></code> based on <code class="docutils literal notranslate"><span class="pre">PIV_.jar</span></code> plugin, in headless mode. For more information about ImageJ headless mode, see <a class="reference external" href="https://imagej.net/learn/headless">here</a>.</p>
 <p>The macro itself is capable of iterating over all the *.tif files in a given directory, so there is no need to repeat in the python script.</p>
 <p class="rubric">Syntax</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python ij_piv.py img_folder</span>
@@ -411,19 +420,22 @@
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To be able to run the command <cite>ImageJ</cite> or <cite>ImageJ-win64</cite> (or other variants of ImageJ in different OS), we need to include the directory of the executable (.exe on windows) in the system path.</p>
+<p>To be able to run the command <code class="docutils literal notranslate"><span class="pre">ImageJ</span></code> or <code class="docutils literal notranslate"><span class="pre">ImageJ-win64</span></code> (or other variants of ImageJ in different OS), we need to include the directory of the executable (.exe on windows) in the system path.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>I put the actual macro file “PIV_STACK_directory.ijm” in the main macro folder of FIJI (in my case “C:Fiji.appmacro”), so that ImageJ can find it without specifying the full path. On a different computer, I need to repeat this step.</p>
+<p>I put the actual macro file <code class="docutils literal notranslate"><span class="pre">PIV_STACK_directory.ijm</span></code> in the main macro folder of FIJI (in my case “C:\Fiji.app\macro”), so that ImageJ can find it without specifying the full path. On a different computer, I need to repeat this step.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>I did a slight modification on the <a href="#id3"><span class="problematic" id="id4">PIV_</span></a>.jar, just to suppress the tedious logging info every step. The core algorithm should be the same as the original plugin.</p>
+<p>I did a slight modification on the <code class="docutils literal notranslate"><span class="pre">PIV_.jar</span></code>, just to suppress the tedious logging info every step. The core algorithm should be the same as the original plugin.</p>
 </div>
 <p class="rubric">Edit</p>
 <ul class="simple">
-<li><p>Dec 2, 2022 – Initial commit.</p></li>
+<li><p>Dec 02, 2022 – Initial commit.</p></li>
+<li><p>Jan 04, 2023 – Add quotation marks &quot; around directories, to make it capable of processing directories with spaces.</p></li>
+<li><p>Jan 05, 2023 – Remove unused import.</p></li>
+<li><p>Jan 18, 2023 – Fix docstring directory backslashes.</p></li>
 </ul>
 </section>
 

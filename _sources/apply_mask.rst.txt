@@ -26,3 +26,4 @@ Apply mask on PIV data. It calls :py:func:`pivLib.apply_mask` to treat the input
 * Dec 01, 2022 -- Remove erosion step. Mask should be used as it is.
 * Dec 13, 2022 -- Fix a bug.
 * Dec 19, 2022 -- More accurate docstring.
+* Jan 05, 2023 -- (i) Adapt myimagelib import style. (ii) Add screen info.

@@ -31,3 +31,4 @@ Apply autocorrelation analysis on sequential PIV data.
 
 * Mar 23, 2022 -- add smoothn as an optional smoothing method
 * Nov 15, 2022 -- Make ``fps`` and ``cutoff`` real *keyword* args.
+* Jan 05, 2023 -- Adapt myimagelib import style.

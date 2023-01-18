@@ -44,3 +44,4 @@ For raw, output image sequences are saved in subfolders in the same folder as th
     2. Temporarily discontinue the "remove background functionality".
     3. Include .raw functionality -- with memory check.
     4. Update the doc string.
+* Jan 05, 2023 -- Adapt myimagelib import style.

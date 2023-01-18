@@ -201,6 +201,15 @@
         
           <li class="toctree-l1 ">
             
+              <a href="de_piv_script.html" class="reference internal ">de_piv_script</a>
+            
+
+            
+          </li>
+
+        
+          <li class="toctree-l1 ">
+            
               <a href="extract.html" class="reference internal ">extract</a>
             
 
@@ -405,21 +414,27 @@
 <li><p>Median z-projection</p></li>
 <li><p>divide raw images by the projection</p></li>
 </ul>
-<p>By default, it saves the output images to a “…_rb” folder, where “…” is the original folder name. For example, images from crop_channel/crop-0 will be processed and saved in crop_channel/crop-0_rb.</p>
+<p>By default, it replaces the original images with background removed images.</p>
 <p class="rubric">Syntax</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python remove_background.py img_folder</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>img_folder – tif sequence folder to be processed.</p></li>
+<li><p>img_folder – A folder of tiffstacks.</p></li>
 </ul>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Here the processed images are converted to 8-bit images. Autocontrast is applied.</p>
 </div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Since the bifurcation images always require background subtraction, this procedure is included in the “crop_channel.py” script. We can still apply this script, but it essentially has no effect.</p>
+</div>
 <p class="rubric">Edit</p>
 <ul class="simple">
 <li><p>Nov 03, 2022 – Initial commit.</p></li>
+<li><p>Jan 04, 2023 – (i) Target on a folder of tiffstacks. Remove the background of each tiffstack, based on their own median image. (ii) Change default saving behavior: now REPLACE the original images with background removed images.</p></li>
+<li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
 </ul>
 </section>
 

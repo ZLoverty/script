@@ -35,5 +35,6 @@ The folder structure is illustrated below:
 
 .. rubric:: Edit
 
-:Nov 03, 2022: Initial commit.
-:Nov 23, 2022: To make the workflow consistent with Claire's, it is more convenient to crop the channel region directly from the \*.nd2 file, and save as tifstack. Now crop directly from \*.nd2 files to  tifstack.
+* Nov 03, 2022 -- Initial commit.
+* Nov 23, 2022 -- To make the workflow consistent with Claire's, it is more convenient to crop the channel region directly from the \*.nd2 file, and save as tifstack. Now crop directly from \*.nd2 files to  tifstack.
+* Jan 05, 2023 -- Adapt myimagelib import style.

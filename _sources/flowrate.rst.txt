@@ -38,3 +38,5 @@ We assume the following folder structure. We will generate flow rate data files 
 
 * Nov 03, 2022 -- Initial commit.
 * Dec 01, 2022 -- We now adopt the "compact PIV" data structure, so the downstream processing needs to be modified.
+* Jan 05, 2023 -- Adapt myimagelib import style.
+* Jan 18, 2023 -- (i) Fix bug in ``get_frame`` function, use "label" instead of "filename" to be consistent with ``pibLib``. (ii) Handle unequal lengths of PIV data

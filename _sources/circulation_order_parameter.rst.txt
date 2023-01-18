@@ -25,3 +25,4 @@ A folder of PIV files are used to generate a single order parameter data file.
 .. rubric:: Edit
 
 * Jan 02, 2021 -- Initial commit.
+* Jan 05, 2023 -- Adapt myimagelib import style.

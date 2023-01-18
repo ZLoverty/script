@@ -31,3 +31,4 @@ For more information, see my note `here <https://github.com/ZLoverty/DE/blob/mai
 .. rubric:: Edit
 
 * Mar 03, 2022 -- Initial commit.
+* Jan 05, 2023 -- Adapt myimagelib import style.

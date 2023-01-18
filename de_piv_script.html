@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-      <title>to_vid</title>
+      <title>de_piv_script</title>
     
           <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
           <link rel="stylesheet" href="_static/theme.css " type="text/css" />
@@ -21,8 +21,8 @@
     
   <link rel="index" title="Index" href="genindex.html" />
   <link rel="search" title="Search" href="search.html" />
-  <link rel="next" title="tracking" href="tracking.html" />
-  <link rel="prev" title="to_tif" href="to_tif.html" /> 
+  <link rel="next" title="extract" href="extract.html" />
+  <link rel="prev" title="crop_channel" href="crop_channel.html" /> 
   </head>
 
   <body>
@@ -199,11 +199,17 @@
           </li>
 
         
-          <li class="toctree-l1 ">
+          <li class="toctree-l1 current">
             
-              <a href="de_piv_script.html" class="reference internal ">de_piv_script</a>
+              <a href="#" class="reference internal current">de_piv_script</a>
             
 
+            
+              <ul>
+                
+                  <li class="toctree-l2"><a href="#de-piv-script" class="reference internal">de_piv_script</a></li>
+                
+              </ul>
             
           </li>
 
@@ -334,17 +340,11 @@
           </li>
 
         
-          <li class="toctree-l1 current">
+          <li class="toctree-l1 ">
             
-              <a href="#" class="reference internal current">to_vid</a>
+              <a href="to_vid.html" class="reference internal ">to_vid</a>
             
 
-            
-              <ul>
-                
-                  <li class="toctree-l2"><a href="#to-vid" class="reference internal">to_vid</a></li>
-                
-              </ul>
             
           </li>
 
@@ -388,18 +388,18 @@
   <ul class="breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
     
-    <li>to_vid</li>
+    <li>de_piv_script</li>
   </ul>
   
 
   <ul class="page-nav">
   <li class="prev">
-    <a href="to_tif.html"
-       title="previous chapter">← to_tif</a>
+    <a href="crop_channel.html"
+       title="previous chapter">← crop_channel</a>
   </li>
   <li class="next">
-    <a href="tracking.html"
-       title="next chapter">tracking →</a>
+    <a href="extract.html"
+       title="next chapter">extract →</a>
   </li>
 </ul>
   
@@ -407,24 +407,29 @@
 <hr>
           <div class="content" role="main" v-pre>
             
-  <section id="to-vid">
-<h1>to_vid<a class="headerlink" href="#to-vid" title="Permalink to this heading">¶</a></h1>
-<p>Convert all the image sequence in a given folder to videos (avi). It is a wrapper of <a class="reference external" href="https://ffmpeg.org/">ffmpeg</a>, which is a prerequisite of this script. Videos will be saved in the parent folder of the image sequence folder.</p>
+  <section id="de-piv-script">
+<h1>de_piv_script<a class="headerlink" href="#de-piv-script" title="Permalink to this heading">¶</a></h1>
+<p>A script to run PIV on all the nd2 files in a given folder. In addition, it applys masks to the raw PIV data and convert separated text files into more compact .mat files. The folder structure is assumed to be:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">|-- folder</span>
+<span class="go">    |-- 000.nd2</span>
+<span class="go">    |-- 001.nd2</span>
+<span class="go">    |-- ...</span>
+<span class="go">    |-- PIV (results)</span>
+<span class="go">        |-- 000.mat</span>
+<span class="go">        |-- 001.mat</span>
+<span class="go">        |-- ...</span>
+</pre></div>
+</div>
 <p class="rubric">Syntax</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python to_vid.py folder [fmt=%05d.tif] [fps=50]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python de_piv_script.py folder</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>folder – the folder that contains the 8-bit tif image sequence, this script convert all 8-bit image sequences in given folder by default</p></li>
-<li><p>fmt – specify the format of image file name, default to <code class="docutils literal notranslate"><span class="pre">%05d.tif</span></code></p></li>
-<li><p>fps – specify the frame rate of the output video, default to <code class="docutils literal notranslate"><span class="pre">50</span></code></p></li>
+<li><p>folder: a folder that contains nd2 files.</p></li>
 </ul>
 <p class="rubric">Edit</p>
 <ul class="simple">
-<li><p>Nov 24, 2021 – initial commit.</p></li>
-<li><p>Nov 26, 2021 – Major change: now convert all the 8-bit folder in given folder to videos Change name to <code class="docutils literal notranslate"><span class="pre">to_vid.py</span></code></p></li>
-<li><p>Dec 08, 2021 – Check if the target .avi file exists already. If so, skip the conversion.</p></li>
-<li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
+<li><p>Jan 05, 2023 – Initial commit.</p></li>
 </ul>
 </section>
 
@@ -433,12 +438,12 @@
           <div class="page-nav">
             <div class="inner"><ul class="page-nav">
   <li class="prev">
-    <a href="to_tif.html"
-       title="previous chapter">← to_tif</a>
+    <a href="crop_channel.html"
+       title="previous chapter">← crop_channel</a>
   </li>
   <li class="next">
-    <a href="tracking.html"
-       title="next chapter">tracking →</a>
+    <a href="extract.html"
+       title="next chapter">extract →</a>
   </li>
 </ul><div class="footer" role="contentinfo">
       &#169; Copyright 2022, Zhengyang Liu.

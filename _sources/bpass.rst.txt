@@ -18,3 +18,4 @@ Convert *\*.nd2* file to image sequence and apply bandpass filter to each image.
 .. rubric:: Edit
 
 * Nov 15, 2022 -- Modify docstring.
+* Jan 05, 2023 -- Adapt myimagelib import style.
