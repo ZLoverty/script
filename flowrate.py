@@ -47,6 +47,7 @@ We assume the following folder structure. We will generate flow rate data files 
 * Nov 03, 2022 -- Initial commit.
 * Dec 01, 2022 -- We now adopt the "compact PIV" data structure, so the downstream processing needs to be modified.
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Jan 18, 2023 -- (i) Fix bug in ``get_frame`` function, use "label" instead of "filename" to be consistent with ``pibLib``. (ii) Handle unequal lengths of PIV data
 """
 
 main_piv_folder = sys.argv[1]
@@ -78,18 +79,22 @@ l["np1"] = l["Name"].map(np1)
 l["np2"] = l["Name"].map(np2)
 
 for n, g in l.groupby("np1"):
-    df = pd.DataFrame()
+    # df = pd.DataFrame()
+    print("Computing flow rate for {}".format(n))
+    tmp = []
     for num, i in g.iterrows():
         Q_list = []
         cpiv_dict = loadmat(i.Dir)
         cpiv = compact_PIV(cpiv_dict)
         for label in cpiv.get_labels():
-            xx, yy, uu, vv = cpiv.get_frame(label, by="filename")
+            xx, yy, uu, vv = cpiv.get_frame(label, by="label")
             # I invert the flow rate here, for consistency between my definition of positive and IJ PIV
             Q = - compute_flowrate(xx, yy, uu, vv) ####################################################
             ###########################################################################################
             Q_list.append(Q)
-        df[i.np2] = Q_list
+        tmp.append(pd.DataFrame({i["np2"]: Q_list}))
+        # df[i.np2] = Q_list
+    df = pd.concat(tmp, axis=1)
     df["t"] = np.array(df.index) * dt
     df.to_csv(os.path.join(flowrate_folder, "{}.csv".format(n)), index=False)
-    print("Computing flow rate for {}".format(n))
+    
