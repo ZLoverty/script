@@ -38,6 +38,7 @@ Batch generate preview images from nd2 files. The code assumes the following fol
     2. Implement main log file. iii) Better doc string.
 * Dec 15, 2021 -- Remove the last os.sep of main_folder, so that it is ok to pass main_folder with "\" (win) or "/" (linux) at the end.
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Feb 02, 2023 -- Fix space in dir bug.
 """
 main_folder = sys.argv[1].rstrip(os.sep)
 out_folder = os.path.join(main_folder, "preview")
@@ -60,7 +61,7 @@ if len(l) > 0:
         out_file = i.Dir.replace(main_folder, out_folder).replace(".nd2", ".tif")
         if os.path.exists(out_file) == False:
             print("Generating preview for {}".format(i.Dir))
-            cmd = "python gen_preview.py {0}".format(i.Dir)
+            cmd = "python gen_preview.py \"{0}\"".format(i.Dir)
             os.system(cmd)
         else:
             print("{} exists already, skipping".format(out_file))
