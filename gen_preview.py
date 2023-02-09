@@ -1,15 +1,4 @@
-import sys
-import os
-from myimagelib.myImageLib import to8bit
-from skimage import io
-from tifffile import imwrite
-from nd2reader import ND2Reader
-import numpy as np
-
 """
-gen_preview
-===========
-
 Generete preview images of given folder.
 
 Assumed folder structure:
@@ -46,7 +35,18 @@ The script will extract the images of each \*.nd2 file and save as a tif image w
 * Dec 14, 2021 -- Now work on single .nd2 file, instead of a folder of tif sequences.
 * Dec 06, 2022 -- Now save first and last frames for a single nd2. Change of default behavior!
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
+
+import sys
+import os
+from myimagelib.myImageLib import to8bit
+from skimage import io
+from tifffile import imwrite
+from nd2reader import ND2Reader
+import numpy as np
+
+
 
 def extract_first_frame(nd2Dir):
     """Extract the first image in .nd2 and convert to 8-bit.

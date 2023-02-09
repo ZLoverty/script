@@ -1,0 +1,4 @@
+﻿myautodoc
+=========
+
+.. automodule:: myautodoc

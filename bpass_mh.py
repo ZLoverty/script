@@ -1,20 +1,4 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-from skimage import io
-import pdb
-from scipy import fftpack
-from myimagelib.myImageLib import dirrec, to8bit, bpass
-import trackpy as tp
-import time
-import os
-import sys
-import myimagelib.corrLib as cl
-
 """
-bpass_mh
-========
-
 Convert *\*.nd2* file to image sequence and apply bandpass filter to each image. Save this image sequence in a subfolder under the same folder as the *\*.nd2* file with corresponding name as the *\*.nd2* file name. An additional histogram matching is performed so that the processed image looks similar to the original image.
 
 .. rubric:: Syntax
@@ -31,27 +15,43 @@ Convert *\*.nd2* file to image sequence and apply bandpass filter to each image.
 .. rubric:: Edit
 
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-bpassLow = 3
-bpassHigh = 500
-folder = sys.argv[1]
-saveDir = sys.argv[2]
-if len(sys.argv) > 3:
-    bpassLow = int(sys.argv[3])
-    bpassHigh = int(sys.argv[4])
+import numpy as np
+import matplotlib.pyplot as plt
+import math
+from skimage import io
+import pdb
+from scipy import fftpack
+from myimagelib.myImageLib import dirrec, to8bit, bpass
+import trackpy as tp
+import time
+import os
+import sys
+import myimagelib.corrLib as cl
 
-if os.path.exists(saveDir) == False:
-    os.mkdir(saveDir)
 
-with open(os.path.join(saveDir, 'log.txt'), 'w') as f:
-    pass
+if __name__ == "__main__":
+    bpassLow = 3
+    bpassHigh = 500
+    folder = sys.argv[1]
+    saveDir = sys.argv[2]
+    if len(sys.argv) > 3:
+        bpassLow = int(sys.argv[3])
+        bpassHigh = int(sys.argv[4])
 
-l = cl.readseq(folder)
-for num, i in l.iterrows():
-    img8 = io.imread(i.Dir)
-    img_bpass = bpass(img8, bpassLow, bpassHigh)
-    img_bp_mh = cl.match_hist(img_bpass, img8)
-    io.imsave(os.path.join(saveDir, '%04d.tif' % num), img_bp_mh)
-    with open(os.path.join(saveDir, 'log.txt'), 'a') as f:
-        f.write(time.asctime() + ' // Frame {0:04d} converted\n'.format(num))
+    if os.path.exists(saveDir) == False:
+        os.mkdir(saveDir)
+
+    with open(os.path.join(saveDir, 'log.txt'), 'w') as f:
+        pass
+
+    l = cl.readseq(folder)
+    for num, i in l.iterrows():
+        img8 = io.imread(i.Dir)
+        img_bpass = bpass(img8, bpassLow, bpassHigh)
+        img_bp_mh = cl.match_hist(img_bpass, img8)
+        io.imsave(os.path.join(saveDir, '%04d.tif' % num), img_bp_mh)
+        with open(os.path.join(saveDir, 'log.txt'), 'a') as f:
+            f.write(time.asctime() + ' // Frame {0:04d} converted\n'.format(num))

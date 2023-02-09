@@ -1,12 +1,4 @@
-import os
-import sys
-import time
-from myimagelib.corrLib import readdata
-
 """
-batch_mean_velocity
-===================
-
 Batch mean velocity computation from PIV data.
 
 .. rubric:: Syntax
@@ -28,7 +20,13 @@ Batch mean velocity computation from PIV data.
 * Dec 31, 2021 -- Initial commit.
 * Jan 22, 2022 -- Strip the os.sep at the end of the given PIV directory, if exists.
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Feb 08, 2023 -- (i) import ``readdata`` from ``myImageLib`` instead. (ii) Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
+
+import os
+import sys
+import time
+from myimagelib.myImageLib import readdata
 
 if __name__=="__main__":
     main_piv_folder = sys.argv[1].rstrip(os.sep)

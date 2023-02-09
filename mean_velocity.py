@@ -1,14 +1,4 @@
-import numpy as np
-import pandas as pd
-import os
-import sys
-import time
-from myimagelib.myImageLib import readdata
-
 """
-mean_velocity
-=============
-
 Compute mean velocity of PIV data.
 
 1. Compute the magnitude of each PIV arrow
@@ -36,7 +26,16 @@ A folder of PIV files are used to generate a single mean velocity data file.
 * Dec 31, 2021 -- Initial commit.
 * Jan 02, 2021 -- Minor changes in docstring.
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
+import numpy as np
+import pandas as pd
+import os
+import sys
+import time
+from myimagelib.myImageLib import readdata
+
+
 
 
 # %% codecell

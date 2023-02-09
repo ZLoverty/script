@@ -1,11 +1,5 @@
-import os
-from myimagelib.myImageLib import dirrec
-import sys
 
 """
-to_vid
-======
-
 Convert all the image sequence in a given folder to videos (avi). It is a wrapper of `ffmpeg <https://ffmpeg.org/>`_, which is a prerequisite of this script. Videos will be saved in the parent folder of the image sequence folder.
 
 .. rubric:: Syntax
@@ -25,7 +19,13 @@ Convert all the image sequence in a given folder to videos (avi). It is a wrappe
 * Nov 26, 2021 -- Major change: now convert all the 8-bit folder in given folder to videos Change name to ``to_vid.py``
 * Dec 08, 2021 -- Check if the target .avi file exists already. If so, skip the conversion.
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
+
+import os
+from myimagelib.myImageLib import dirrec
+import sys
+
 
 def main(folder, **kwargs):
     fps = 50

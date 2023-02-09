@@ -1,15 +1,4 @@
-import pandas as pd
-import numpy as np
-import os
-import sys
-from skimage import io
-from myimagelib.myImageLib import readdata, show_progress
-from myimagelib.pivLib import apply_mask
-
 """
-apply_mask
-==========
-
 Apply mask on PIV data. It calls :py:func:`pivLib.apply_mask` to treat the input PIV data, and save the results (masked PIV data) in the same files. See `here <https://zloverty.github.io/mylib/pivLib/pivLib.apply_mask.html>`_ for more details.
 
 .. rubric:: Syntax
@@ -35,20 +24,35 @@ Apply mask on PIV data. It calls :py:func:`pivLib.apply_mask` to treat the input
 * Dec 13, 2022 -- Fix a bug.
 * Dec 19, 2022 -- More accurate docstring.
 * Jan 05, 2023 -- (i) Adapt myimagelib import style. (ii) Add screen info.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-piv_folder = sys.argv[1]
-mask_dir = sys.argv[2]
+import pandas as pd
+import numpy as np
+import os
+import sys
+from skimage import io
+from myimagelib.myImageLib import readdata, show_progress
+from myimagelib.pivLib import apply_mask
 
-mask = io.imread(mask_dir)
 
-l = readdata(piv_folder, "csv")
-numFiles = len(l)
 
-print("applying mask to {}".format(piv_folder))
+def main(piv_folder, mask_dir):
+   
+   mask = io.imread(mask_dir)
 
-for num, i in l.iterrows():
-    show_progress((num+1)/numFiles, num+1)
-    pivData = pd.read_csv(i.Dir)
-    pivData = apply_mask(pivData, mask)
-    pivData.to_csv(i.Dir, index=False)
+   l = readdata(piv_folder, "csv")
+   numFiles = len(l)
+
+   print("applying mask to {}".format(piv_folder))
+
+   for num, i in l.iterrows():
+      show_progress((num+1)/numFiles, num+1)
+      pivData = pd.read_csv(i.Dir)
+      pivData = apply_mask(pivData, mask)
+      pivData.to_csv(i.Dir, index=False)
+
+if __name__=="__main__":
+   piv_folder = sys.argv[1]
+   mask_dir = sys.argv[2]
+   main(piv_folder, mask_dir)

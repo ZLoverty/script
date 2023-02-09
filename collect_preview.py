@@ -1,11 +1,4 @@
-import sys
-import os
-from shutil import copyfile
-
 """
-collect_preview
-===============
-
 Collect all the tif files under preview folder into the main folder. Assume file structure is shown below. All the tif files are put in folder "collect preview".
 
 .. code-block:: console
@@ -47,17 +40,24 @@ Collect all the tif files under preview folder into the main folder. Assume file
    
 .. rubric:: Edit
 
-:Dec 06, 2022: Initial commit.
+* Dec 06, 2022 -- Initial commit.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-main_folder = sys.argv[1]
-save_folder = os.path.join(main_folder, "collect_preview")
-if os.path.exists(save_folder) == False:
-    os.makedirs(save_folder)
-for r, s, f in os.walk(main_folder):
-    if os.path.split(r)[1] == "preview":
-        for filename in f:
-            if filename.endswith(".tif"):
-                print("collect {}".format(os.path.join(r, filename)))
-                new_name = os.path.split(os.path.split(r)[0])[1] + "-" + filename
-                copyfile(os.path.join(r, filename), os.path.join(save_folder, new_name))
+import sys
+import os
+from shutil import copyfile
+
+
+if __name__ == "__main__":
+    main_folder = sys.argv[1]
+    save_folder = os.path.join(main_folder, "collect_preview")
+    if os.path.exists(save_folder) == False:
+        os.makedirs(save_folder)
+    for r, s, f in os.walk(main_folder):
+        if os.path.split(r)[1] == "preview":
+            for filename in f:
+                if filename.endswith(".tif"):
+                    print("collect {}".format(os.path.join(r, filename)))
+                    new_name = os.path.split(os.path.split(r)[0])[1] + "-" + filename
+                    copyfile(os.path.join(r, filename), os.path.join(save_folder, new_name))

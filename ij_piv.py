@@ -1,10 +1,4 @@
-import os
-import sys
-
 """
-ij_piv
-==========
-
 Invoke ImageJ2 to run PIV macro ``PIV_STACK_directory.ijm`` based on ``PIV_.jar`` plugin, in headless mode. For more information about ImageJ headless mode, see `here <https://imagej.net/learn/headless>`_.
 
 The macro itself is capable of iterating over all the \*.tif files in a given directory, so there is no need to repeat in the python script.
@@ -35,8 +29,14 @@ The macro itself is capable of iterating over all the \*.tif files in a given di
 * Jan 04, 2023 -- Add quotation marks \" around directories, to make it capable of processing directories with spaces.
 * Jan 05, 2023 -- Remove unused import.
 * Jan 18, 2023 -- Fix docstring directory backslashes.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-img_folder = sys.argv[1]
+import os
+import sys
 
-os.system("ImageJ-win64 --headless --console -macro PIV_STACK_directory.ijm \"{}\"".format(img_folder))
+if __name__ == "__main__":
+
+   img_folder = sys.argv[1]
+
+   os.system("ImageJ-win64 --headless --console -macro PIV_STACK_directory.ijm \"{}\"".format(img_folder))

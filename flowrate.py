@@ -1,15 +1,4 @@
-from myimagelib.pivLib import compact_PIV
-import numpy as np
-import pandas as pd
-from myimagelib.myImageLib import readdata, show_progress
-import sys
-import os
-from scipy.io import loadmat
-
 """
-flowrate
-========
-
 This script compute "volumetric flow rate" in a channel from 2D PIV data. The unit of the flow rate will be px^2/s (it comes from a mean velocity, px/s, multiplied by a width, px).
 
 We assume the following folder structure. We will generate flow rate data files based on the PIV file name before "\_". Columns in each file will be determined by PIV file name after "\_". For example, flow rate data computed from 04\_A.mat, 04\_B.mat will be put in a file 04.csv, with columns A and B.
@@ -48,53 +37,64 @@ We assume the following folder structure. We will generate flow rate data files 
 * Dec 01, 2022 -- We now adopt the "compact PIV" data structure, so the downstream processing needs to be modified.
 * Jan 05, 2023 -- Adapt myimagelib import style.
 * Jan 18, 2023 -- (i) Fix bug in ``get_frame`` function, use "label" instead of "filename" to be consistent with ``pibLib``. (ii) Handle unequal lengths of PIV data
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-main_piv_folder = sys.argv[1]
-flowrate_folder = sys.argv[2]
-dt = float(sys.argv[3])
+from myimagelib.pivLib import compact_PIV
+import numpy as np
+import pandas as pd
+from myimagelib.myImageLib import readdata, show_progress
+import sys
+import os
+from scipy.io import loadmat
 
-if os.path.exists(flowrate_folder) == False:
-    os.makedirs(flowrate_folder)
+if __name__ == "__main__":
 
-def compute_flowrate(x, y, u, v):
-    """
-    Compute volumetric flow rate from masked PIV results.
-    x, y, u, v -- PIV data.
-    """
-    mask = ~np.isnan(v)
-    x.astype("float")[~mask] = np.nan
-    W = np.nanmax(x, axis=1) - np.nanmin(x, axis=1) # channel width along y, px
-    v_meanx = np.nanmean(v, axis=1)
-    Q = np.nanmean(W*v_meanx)
-    return Q
-def np1(a):
-    return a.split("_")[0]
-def np2(a):
-    return a.split("_")[1]
+    main_piv_folder = sys.argv[1]
+    flowrate_folder = sys.argv[2]
+    dt = float(sys.argv[3])
 
-l = readdata(main_piv_folder, "mat")
-# analyze file names
-l["np1"] = l["Name"].map(np1)
-l["np2"] = l["Name"].map(np2)
+    if os.path.exists(flowrate_folder) == False:
+        os.makedirs(flowrate_folder)
 
-for n, g in l.groupby("np1"):
-    # df = pd.DataFrame()
-    print("Computing flow rate for {}".format(n))
-    tmp = []
-    for num, i in g.iterrows():
-        Q_list = []
-        cpiv_dict = loadmat(i.Dir)
-        cpiv = compact_PIV(cpiv_dict)
-        for label in cpiv.get_labels():
-            xx, yy, uu, vv = cpiv.get_frame(label, by="label")
-            # I invert the flow rate here, for consistency between my definition of positive and IJ PIV
-            Q = - compute_flowrate(xx, yy, uu, vv) ####################################################
-            ###########################################################################################
-            Q_list.append(Q)
-        tmp.append(pd.DataFrame({i["np2"]: Q_list}))
-        # df[i.np2] = Q_list
-    df = pd.concat(tmp, axis=1)
-    df["t"] = np.array(df.index) * dt
-    df.to_csv(os.path.join(flowrate_folder, "{}.csv".format(n)), index=False)
+    def compute_flowrate(x, y, u, v):
+        """
+        Compute volumetric flow rate from masked PIV results.
+        x, y, u, v -- PIV data.
+        """
+        mask = ~np.isnan(v)
+        x.astype("float")[~mask] = np.nan
+        W = np.nanmax(x, axis=1) - np.nanmin(x, axis=1) # channel width along y, px
+        v_meanx = np.nanmean(v, axis=1)
+        Q = np.nanmean(W*v_meanx)
+        return Q
+    def np1(a):
+        return a.split("_")[0]
+    def np2(a):
+        return a.split("_")[1]
+
+    l = readdata(main_piv_folder, "mat")
+    # analyze file names
+    l["np1"] = l["Name"].map(np1)
+    l["np2"] = l["Name"].map(np2)
+
+    for n, g in l.groupby("np1"):
+        # df = pd.DataFrame()
+        print("Computing flow rate for {}".format(n))
+        tmp = []
+        for num, i in g.iterrows():
+            Q_list = []
+            cpiv_dict = loadmat(i.Dir)
+            cpiv = compact_PIV(cpiv_dict)
+            for label in cpiv.get_labels():
+                xx, yy, uu, vv = cpiv.get_frame(label, by="label")
+                # I invert the flow rate here, for consistency between my definition of positive and IJ PIV
+                Q = - compute_flowrate(xx, yy, uu, vv) ####################################################
+                ###########################################################################################
+                Q_list.append(Q)
+            tmp.append(pd.DataFrame({i["np2"]: Q_list}))
+            # df[i.np2] = Q_list
+        df = pd.concat(tmp, axis=1)
+        df["t"] = np.array(df.index) * dt
+        df.to_csv(os.path.join(flowrate_folder, "{}.csv".format(n)), index=False)
     

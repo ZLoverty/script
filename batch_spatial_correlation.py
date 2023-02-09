@@ -1,14 +1,4 @@
-import os
-import sys
-import time
-from myimagelib.corrLib import corrS
-from myimagelib.myImageLib import readdata
-from myimagelib.pivLib import read_piv
-
 """
-batch_spatial_correlation
-=========================
-
 Batch spatial correlation computation.
 
 .. rubric:: Syntax
@@ -29,7 +19,15 @@ Batch spatial correlation computation.
 
 * Dec 15, 2021 -- Initial commit.
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
+
+import os
+import sys
+import time
+from myimagelib.corrLib import corrS
+from myimagelib.myImageLib import readdata
+from myimagelib.pivLib import read_piv
 
 if __name__=="__main__":
     main_piv_folder = sys.argv[1]

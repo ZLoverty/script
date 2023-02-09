@@ -1,17 +1,4 @@
-from myimagelib.corrLib import corrS
-from myimagelib.myImageLib import readdata
-import numpy as np
-import pandas as pd
-import os
-import time
-import sys
-import pdb
-from myimagelib.pivLib import read_piv
-
 """
-spatial_correlation
-===================
-
 Compute correlation length of velocity and velocity orientation.
 
 
@@ -32,18 +19,22 @@ Compute correlation length of velocity and velocity orientation.
 
 .. rubric:: Edit
 
-* Aug 06, 2020 --
-    1. change corrI return value according to the change of corrI(), to speed up the code,
-    2. write parameters in log down sampling: instead of computing correlations for all frames, now only take 100 frames if the video is shorter than 100 frames, do the whole video
-* Dec 13, 2021 --
-    1. Rewrite doc string.
-    2. Minor structural modification.
-* Dec 15, 2021 --
-    1. Rename to `spatial_correlation.py`,
-    2. modify test script,
-    3. replace PIV data loading snippet with `read_piv` function.
+* Aug 06, 2020 -- (i) change corrI return value according to the change of corrI(), to speed up the code, (ii) write parameters in log down sampling: instead of computing correlations for all frames, now only take 100 frames if the video is shorter than 100 frames, do the whole video
+* Dec 13, 2021 -- (i) Rewrite doc string. (ii) Minor structural modification.
+* Dec 15, 2021 -- (i) Rename to `spatial_correlation.py`, (ii) modify test script, (iii) replace PIV data loading snippet with `read_piv` function.
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
+
+from myimagelib.corrLib import corrS
+from myimagelib.myImageLib import readdata
+import numpy as np
+import pandas as pd
+import os
+import time
+import sys
+import pdb
+from myimagelib.pivLib import read_piv
 
 if __name__=="__main__":
     input_folder = sys.argv[1]

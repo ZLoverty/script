@@ -1,12 +1,4 @@
-from myimagelib.myImageLib import readdata, show_progress
-from myimagelib.pivLib import compact_PIV
-import os
-import sys
-
 """
-wrap_piv
-========
-
 Put PIV data from separated text files into a .mat file, in order to keep the number of files small and meantime save some storage space.
 
 .. rubric:: Syntax
@@ -30,19 +22,27 @@ Put PIV data from separated text files into a .mat file, in order to keep the nu
 * Dec 01, 2022 -- Initial commit.
 * Dec 19, 2022 -- Add a warning of deleting original .csv files.
 * Jan 05, 2023 -- (i) Adapt myimagelib import style. (ii) Add screen info.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-piv_folder = sys.argv[1]
+from myimagelib.myImageLib import readdata, show_progress
+from myimagelib.pivLib import compact_PIV
+import os
+import sys
 
-l = readdata(piv_folder, "csv")
-nFiles = len(l)
-print("{:d} files found".format(nFiles))
-print("Wrapping into .mat file ...")
+if __name__ == "__main__":
 
-cpiv = compact_PIV(l)
-cpiv.to_mat(piv_folder.rstrip(os.sep) + ".mat")
+   piv_folder = sys.argv[1]
 
-print("Clean up text files ...")
-for num, i in l.iterrows():
-    show_progress((num+1)/nFiles, num)
-    os.remove(i.Dir)
+   l = readdata(piv_folder, "csv")
+   nFiles = len(l)
+   print("{:d} files found".format(nFiles))
+   print("Wrapping into .mat file ...")
+
+   cpiv = compact_PIV(l)
+   cpiv.to_mat(piv_folder.rstrip(os.sep) + ".mat")
+
+   print("Clean up text files ...")
+   for num, i in l.iterrows():
+      show_progress((num+1)/nFiles, num)
+      os.remove(i.Dir)

@@ -1,12 +1,3 @@
-import numpy as np
-import os
-from skimage import io
-import corrLib
-import sys
-import time
-
-
-
 """
 small_imseq
 ===========
@@ -31,7 +22,15 @@ Concentration has always been derived from the bright field images. While images
 .. rubric:: Edit
 
 * Sep 20, 2020 -- Initial commit.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
+
+import numpy as np
+import os
+from skimage import io
+import corrLib
+import sys
+import time
 
 
 def down_size_imseq(folder, windowsize=[50, 50], step=25):
@@ -58,26 +57,27 @@ def down_size_imseq(folder, windowsize=[50, 50], step=25):
 
     return stack
 
-arg_length = len(sys.argv)
+if __name__ == "__main__":
+    arg_length = len(sys.argv)
 
-img_folder = sys.argv[1]
-out_folder = sys.argv[2]
-wsize = 50
-step = 25
-if arg_length > 3: wsize = int(sys.argv[3])
-if arg_length > 4: step = int(sys.argv[4])
+    img_folder = sys.argv[1]
+    out_folder = sys.argv[2]
+    wsize = 50
+    step = 25
+    if arg_length > 3: wsize = int(sys.argv[3])
+    if arg_length > 4: step = int(sys.argv[4])
 
-if os.path.exists(out_folder) == False:
-    os.makedirs(out_folder)
-with open(os.path.join(out_folder, 'log.txt'), 'w') as f:
-    f.write('img_folder: ' + img_folder + '\n')
-    f.write('out_folder: ' + out_folder + '\n')
-    f.write('wsize: ' + str(wsize) + '\n')
-    f.write('step: ' + str(step) + '\n')
-    f.write(time.asctime() + ' // Computation starts!\n')
+    if os.path.exists(out_folder) == False:
+        os.makedirs(out_folder)
+    with open(os.path.join(out_folder, 'log.txt'), 'w') as f:
+        f.write('img_folder: ' + img_folder + '\n')
+        f.write('out_folder: ' + out_folder + '\n')
+        f.write('wsize: ' + str(wsize) + '\n')
+        f.write('step: ' + str(step) + '\n')
+        f.write(time.asctime() + ' // Computation starts!\n')
 
-stack = down_size_imseq(img_folder, windowsize=[wsize, wsize], step=step)
-np.save(os.path.join(out_folder, 'stack.npy'), stack)
+    stack = down_size_imseq(img_folder, windowsize=[wsize, wsize], step=step)
+    np.save(os.path.join(out_folder, 'stack.npy'), stack)
 
-with open(os.path.join(out_folder, 'log.txt'), 'a') as f:
-    f.write(time.asctime() + ' // Computation finishes!')
+    with open(os.path.join(out_folder, 'log.txt'), 'a') as f:
+        f.write(time.asctime() + ' // Computation finishes!')

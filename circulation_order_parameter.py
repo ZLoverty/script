@@ -1,14 +1,4 @@
-import numpy as np
-import pandas as pd
-import os
-import sys
-import time
-from myimagelib.myImageLib import readdata
-
 """
-circulation_order_parameter
-===========================
-
 Compute circulation order parameter according to Wioland 2013. Technical details can be found in `my note <https://github.com/ZLoverty/DE/blob/main/Notes/Analysis_of_collective_motions_in_droplets.pdf>`_.
 
 .. rubric:: Syntax
@@ -33,7 +23,16 @@ A folder of PIV files are used to generate a single order parameter data file.
 
 * Jan 02, 2021 -- Initial commit.
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
+import numpy as np
+import pandas as pd
+import os
+import sys
+import time
+from myimagelib.myImageLib import readdata
+
+
 
 # %% codecell
 def tangent_unit(point, center):
