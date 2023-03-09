@@ -1,1 +1,0 @@
-nd2Dir = test_images\batch_to_tif\day2\01.nd2

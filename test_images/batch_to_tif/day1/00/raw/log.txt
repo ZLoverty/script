@@ -1,2 +1,0 @@
-nd2Dir = test_images\batch_to_tif\day1\00.nd2
-Sat Jan 22 15:04:20 2022 // Frame 0000 converted
