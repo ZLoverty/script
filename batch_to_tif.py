@@ -28,7 +28,7 @@ Batch convert *\*.nd2* files to .tif images by calling ``to_tif.py``. The code a
 * Dec 14, 2021 -- (i) Use system argument as input main folder, (ii) Implement main log file, (iii) Better doc string.
 * Jan 22, 2022 -- Remove the log file and print all the information to stdout. When using the code, use ``>>`` to save the screen message to a file. It's easier to locate the log file... This change should be applied to all the batch code.
 * Jan 05, 2023 -- Adapt myimagelib import style.
-* Mar 09, 2023 -- add ``mode="r"`` for ``readdata``, which looks for target file recursively.
+* Mar 09, 2023 -- (i) add ``mode="r"`` for ``readdata``, which looks for target file recursively. (ii) use in other folders
 """
 import os
 from myimagelib.myImageLib import readdata
@@ -39,6 +39,7 @@ import pandas as pd
 
 if __name__=="__main__":
 
+    script_folder, script_name = os.path.split(sys.argv[0])
     main_folder = sys.argv[1]
 
     l0 = readdata(main_folder, "nd2", mode="r")
@@ -57,7 +58,7 @@ if __name__=="__main__":
             out_folder = os.path.splitext(i.Dir)[0]
             if os.path.exists(out_folder) == False:
                 print(time.asctime() + " // Converting {} to tif".format(i.Dir))
-                cmd = "python to_tif.py {}".format(i.Dir)
+                cmd = "python {0} {1}".format(os.path.join(script_folder, "to_tif.py"), i.Dir)
                 os.system(cmd)
             else:
                 print(time.asctime() + " // {} tif folder exists already, skipping".format(i.Dir))
