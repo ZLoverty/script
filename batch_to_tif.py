@@ -25,12 +25,10 @@ Batch convert *\*.nd2* files to .tif images by calling ``to_tif.py``. The code a
 
 .. rubric:: Edit
 
-* Dec 14, 2021 --
-    * Use system argument as input main folder.
-    * Implement main log file.
-    * Better doc string.
+* Dec 14, 2021 -- (i) Use system argument as input main folder, (ii) Implement main log file, (iii) Better doc string.
 * Jan 22, 2022 -- Remove the log file and print all the information to stdout. When using the code, use ``>>`` to save the screen message to a file. It's easier to locate the log file... This change should be applied to all the batch code.
 * Jan 05, 2023 -- Adapt myimagelib import style.
+* Mar 09, 2023 -- add ``mode="r"`` for ``readdata``, which looks for target file recursively.
 """
 import os
 from myimagelib.myImageLib import readdata
@@ -38,23 +36,21 @@ import sys
 import time
 import pandas as pd
 
+
 if __name__=="__main__":
+
     main_folder = sys.argv[1]
-    l0 = readdata(main_folder, 'nd2')
+
+    l0 = readdata(main_folder, "nd2", mode="r")
+    l1 = readdata(main_folder, "raw", mode="r")
+    l = pd.concat([l0, l1], axis=0)
     print(time.asctime())
     print("------------------------")
     print("Start batch_to_tif on {}".format(main_folder))
-    print("The following nd2 files will be converted to tif sequences:")
-    l1 = readdata(main_folder, "raw")
-    l = pd.concat([l0, l1], axis=0)
+    print("The following raw images files will be converted to tif sequences:")
+    
     for num, i in l.iterrows():
         print("\t{}".format(i.Dir))
-    # log_file = os.path.join(main_folder, 'batch_to_tif_log.txt')
-    # with open(log_file, 'w') as f:
-    #     f.write(time.asctime() + " // Start batch_to_tif in {}\n".format(main_folder))
-    #     f.write("The following files will be converted:\n")
-    #     f.write(repr(l))
-    #     f.write("\n\n")
 
     if len(l) > 0:
         for num, i in l.iterrows():
