@@ -28,6 +28,7 @@ This code is intended for tracking droplets using ``cv2.HoughCircle()`` algorith
 * Jan 05, 2023 -- Adapt myimagelib import style.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 * Mar 09, 2023 -- (i) Use .nd2 as input image, (ii) do not save cropped images, instead generate a report, (iii) I'm trying to generate a real time report using matplotlib, but the performance was an issue. The plot window freezes, and the tracking efficiency decays over time. Therefore, I disable this report system and postpone the development to the future.
+* Mar 14, 2023 -- Remove the link step: link trajectories by nature is highly interactive, because one needs to actively check if the cutoff distance is chosen properly so that we don't miss detected particles with the filtering. 
 """
 
 import numpy as np
@@ -172,8 +173,8 @@ if __name__ == "__main__":
 
     # link and save traj data in a *.csv file
     traj = pd.concat(data_list, axis=0)
-    linked = tp.link(traj, 20, memory=5)
+    # linked = tp.link(traj, 20, memory=5)
     # linked1 = tp.filter_stubs(linked, 30)
-    linked.to_csv(os.path.join(analysis_folder, 'traj.csv'), index=False)
+    traj.to_csv(os.path.join(analysis_folder, 'finding.csv'), index=False)
 
     
