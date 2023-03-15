@@ -54,7 +54,7 @@ from nd2reader import ND2Reader
 
 
 def report(traj, hough_params, nd2Dir, num_images, number_of_circles_detected, fig, img):
-    # generate report (for a sketch, see https://drive.google.com/open?id=1CrAxG9Wzg-yLUcKtmo7gak8eFOZLUoAw&authuser=liux3141%40umn.edu&usp=drive_fs)
+    # generate report (for a sketch, see https://drive.google.com/open?id=1DOkgLN8IF6_Pln0teigA82nlB-SXCexc&authuser=liux3141%40umn.edu&usp=drive_fs)
     
     plt.clf()
     subfigs = fig.subfigures(3, 1, height_ratios=[0.2, 0.4, 0.4])
@@ -117,7 +117,7 @@ if __name__ == "__main__":
         hough_params = json.load(f)
 
     # Initial params
-    # report_step = 100 # show report window every report_step steps, int
+    report_step = 1000 # show report window every report_step steps, int
     max_number_of_circles = 3 # maximal number of circles to be detected, if in one frame we detect more circles, only the first number of circles will be recorded.
     number_of_circles_detected = [] # number of circles detected at each frame, used for evaluating the parameter set
 
@@ -125,7 +125,7 @@ if __name__ == "__main__":
 
     t0 = time.monotonic()
 
-    # fig = plt.figure(figsize=(16, 9), dpi=72)
+    fig = plt.figure(figsize=(16, 9), dpi=72)
     # plt.show(block=False)
 
     with ND2Reader(nd2Dir) as images:
@@ -168,8 +168,9 @@ if __name__ == "__main__":
             
             
 
-            # if num % report_step == 0 and num > 0:
-            #     report(traj, hough_params, nd2Dir, num+1, number_of_circles_detected, fig, img)
+            if num % report_step == 0 and num > 0:
+                tmp = pd.concat(data_list, axis=0)
+                report(tmp, hough_params, nd2Dir, num+1, number_of_circles_detected, fig, img)
 
     # link and save traj data in a *.csv file
     traj = pd.concat(data_list, axis=0)
