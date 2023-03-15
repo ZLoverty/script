@@ -20,7 +20,7 @@ We assume the following folder structure. We will generate flow rate data files 
    python flowrate.py main_piv_folder flowrate_folder dt
 
 * main_piv_folder -- the folder contains PIV of all crops (channels).
-* flowrate_folder -- full directory of flow rate data folder. The data will be ["crop-0", "crop-1", "crop-2", "t"].
+* flowrate_folder -- full directory of flow rate data folder. The data will be ["A", "B", "C", "t"].
 * dt -- time interval between two PIV data
 
 .. note::
@@ -36,7 +36,7 @@ We assume the following folder structure. We will generate flow rate data files 
 * Nov 03, 2022 -- Initial commit.
 * Dec 01, 2022 -- We now adopt the "compact PIV" data structure, so the downstream processing needs to be modified.
 * Jan 05, 2023 -- Adapt myimagelib import style.
-* Jan 18, 2023 -- (i) Fix bug in ``get_frame`` function, use "label" instead of "filename" to be consistent with ``pibLib``. (ii) Handle unequal lengths of PIV data
+* Jan 18, 2023 -- (i) Fix bug in ``get_frame`` function, use "label" instead of "filename" to be consistent with ``pivLib``. (ii) Handle unequal lengths of PIV data
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
@@ -69,6 +69,7 @@ if __name__ == "__main__":
         Q = np.nanmean(W*v_meanx)
         return Q
     def np1(a):
+        """get first part of filename, e.g. 00_A, np1=00, np2=A"""
         return a.split("_")[0]
     def np2(a):
         return a.split("_")[1]
