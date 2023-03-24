@@ -15,26 +15,26 @@ from scipy.io import loadmat
 import os
 
 # date and number of experiment
-folder = r"A:\SYMMETRIC\19 jan 2023"
-number = 0
+folder = r"A:\SYMMETRIC\28 feb 2023"
+number = 2
 
 # Load image and PIV data
 # img = np.random.rand(10, 100, 200)
 # x, y = np.meshgrid(np.linspace(0,200,10), np.linspace(0, 100, 5))
 # U, V = np.random.rand(10, *x.shape), np.random.rand(10, *x.shape)
 img1 = io.imread(os.path.join(folder, "nd2", "crop_channel", "{:02d}_A.tif".format(number)))
-img2 = io.imread(os.path.join(folder, "nd2", "crop_channel", "{:02d}_B.tif".format(number)))
-img3 = io.imread(os.path.join(folder, "nd2", "crop_channel", "{:02d}_C.tif".format(number)))
+img2 = io.imread(os.path.join(folder, "nd2",  "crop_channel", "{:02d}_B.tif".format(number)))
+img3 = io.imread(os.path.join(folder, "nd2",  "crop_channel", "{:02d}_C.tif".format(number)))
 
 cpiv_dict = loadmat(os.path.join(folder, "nd2", "PIV", "{:02d}_A.mat".format(number)))
 x1, y1, U1, V1, mask1 = cpiv_dict["x"], cpiv_dict["y"], cpiv_dict["u"], cpiv_dict["v"], cpiv_dict["mask"]
 U1[:, ~(mask1>mask1.mean())] = np.nan
 V1[:, ~(mask1>mask1.mean())] = np.nan 
-cpiv_dict = loadmat(os.path.join(folder, "nd2", "PIV", "{:02d}_B.mat".format(number)))
+cpiv_dict = loadmat(os.path.join(folder,"nd2",  "PIV", "{:02d}_B.mat".format(number)))
 x2, y2, U2, V2, mask2 = cpiv_dict["x"], cpiv_dict["y"], cpiv_dict["u"], cpiv_dict["v"], cpiv_dict["mask"]
 U2[:, ~(mask2>mask2.mean())] = np.nan
 V2[:, ~(mask2>mask2.mean())] = np.nan 
-cpiv_dict = loadmat(os.path.join(folder, "nd2", "PIV", "{:02d}_C.mat".format(number)))
+cpiv_dict = loadmat(os.path.join(folder,"nd2",  "PIV", "{:02d}_C.mat".format(number)))
 x3, y3, U3, V3, mask3 = cpiv_dict["x"], cpiv_dict["y"], cpiv_dict["u"], cpiv_dict["v"], cpiv_dict["mask"]
 U3[:, ~(mask3>mask3.mean())] = np.nan
 V3[:, ~(mask3>mask3.mean())] = np.nan 
