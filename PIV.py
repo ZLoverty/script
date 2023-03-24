@@ -23,6 +23,7 @@ This is the most basic version of PIV.
 * Dec 07, 2022 -- Fix undefined "start" issue.
 * Jan 05, 2023 -- (i) Check if img exists. (ii) Adapt myimagelib import style.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
+* Mar 23, 2023 -- Also process tiff stacks.
 """
 
 from myimagelib.pivLib import PIV
@@ -88,3 +89,12 @@ if __name__ == "__main__":
                 pivData = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
                 pivData.to_csv(os.path.join(piv_folder, "{0:05d}-{1:05d}.csv".format(i, i+1)), index=False)
 
+    elif img.endswith(".tif"):
+        img = io.imread(img)
+        assert(len(img.shape)==3)
+        nImages = len(img)
+        for i, I0, I1 in zip(range(nImages-1), img[:-1], img[1:]):
+            show_progress((i+1)/nImages, i+1)
+            x, y, u, v = PIV(I0, I1, winsize, overlap, dt)
+            pivData = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
+            pivData.to_csv(os.path.join(piv_folder, "{0:05d}-{1:05d}.csv".format(i, i+1)), index=False)
