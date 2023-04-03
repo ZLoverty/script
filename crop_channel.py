@@ -43,6 +43,7 @@ The folder structure is illustrated below:
 * Jan 24, 2023 -- (i) Check the existence of output files, e.g. 00_A.tif, 00_B.tif, 00_C.tif, (ii) print nd2 file name as progress bar label.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 * Mar 30, 2023 -- (i) Add "map" method, in addtion to "rotate", (ii) generate a crop region indicator on the raw image.
+* Mar 31, 2023 -- Explicitly convert image dtype to float32 when dividing median to reduce memory usage. 
 """
 
 import sys
@@ -146,7 +147,7 @@ if __name__ == "__main__":
         # remove background and save
         for j in crops:
             crops[j] = np.stack(crops[j])
-            imwrite(crop_name[j], to8bit(crops[j] / np.median(crops[j], axis=0)))
+            imwrite(crop_name[j], to8bit(crops[j].astype("float32") / np.median(crops[j], axis=0).astype("float32")))
         
     else:
         print("All the output files: ")
