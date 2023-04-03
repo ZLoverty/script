@@ -14,7 +14,7 @@ A simple graphical interface to manually input droplet coords which are not foun
 .. rubric:: Edit
 
 * Mar 14, 2023 -- Initial commit.
-* Apr 03, 2023 -- (i) Implement circle cursor to better position the manual tracking, (ii) save data on the last image and exit.
+* Apr 03, 2023 -- (i) Implement circle cursor to better position the manual tracking, (ii) save data on the last image and exit, (iii) index should be saved.
 """
 
 import matplotlib.pyplot as plt
@@ -109,7 +109,7 @@ if __name__ == "__main__":
                 coords = np.stack(self.coords)
                 pos.loc[missing_frame_index[:self.current_frame], "x"] = coords[:, 0]
                 pos.loc[missing_frame_index[:self.current_frame], "y"] = coords[:, 1]
-                pos.to_csv(os.path.join(analysis_folder, "tracking_manual.csv"), index=False)
+                pos.to_csv(os.path.join(analysis_folder, "tracking_manual.csv"))
                 exit()
             
         def on_mouse_move(self, event):
@@ -133,7 +133,7 @@ if __name__ == "__main__":
                 coords = np.stack(self.coords)
                 pos.loc[missing_frame_index[:self.current_frame], "x"] = coords[:, 0]
                 pos.loc[missing_frame_index[:self.current_frame], "y"] = coords[:, 1]
-                pos.to_csv(os.path.join(analysis_folder, "tracking_manual.csv"), index=False)
+                pos.to_csv(os.path.join(analysis_folder, "tracking_manual.csv"))
 
     interactor = CirclePicker(ax)
     plt.show()
