@@ -1,3 +1,20 @@
+"""
+A GUI miniapp to quickly define crop region for bifurcation experiment images.
+
+.. rubric:: Syntax
+
+.. code-block:: console
+
+   python faster_cropping.py imgDir [optional arguments]
+
+* imgDir -- the directory of nd2 or tif raw images.
+* optional arguments -- (i) angles: angles between each channel, default 0 120 240. To pass the argument, use ``--angles 0 120 240``. It is possible to pass more than 3 numbers. In that case, more crops will be created. (ii) wh -- width and height of the cropping regions, default 300 500. To pass the argument, use ``--wh 300 500``.
+
+.. rubric:: Edit
+
+* Apr 27, 2023 -- Set commandline arguments.
+"""
+
 import matplotlib.pyplot as plt
 from skimage import io
 from matplotlib.backend_bases import MouseButton
@@ -8,18 +25,31 @@ import pandas as pd
 from scipy.ndimage import map_coordinates
 from tifffile import imwrite
 from myimagelib.myImageLib import to8bit
+import argparse
 
-### Required settings below
+### parse commandline arguments
 
-imgDir = r"A:\SYMMETRIC\28 feb 2023\nd2\06.nd2"
+parser = argparse.ArgumentParser(prog="fastCropper", description="A GUI miniapp to quickly define crop region for bifurcation experiment images.")
+parser.add_argument("imgDir")
+parser.add_argument("-a", "--angles",
+                    nargs="*",
+                    type=int,
+                    default=[0, 120, 240])
+parser.add_argument("--width",
+                    type=int,
+                    default=300)
+parser.add_argument("--height",
+                    type=int,
+                    default=500)
+args = parser.parse_args()
 
-save_folder = r"A:\SYMMETRIC\28 feb 2023"
+imgDir = args.imgDir
+save_folder, filename = os.path.split(imgDir)
+name, ext = os.path.splitext(filename)
 
-suffix = 2
+angles = args.angles
 
-angles = [0, 120, 240]
-
-w, h = 400, 500
+w, h = args.width, args.height
 
 ### Settings above
 
@@ -70,7 +100,7 @@ class RectInteractor:
         canvas.mpl_connect("key_press_event", self.on_key_press)
 
         self.canvas = canvas
-    
+
     def on_draw(self, event):
         """Callback for draws."""
         self.background = self.canvas.copy_from_bbox(self.ax.bbox)
@@ -81,7 +111,7 @@ class RectInteractor:
 
     def on_button_press(self, event):
         """Callback for mouse button presses."""
-        if (event.inaxes is None or 
+        if (event.inaxes is None or
             event.button != MouseButton.LEFT):
             return
         self.xc = np.array((event.xdata, event.ydata))
@@ -95,7 +125,7 @@ class RectInteractor:
         if (event.inaxes is None or
             event.button != MouseButton.LEFT):
             return
-        
+
         # compute channel A direction
 
         x = np.array((event.xdata, event.ydata))
@@ -131,7 +161,7 @@ class RectInteractor:
         if event.key == 'enter':
             if not os.path.exists(save_folder):
                 os.makedirs(save_folder)
-            
+
             # image center, for rotating base points
             # this is to mimic the manual cropping in ImageJ
             xc = np.array((img.shape[1]//2, img.shape[0]//2))
@@ -140,15 +170,15 @@ class RectInteractor:
             dfhu = pd.DataFrame(np.stack([self.h_unit[i] for i in self.h_unit]), columns=["hu0", "hu1"], index=range(self.numChannels))
             dfwu = pd.DataFrame(np.stack([self.w_unit[i] for i in self.w_unit]), columns=["wu0", "wu1"], index=range(self.numChannels))
             df = dfxy.join(dfhu).join(dfwu).assign(h=h, w=w)
-            df.to_csv(os.path.join(save_folder, "crop_data{}.csv".format(suffix)))
-            fig.savefig(os.path.join(save_folder, "crop{}.jpg".format(suffix)))
+            df.to_csv(os.path.join(save_folder, "crop_data{}.csv".format(name)))
+            fig.savefig(os.path.join(save_folder, "crop{}.jpg".format(name)))
             for i in self.xy:
                 YY, XX = np.mgrid[0:h, 0:w]
                 YY = np.flip(YY, axis=0)
                 X = self.xy[i][0] + XX * self.w_unit[i][0] + YY * self.h_unit[i][0]
                 Y = self.xy[i][1] + XX * self.w_unit[i][1] + YY * self.h_unit[i][1]
                 crop = map_coordinates(img, [Y, X], order=0, mode="constant")
-                imwrite(os.path.join(save_folder, "{0}{1}.tif".format(chr(65+i), suffix)), to8bit(crop))
+                imwrite(os.path.join(save_folder, "{0}{1}.tif".format(chr(65+i), name)), to8bit(crop))
 
 interactor = RectInteractor(ax)
 plt.show()
