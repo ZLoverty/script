@@ -1,21 +1,26 @@
 """
-This is the most basic version of PIV.
+Particle image velocimetry (PIV) analysis on an image sequence. This script utilize the ``extended_search_area_piv()`` function of the `openpiv-python <>`_ package. Every pair of frames will give a velocity field, which will be saved as a table of [x, y, u, v]. For example, a 3-frame sequence will lead to 2 velocity fields, namely 1-2 and 2-3. More generally, an n-frame image will result in an (n-1)-frame velocity field. 
 
 .. rubric:: Syntax
 
 .. code-block:: console
 
-   python PIV.py img winsize dt piv_folder
+   python PIV.py img [winsize piv_folder]
 
-* img: can be i) tif sequence folder, ii) nd2 file dir to be analyzed.
-* winsize: interrogation window size.
-* dt: time interval between adjacent frames (1/FPS).
-* piv_folder: folder to save PIV results.
+* img: can be i) tif sequence folder, ii) nd2 file dir, iii) tiffstack dir.
+* winsize (optional): interrogation window size. Default is 32. Specify a different value with ``--winsize 16``.
+* piv_folder (optional): folder to save PIV results. Default is ".", i.e. the same directory as the script. Specify a different folder with ``--piv_folder /folder/you/like``.
 
 .. note::
 
    In this implementation, we set overlap as half of winsize.
 
+.. rubric:: Test
+
+.. code-block:: console
+
+   python PIV.py test_images/piv_drop/ --piv_folder test_images/piv_drop/
+   
 .. rubric:: Edit
 
 * Nov 03, 2022 -- Initial commit.
@@ -24,6 +29,7 @@ This is the most basic version of PIV.
 * Jan 05, 2023 -- (i) Check if img exists. (ii) Adapt myimagelib import style.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 * Mar 23, 2023 -- Also process tiff stacks.
+* Apr 28, 2023 -- (i) improve docstring, (ii) remove argument ``dt``, (iii) rewrite argument parser with argparse, (iv) make pair sampling consistent (every frame instead of every 2 frames).
 """
 
 from myimagelib.pivLib import PIV
@@ -33,13 +39,21 @@ from skimage import io
 from myimagelib.myImageLib import readdata, show_progress
 import pandas as pd
 from nd2reader import ND2Reader
+import argparse
 
 
 if __name__ == "__main__":
-    img = sys.argv[1]
-    winsize = int(sys.argv[2])
-    dt = float(sys.argv[3])
-    piv_folder = sys.argv[4]
+
+    parser = argparse.ArgumentParser(prog="PIV")
+    parser.add_argument("img")
+    parser.add_argument("--winsize", type=int, default=32)
+    parser.add_argument("--piv_folder", default=".")
+    args = parser.parse_args()
+
+    img = args.img
+    winsize = args.winsize
+    piv_folder = args.piv_folder
+    dt = 1
 
     if os.path.exists(img) == False:
         raise ValueError("The specified image dir does not exist!")
@@ -60,7 +74,7 @@ if __name__ == "__main__":
             print("The last csv file has name: {}".format(last_name))
             start = int(last_name.split("-")[0])
             print("Start doing PIV from frame {:d}".format(start))
-            if start > len(lr) * 2: # check if there are missing results before
+            if start > len(lr): # check if there are missing results before
                 print("There are files missing, start from beginning.")
                 start = 0
         else:
@@ -70,24 +84,24 @@ if __name__ == "__main__":
     if os.path.isdir(img):
         l = readdata(img, "tif")
         nImages = len(l)
-        for ind0, ind1 in zip(l.index[::2], l.index[1::2]):
+        for ind0, ind1 in zip(l.index[:-1:], l.index[1::]):
             show_progress((ind0+2)/nImages, ind0+1)
             I0 = io.imread(l.at[ind0, "Dir"])
             I1 = io.imread(l.at[ind1, "Dir"])
             x, y, u, v = PIV(I0, I1, winsize, overlap, dt)
             pivData = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
-            pivData.to_csv(os.path.join(piv_folder, "{0}-{1}.csv".format(l.at[ind0, "Name"], l.at[ind1, "Name"])), index=False)
+            pivData.to_csv(os.path.join(piv_folder, "{0}.csv".format(l.at[ind0, "Name"])), index=False)
     
     elif img.endswith(".nd2"):
         with ND2Reader(img) as images:
             nImages = images.metadata["num_frames"]
-            for i in range(start, nImages, 2):
+            for i in range(start, nImages):
                 show_progress((i+1)/nImages, i+1)
                 I0 = images[i]
                 I1 = images[i+1]
                 x, y, u, v = PIV(I0, I1, winsize, overlap, dt)
                 pivData = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
-                pivData.to_csv(os.path.join(piv_folder, "{0:05d}-{1:05d}.csv".format(i, i+1)), index=False)
+                pivData.to_csv(os.path.join(piv_folder, "{0:05d}.csv".format(i)), index=False)
 
     elif img.endswith(".tif"):
         img = io.imread(img)
@@ -97,4 +111,4 @@ if __name__ == "__main__":
             show_progress((i+1)/nImages, i+1)
             x, y, u, v = PIV(I0, I1, winsize, overlap, dt)
             pivData = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
-            pivData.to_csv(os.path.join(piv_folder, "{0:05d}-{1:05d}.csv".format(i, i+1)), index=False)
+            pivData.to_csv(os.path.join(piv_folder, "{0:05d}.csv".format(i)), index=False)
