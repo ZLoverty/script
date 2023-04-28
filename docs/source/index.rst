@@ -10,4 +10,8 @@ Contents
    
    scripts
 
+Plans
+-----
+
+* Use static html pages to demonstrate the use of the scripts in combinations, for different projects.  
 
