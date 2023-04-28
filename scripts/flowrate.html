@@ -43,6 +43,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/flowrate';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="gen_preview" href="gen_preview.html" />
+    <link rel="prev" title="de_piv_script" href="de_piv_script.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -119,12 +121,37 @@
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PIV.html">PIV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apply_mask.html">apply_mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_gen_preview.html">batch_gen_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_mean_velocity.html">batch_mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_spatial_correlation.html">batch_spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_tif.html">batch_to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_vid.html">batch_to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_velocity_autocorr.html">batch_velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_bif_piv.html">check_bif_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_traj.html">check_traj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circulation_order_parameter.html">circulation_order_parameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cleanup_tif.html">cleanup_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_preview.html">collect_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de_piv_script.html">de_piv_script</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">flowrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gen_preview.html">gen_preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ij_piv.html">ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual_entry_droplets.html">manual_entry_droplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mean_velocity.html">mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="myautodoc.html">myautodoc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network_monitor.html">network_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piv_overlay.html">piv_overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove_background.html">remove_background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rename_ij_piv.html">rename_ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spatial_correlation.html">spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_tif.html">to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_vid.html">to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocity_autocorr.html">velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrap_piv.html">wrap_piv</a></li>
 </ul>
 </li>
 </ul>
@@ -275,8 +302,44 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="flowrate">
-<h1>flowrate<a class="headerlink" href="#flowrate" title="Permalink to this heading">#</a></h1>
+  <section id="module-flowrate">
+<span id="flowrate"></span><h1>flowrate<a class="headerlink" href="#module-flowrate" title="Permalink to this heading">#</a></h1>
+<p>This script compute “volumetric flow rate” in a channel from 2D PIV data. The unit of the flow rate will be px^2/s (it comes from a mean velocity, px/s, multiplied by a width, px).</p>
+<p>We assume the following folder structure. We will generate flow rate data files based on the PIV file name before “_”. Columns in each file will be determined by PIV file name after “_”. For example, flow rate data computed from 04_A.mat, 04_B.mat will be put in a file 04.csv, with columns A and B.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">|-- main_piv_folder</span>
+<span class="go">    |-- 00_A.mat</span>
+<span class="go">    |-- 00_B.mat</span>
+<span class="go">    |-- ...</span>
+<span class="go">    |-- 09_A.mat</span>
+<span class="go">|-- flowrate_folder</span>
+<span class="go">    |-- (to be generated)</span>
+</pre></div>
+</div>
+<p class="rubric">Syntax</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python flowrate.py main_piv_folder flowrate_folder dt</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>main_piv_folder – the folder contains PIV of all crops (channels).</p></li>
+<li><p>flowrate_folder – full directory of flow rate data folder. The data will be [“A”, “B”, “C”, “t”].</p></li>
+<li><p>dt – time interval between two PIV data</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">dt</span></code> is 2/FPS by default. However, sometimes we do PIV in a denser way, e.g. 1-&gt;2, 2-&gt;3, 3-&gt;4. In such case, <code class="docutils literal notranslate"><span class="pre">dt=1/FPS</span></code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The PIV data generated by ImageJ PIV have unit px/frame. So the flow rates from them are px^2/frame.</p>
+</div>
+<p class="rubric">Edit</p>
+<ul class="simple">
+<li><p>Nov 03, 2022 – Initial commit.</p></li>
+<li><p>Dec 01, 2022 – We now adopt the “compact PIV” data structure, so the downstream processing needs to be modified.</p></li>
+<li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
+<li><p>Jan 18, 2023 – (i) Fix bug in <code class="docutils literal notranslate"><span class="pre">get_frame</span></code> function, use “label” instead of “filename” to be consistent with <code class="docutils literal notranslate"><span class="pre">pivLib</span></code>. (ii) Handle unequal lengths of PIV data</p></li>
+<li><p>Feb 08, 2023 – Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__==&quot;__main__&quot;</span></code> will be executed, causing problems)</p></li>
+</ul>
 </section>
 
 
@@ -291,6 +354,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="de_piv_script.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">de_piv_script</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="gen_preview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">gen_preview</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>

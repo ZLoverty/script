@@ -43,6 +43,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/velocity_autocorr';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="wrap_piv" href="wrap_piv.html" />
+    <link rel="prev" title="to_vid" href="to_vid.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -119,12 +121,37 @@
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PIV.html">PIV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apply_mask.html">apply_mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_gen_preview.html">batch_gen_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_mean_velocity.html">batch_mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_spatial_correlation.html">batch_spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_tif.html">batch_to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_vid.html">batch_to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_velocity_autocorr.html">batch_velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_bif_piv.html">check_bif_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_traj.html">check_traj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circulation_order_parameter.html">circulation_order_parameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cleanup_tif.html">cleanup_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_preview.html">collect_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de_piv_script.html">de_piv_script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flowrate.html">flowrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gen_preview.html">gen_preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ij_piv.html">ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual_entry_droplets.html">manual_entry_droplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mean_velocity.html">mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="myautodoc.html">myautodoc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network_monitor.html">network_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piv_overlay.html">piv_overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove_background.html">remove_background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rename_ij_piv.html">rename_ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spatial_correlation.html">spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_tif.html">to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_vid.html">to_vid</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrap_piv.html">wrap_piv</a></li>
 </ul>
 </li>
 </ul>
@@ -275,8 +302,42 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="velocity-autocorr">
-<h1>velocity_autocorr<a class="headerlink" href="#velocity-autocorr" title="Permalink to this heading">#</a></h1>
+  <section id="module-velocity_autocorr">
+<span id="velocity-autocorr"></span><h1>velocity_autocorr<a class="headerlink" href="#module-velocity_autocorr" title="Permalink to this heading">#</a></h1>
+<p>Apply autocorrelation analysis on sequential PIV data.</p>
+<p class="rubric">Syntax</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python velocity_autocorr.py piv_folder out_folder [fps=50] [cutoff=2000]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>fps: the imaging frame rate</p></li>
+<li><p>cutoff: frame number above which the velocity data are not included in the analysis</p></li>
+</ul>
+<p class="rubric">Test</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python velocity_autocorr.py test_images</span>
+</pre></div>
+</div>
+<p>elocity_autocorr test_images
+elocity_autocorr
+ac_result 50 20</p>
+<p class="rubric">Edit</p>
+<ul>
+<li><p>Dec 13, 2021 – Initial commit.</p></li>
+<li><p>Feb 21, 2022 – Rewrite with new functions.</p></li>
+<li><p>Mar 16, 2022 –</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Rewrite with piv_data class</p></li>
+<li><p>Use fps instead of dt as input argument</p></li>
+<li><p>Modify doc string</p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p>Mar 23, 2022 – add smoothn as an optional smoothing method</p></li>
+<li><p>Nov 15, 2022 – Make <code class="docutils literal notranslate"><span class="pre">fps</span></code> and <code class="docutils literal notranslate"><span class="pre">cutoff</span></code> real <em>keyword</em> args.</p></li>
+<li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
+<li><p>Feb 08, 2023 – Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__==&quot;__main__&quot;</span></code> will be executed, causing problems)</p></li>
+</ul>
 </section>
 
 
@@ -291,6 +352,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="to_vid.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">to_vid</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="wrap_piv.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">wrap_piv</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>

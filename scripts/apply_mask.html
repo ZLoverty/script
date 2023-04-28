@@ -43,6 +43,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/apply_mask';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="batch_gen_preview" href="batch_gen_preview.html" />
+    <link rel="prev" title="PIV" href="PIV.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -119,12 +121,37 @@
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PIV.html">PIV</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">apply_mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_gen_preview.html">batch_gen_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_mean_velocity.html">batch_mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_spatial_correlation.html">batch_spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_tif.html">batch_to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_vid.html">batch_to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_velocity_autocorr.html">batch_velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_bif_piv.html">check_bif_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_traj.html">check_traj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circulation_order_parameter.html">circulation_order_parameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cleanup_tif.html">cleanup_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_preview.html">collect_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de_piv_script.html">de_piv_script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flowrate.html">flowrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gen_preview.html">gen_preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ij_piv.html">ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual_entry_droplets.html">manual_entry_droplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mean_velocity.html">mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="myautodoc.html">myautodoc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network_monitor.html">network_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piv_overlay.html">piv_overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove_background.html">remove_background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rename_ij_piv.html">rename_ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spatial_correlation.html">spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_tif.html">to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_vid.html">to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocity_autocorr.html">velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrap_piv.html">wrap_piv</a></li>
 </ul>
 </li>
 </ul>
@@ -275,8 +302,31 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="apply-mask">
-<h1>apply_mask<a class="headerlink" href="#apply-mask" title="Permalink to this heading">#</a></h1>
+  <section id="module-apply_mask">
+<span id="apply-mask"></span><h1>apply_mask<a class="headerlink" href="#module-apply_mask" title="Permalink to this heading">#</a></h1>
+<p>Apply mask on PIV data. It calls <code class="xref py py-func docutils literal notranslate"><span class="pre">pivLib.apply_mask()</span></code> to treat the input PIV data, and save the results (masked PIV data) in the same files. See <a class="reference external" href="https://zloverty.github.io/mylib/pivLib/pivLib.apply_mask.html">here</a> for more details.</p>
+<p class="rubric">Syntax</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python apply_mask.py piv_folder mask_dir</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>piv_folder: folder containing PIV data (csv sequence)</p></li>
+<li><p>mask_dir: directory of a tif binary mask, of the same shape as raw images.</p></li>
+<li><p>erode: number of pixels to erode from the True region (this makes the mask smaller, reducing boundary effect). Default to 32, a good value is the winsize of PIV.</p></li>
+</ul>
+<p class="rubric">Test</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python apply_mask.py test_imagespply_mask test_imagespply_mask\A.tif</span>
+</pre></div>
+</div>
+<p class="rubric">Edit</p>
+<ul class="simple">
+<li><p>Nov 03, 2022 – Initial commit.</p></li>
+<li><p>Dec 01, 2022 – Remove erosion step. Mask should be used as it is.</p></li>
+<li><p>Dec 13, 2022 – Fix a bug.</p></li>
+<li><p>Dec 19, 2022 – More accurate docstring.</p></li>
+<li><p>Jan 05, 2023 – (i) Adapt myimagelib import style. (ii) Add screen info.</p></li>
+<li><p>Feb 08, 2023 – Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__==&quot;__main__&quot;</span></code> will be executed, causing problems)</p></li>
+</ul>
 </section>
 
 
@@ -291,6 +341,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="PIV.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">PIV</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="batch_gen_preview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">batch_gen_preview</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>

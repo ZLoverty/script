@@ -43,6 +43,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/batch_to_tif';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="batch_to_vid" href="batch_to_vid.html" />
+    <link rel="prev" title="batch_spatial_correlation" href="batch_spatial_correlation.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -119,12 +121,37 @@
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PIV.html">PIV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apply_mask.html">apply_mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_gen_preview.html">batch_gen_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_mean_velocity.html">batch_mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_spatial_correlation.html">batch_spatial_correlation</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">batch_to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_vid.html">batch_to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_velocity_autocorr.html">batch_velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_bif_piv.html">check_bif_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_traj.html">check_traj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circulation_order_parameter.html">circulation_order_parameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cleanup_tif.html">cleanup_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_preview.html">collect_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de_piv_script.html">de_piv_script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flowrate.html">flowrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gen_preview.html">gen_preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ij_piv.html">ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual_entry_droplets.html">manual_entry_droplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mean_velocity.html">mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="myautodoc.html">myautodoc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network_monitor.html">network_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piv_overlay.html">piv_overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove_background.html">remove_background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rename_ij_piv.html">rename_ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spatial_correlation.html">spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_tif.html">to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_vid.html">to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocity_autocorr.html">velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrap_piv.html">wrap_piv</a></li>
 </ul>
 </li>
 </ul>
@@ -275,8 +302,34 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="batch-to-tif">
-<h1>batch_to_tif<a class="headerlink" href="#batch-to-tif" title="Permalink to this heading">#</a></h1>
+  <section id="module-batch_to_tif">
+<span id="batch-to-tif"></span><h1>batch_to_tif<a class="headerlink" href="#module-batch_to_tif" title="Permalink to this heading">#</a></h1>
+<p>Batch convert <em>*.nd2</em> files to .tif images by calling <code class="docutils literal notranslate"><span class="pre">to_tif.py</span></code>. The code assumes the following folder structure:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">main_folder</span>
+<span class="go">|-- day1</span>
+<span class="go">    |-- 00.nd2</span>
+<span class="go">|-- day2</span>
+<span class="go">    |-- 01.nd2</span>
+</pre></div>
+</div>
+<p class="rubric">Syntax</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python batch_to_tif.py main_folder</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>main_folder – the folder containing <em>*.nd2</em> files.</p></li>
+</ul>
+<p class="rubric">Test</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python batch_to_tif.py test_imagesatch_to_tif</span>
+</pre></div>
+</div>
+<p class="rubric">Edit</p>
+<ul class="simple">
+<li><p>Dec 14, 2021 – (i) Use system argument as input main folder, (ii) Implement main log file, (iii) Better doc string.</p></li>
+<li><p>Jan 22, 2022 – Remove the log file and print all the information to stdout. When using the code, use <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code> to save the screen message to a file. It’s easier to locate the log file… This change should be applied to all the batch code.</p></li>
+<li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
+<li><p>Mar 09, 2023 – (i) add <code class="docutils literal notranslate"><span class="pre">mode=&quot;r&quot;</span></code> for <code class="docutils literal notranslate"><span class="pre">readdata</span></code>, which looks for target file recursively. (ii) use in other folders</p></li>
+</ul>
 </section>
 
 
@@ -291,6 +344,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="batch_spatial_correlation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">batch_spatial_correlation</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="batch_to_vid.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">batch_to_vid</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>

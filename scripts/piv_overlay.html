@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>bpass &#8212; script 1.0 documentation</title>
+    <title>piv_overlay &#8212; script 1.0 documentation</title>
   
   
   
@@ -40,9 +40,11 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/bpass';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/piv_overlay';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="remove_background" href="remove_background.html" />
+    <link rel="prev" title="network_monitor" href="network_monitor.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -119,12 +121,37 @@
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        <ul class="nav bd-sidenav">
-<li class="toctree-l1 has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PIV.html">PIV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apply_mask.html">apply_mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_gen_preview.html">batch_gen_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_mean_velocity.html">batch_mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_spatial_correlation.html">batch_spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_tif.html">batch_to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_vid.html">batch_to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_velocity_autocorr.html">batch_velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_bif_piv.html">check_bif_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_traj.html">check_traj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circulation_order_parameter.html">circulation_order_parameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cleanup_tif.html">cleanup_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_preview.html">collect_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de_piv_script.html">de_piv_script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flowrate.html">flowrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gen_preview.html">gen_preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ij_piv.html">ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual_entry_droplets.html">manual_entry_droplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mean_velocity.html">mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="myautodoc.html">myautodoc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network_monitor.html">network_monitor</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">piv_overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove_background.html">remove_background</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rename_ij_piv.html">rename_ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spatial_correlation.html">spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_tif.html">to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_vid.html">to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocity_autocorr.html">velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrap_piv.html">wrap_piv</a></li>
 </ul>
 </li>
 </ul>
@@ -181,7 +208,7 @@
       
       
       
-      <li><a href="../_sources/scripts/bpass.rst" target="_blank"
+      <li><a href="../_sources/scripts/piv_overlay.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -261,7 +288,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>bpass</h1>
+    <h1>piv_overlay</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -275,8 +302,39 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="bpass">
-<h1>bpass<a class="headerlink" href="#bpass" title="Permalink to this heading">#</a></h1>
+  <section id="module-piv_overlay">
+<span id="piv-overlay"></span><h1>piv_overlay<a class="headerlink" href="#module-piv_overlay" title="Permalink to this heading">#</a></h1>
+<p>Generate PIV arrow overlayed images for PIV visual inspection and illustration.</p>
+<p class="rubric">Syntax</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python piv_overlay.py matDir imgDir [optional args]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>matDir – compact PIV data file (.mat) directory</p></li>
+<li><p>imgDir – tiffstack image file (.tif) directory</p></li>
+<li><p>output_width (optional) – specify the width of output overlay images (pixels). Default is 300. To use, do <code class="docutils literal notranslate"><span class="pre">--width</span> <span class="pre">300</span></code>.</p></li>
+<li><p>videofps (optional) – specify the framerate of the output video. Default is 20.</p></li>
+</ul>
+<p class="rubric">Test</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python piv_overlay.py test_images\piv_drop test_images\piv_drop --width 300 --videofps 20</span>
+</pre></div>
+</div>
+<p class="rubric">Edit</p>
+<ul class="simple">
+<li><p>Jan 03, 2022 – (i) move from PIV to script, (ii) set scale, (iii) update docstring, (iv) minor structural changes</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>See <a class="reference external" href="https://github.com/ZLoverty/DE/blob/main/Notes/PIV_technical_report.pdf">PIV technical report Sec II.A.1</a> for the reasoning of scale settings.</p>
+</div>
+<ul class="simple">
+<li><p>Jan 22, 2022 – reduce scale by 1.5 to increase the arrow size</p></li>
+<li><p>Mar 03, 2022 – (i) Use <cite>droplet_image</cite> class to rewrite the script, (ii) remove logging</p></li>
+<li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
+<li><p>Feb 08, 2023 – Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__==&quot;__main__&quot;</span></code> will be executed, causing problems)</p></li>
+<li><p>Apr 27, 2023 – (i) Stop using <code class="docutils literal notranslate"><span class="pre">droplet_image</span></code> class for making PIV overlay. Making PIV overlay is necessary in multiple projects and should be made more general. (ii) In this edit, we use tiffstack and compact PIV as the standard input for this script. In future versions, nd2 should also be legit input images. (iii) Sparcity argument is disabled temporarily. (iv) rewrite commandline argument parser with argparse module.</p></li>
+<li><p>Apr 28, 2023 – (i) make avi videos and delete jpg files, (ii) no longer require output_folder. Instead, always store the .jpg files in piv_folder/output first, and then convert the .jpg stack into .avi movie. The .avi will be saved in the same folder as the .mat PIV data files. The .jpg images will be deleted after the .avi video is generated.</p></li>
+</ul>
 </section>
 
 
@@ -291,6 +349,24 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="network_monitor.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">network_monitor</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="remove_background.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">remove_background</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
 </div></div>
   
 </div>
