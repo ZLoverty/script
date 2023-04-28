@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>circulation_order_parameter &#8212; script 1.0 documentation</title>
+    <title>faster_cropping &#8212; script 1.0 documentation</title>
   
   
   
@@ -40,11 +40,11 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/circulation_order_parameter';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/faster_cropping';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cleanup_tif" href="cleanup_tif.html" />
-    <link rel="prev" title="check_traj" href="check_traj.html" />
+    <link rel="next" title="flowrate" href="flowrate.html" />
+    <link rel="prev" title="extract" href="extract.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -135,12 +135,12 @@
 <li class="toctree-l2"><a class="reference internal" href="bpass_mh.html">bpass_mh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="check_bif_piv.html">check_bif_piv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="check_traj.html">check_traj</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">circulation_order_parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circulation_order_parameter.html">circulation_order_parameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cleanup_tif.html">cleanup_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_preview.html">collect_preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="de_piv_script.html">de_piv_script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="extract.html">extract</a></li>
-<li class="toctree-l2"><a class="reference internal" href="faster_cropping.html">faster_cropping</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">faster_cropping</a></li>
 <li class="toctree-l2"><a class="reference internal" href="flowrate.html">flowrate</a></li>
 <li class="toctree-l2"><a class="reference internal" href="gen_preview.html">gen_preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ij_piv.html">ij_piv</a></li>
@@ -213,7 +213,7 @@
       
       
       
-      <li><a href="../_sources/scripts/circulation_order_parameter.rst" target="_blank"
+      <li><a href="../_sources/scripts/faster_cropping.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -293,7 +293,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>circulation_order_parameter</h1>
+    <h1>faster_cropping</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -307,28 +307,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-circulation_order_parameter">
-<span id="circulation-order-parameter"></span><h1>circulation_order_parameter<a class="headerlink" href="#module-circulation_order_parameter" title="Permalink to this heading">#</a></h1>
-<p>Compute circulation order parameter according to Wioland 2013. Technical details can be found in <a class="reference external" href="https://github.com/ZLoverty/DE/blob/main/Notes/Analysis_of_collective_motions_in_droplets.pdf">my note</a>.</p>
+  <section id="module-faster_cropping">
+<span id="faster-cropping"></span><h1>faster_cropping<a class="headerlink" href="#module-faster_cropping" title="Permalink to this heading">#</a></h1>
+<p>A GUI miniapp to quickly define crop region for bifurcation experiment images.</p>
 <p class="rubric">Syntax</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python circulation_order_parameter.py piv_folder out_folder x y</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python faster_cropping.py imgDir [optional arguments]</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>piv_folder – folder containing PIV data (.csv), file names indicate frame number</p></li>
-<li><p>out_folder – order parameter data file (.csv), contain frame and OP</p></li>
-<li><p>x, y – the center position</p></li>
+<li><p>imgDir – the directory of nd2 or tif raw images.</p></li>
+<li><p>optional arguments – (i) angles: angles between each channel, default 0 120 240. To pass the argument, use <code class="docutils literal notranslate"><span class="pre">--angles</span> <span class="pre">0</span> <span class="pre">120</span> <span class="pre">240</span></code>. It is possible to pass more than 3 numbers. In that case, more crops will be created. (ii) wh – width and height of the cropping regions, default 300 500. To pass the argument, use <code class="docutils literal notranslate"><span class="pre">--wh</span> <span class="pre">300</span> <span class="pre">500</span></code>.</p></li>
 </ul>
-<p>A folder of PIV files are used to generate a single order parameter data file.</p>
-<p class="rubric">Test</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python circulation_order_parameter.py test_images\circulation_order_parameter\piv test_images\circulation_order_parameter\order_parameter 259 227</span>
-</pre></div>
-</div>
 <p class="rubric">Edit</p>
 <ul class="simple">
-<li><p>Jan 02, 2021 – Initial commit.</p></li>
-<li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
-<li><p>Feb 08, 2023 – Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__==&quot;__main__&quot;</span></code> will be executed, causing problems)</p></li>
+<li><p>Apr 27, 2023 – Set commandline arguments.</p></li>
+<li><p>Apr 28, 2023 – Wrap in <code class="docutils literal notranslate"><span class="pre">__name__==&quot;__main__&quot;</span></code>.</p></li>
 </ul>
 </section>
 
@@ -345,20 +338,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="check_traj.html"
+       href="extract.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">check_traj</p>
+        <p class="prev-next-title">extract</p>
       </div>
     </a>
     <a class="right-next"
-       href="cleanup_tif.html"
+       href="flowrate.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">cleanup_tif</p>
+        <p class="prev-next-title">flowrate</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

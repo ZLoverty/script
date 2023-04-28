@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>circulation_order_parameter &#8212; script 1.0 documentation</title>
+    <title>small_imseq &#8212; script 1.0 documentation</title>
   
   
   
@@ -40,11 +40,11 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/circulation_order_parameter';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/small_imseq';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="cleanup_tif" href="cleanup_tif.html" />
-    <link rel="prev" title="check_traj" href="check_traj.html" />
+    <link rel="next" title="spatial_correlation" href="spatial_correlation.html" />
+    <link rel="prev" title="rename_ij_piv" href="rename_ij_piv.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -135,7 +135,7 @@
 <li class="toctree-l2"><a class="reference internal" href="bpass_mh.html">bpass_mh</a></li>
 <li class="toctree-l2"><a class="reference internal" href="check_bif_piv.html">check_bif_piv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="check_traj.html">check_traj</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">circulation_order_parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circulation_order_parameter.html">circulation_order_parameter</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cleanup_tif.html">cleanup_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="collect_preview.html">collect_preview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="de_piv_script.html">de_piv_script</a></li>
@@ -151,7 +151,7 @@
 <li class="toctree-l2"><a class="reference internal" href="piv_overlay.html">piv_overlay</a></li>
 <li class="toctree-l2"><a class="reference internal" href="remove_background.html">remove_background</a></li>
 <li class="toctree-l2"><a class="reference internal" href="rename_ij_piv.html">rename_ij_piv</a></li>
-<li class="toctree-l2"><a class="reference internal" href="small_imseq.html">small_imseq</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">small_imseq</a></li>
 <li class="toctree-l2"><a class="reference internal" href="spatial_correlation.html">spatial_correlation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="to_tif.html">to_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="to_vid.html">to_vid</a></li>
@@ -213,7 +213,7 @@
       
       
       
-      <li><a href="../_sources/scripts/circulation_order_parameter.rst" target="_blank"
+      <li><a href="../_sources/scripts/small_imseq.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -282,7 +282,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -293,11 +295,19 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>circulation_order_parameter</h1>
+    <h1>small_imseq</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">small_imseq</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -307,29 +317,31 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-circulation_order_parameter">
-<span id="circulation-order-parameter"></span><h1>circulation_order_parameter<a class="headerlink" href="#module-circulation_order_parameter" title="Permalink to this heading">#</a></h1>
-<p>Compute circulation order parameter according to Wioland 2013. Technical details can be found in <a class="reference external" href="https://github.com/ZLoverty/DE/blob/main/Notes/Analysis_of_collective_motions_in_droplets.pdf">my note</a>.</p>
+  <section id="module-small_imseq">
+<span id="small-imseq"></span><h1>small_imseq<a class="headerlink" href="#module-small_imseq" title="Permalink to this heading">#</a></h1>
+<section id="id1">
+<h2>small_imseq<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<p>Concentration has always been derived from the bright field images. While images are typically 1280*1080, the data we use are always coarse-grained down to 50*42. Although the down sizing step takes only several milliseconds, repeating the process over and over for hundreds of thousands of times (all images) takes a lot of time. Thus, I decide to convert the image sequences to the coarse-grained version and save them as numpy binary data. In this way, the 3000 frame video will be down sized to 3000*50*42 float16 numbers, which in total is 6M instead of the 4.64G. By saving this down sized data, the data also gets more portable because of the small size, while all the useful information is retained.</p>
 <p class="rubric">Syntax</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python circulation_order_parameter.py piv_folder out_folder x y</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python small_imseq.py img_folder out_folder wsize step</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>piv_folder – folder containing PIV data (.csv), file names indicate frame number</p></li>
-<li><p>out_folder – order parameter data file (.csv), contain frame and OP</p></li>
-<li><p>x, y – the center position</p></li>
+<li><p>img_folder – folder of image sequence</p></li>
+<li><p>out_folder – folder to save the numpy array</p></li>
+<li><p>wsize, step –  window size (int, assuming square) and step, parameter of <code class="xref py py-func docutils literal notranslate"><span class="pre">myimagelib.corrLib.divide_windows()</span></code></p></li>
 </ul>
-<p>A folder of PIV files are used to generate a single order parameter data file.</p>
-<p class="rubric">Test</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python circulation_order_parameter.py test_images\circulation_order_parameter\piv test_images\circulation_order_parameter\order_parameter 259 227</span>
-</pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The array will be saved as file ‘stack.npy’</p>
 </div>
 <p class="rubric">Edit</p>
 <ul class="simple">
-<li><p>Jan 02, 2021 – Initial commit.</p></li>
-<li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
+<li><p>Sep 20, 2020 – Initial commit.</p></li>
 <li><p>Feb 08, 2023 – Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__==&quot;__main__&quot;</span></code> will be executed, causing problems)</p></li>
+<li><p>Apr 28, 2023 – Update corrLib reference.</p></li>
 </ul>
+</section>
 </section>
 
 
@@ -345,20 +357,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="check_traj.html"
+       href="rename_ij_piv.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">check_traj</p>
+        <p class="prev-next-title">rename_ij_piv</p>
       </div>
     </a>
     <a class="right-next"
-       href="cleanup_tif.html"
+       href="spatial_correlation.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">cleanup_tif</p>
+        <p class="prev-next-title">spatial_correlation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -371,6 +383,20 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">small_imseq</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
