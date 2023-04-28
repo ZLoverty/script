@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>velocity_autocorr &#8212; script 1.0 documentation</title>
+    <title>track_droplets &#8212; script 1.0 documentation</title>
   
   
   
@@ -40,11 +40,11 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/velocity_autocorr';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/track_droplets';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="wrap_piv" href="wrap_piv.html" />
-    <link rel="prev" title="track_droplets" href="track_droplets.html" />
+    <link rel="next" title="velocity_autocorr" href="velocity_autocorr.html" />
+    <link rel="prev" title="to_vid" href="to_vid.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -157,8 +157,8 @@
 <li class="toctree-l2"><a class="reference internal" href="spatial_correlation.html">spatial_correlation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="to_tif.html">to_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="to_vid.html">to_vid</a></li>
-<li class="toctree-l2"><a class="reference internal" href="track_droplets.html">track_droplets</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">velocity_autocorr</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">track_droplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocity_autocorr.html">velocity_autocorr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wrap_piv.html">wrap_piv</a></li>
 </ul>
 </li>
@@ -216,7 +216,7 @@
       
       
       
-      <li><a href="../_sources/scripts/velocity_autocorr.rst" target="_blank"
+      <li><a href="../_sources/scripts/track_droplets.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -296,7 +296,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>velocity_autocorr</h1>
+    <h1>track_droplets</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -310,41 +310,39 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-velocity_autocorr">
-<span id="velocity-autocorr"></span><h1>velocity_autocorr<a class="headerlink" href="#module-velocity_autocorr" title="Permalink to this heading">#</a></h1>
-<p>Apply autocorrelation analysis on sequential PIV data.</p>
+  <section id="module-track_droplets">
+<span id="track-droplets"></span><h1>track_droplets<a class="headerlink" href="#module-track_droplets" title="Permalink to this heading">#</a></h1>
+<p>This code is intended for tracking droplets using <code class="docutils literal notranslate"><span class="pre">cv2.HoughCircle()</span></code> algorithm.</p>
+<p class="rubric">Algorithm</p>
+<ul class="simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">cv2.HoughCircle()</span></code> with parameters in <code class="docutils literal notranslate"><span class="pre">hough_params.json</span></code> in the analysis_folder</p></li>
+<li><p>if number_of_circle_found &gt; 0, then process next image frame</p></li>
+<li><dl class="simple">
+<dt>else if number_of_circle_found == 0, increase <code class="docutils literal notranslate"><span class="pre">param1</span></code> (not implemented)</dt><dd><ul>
+<li><p>if no particle is found after 5 iterations, save x, y as <code class="docutils literal notranslate"><span class="pre">np.nan</span></code> and skip</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
 <p class="rubric">Syntax</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python velocity_autocorr.py piv_folder out_folder [fps=50] [cutoff=2000]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">track_droplets</span><span class="o">.</span><span class="n">py</span> <span class="n">analysis_folder</span> <span class="n">nd2Dir</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>fps: the imaging frame rate</p></li>
-<li><p>cutoff: frame number above which the velocity data are not included in the analysis</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">analysis_folder</span></code> – folder to retrieve hough circle parameters <code class="docutils literal notranslate"><span class="pre">hough_params.json</span></code>, and to save trajectory results</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nd2Dir</span></code> – directory of .nd2 raw image</p></li>
 </ul>
 <p class="rubric">Test</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python velocity_autocorr.py test_images</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python track_droplets.py test_images rack_droplets test_images       est.nd2 </span>
 </pre></div>
 </div>
-<p>elocity_autocorr test_images
-elocity_autocorr
-ac_result 50 20</p>
 <p class="rubric">Edit</p>
-<ul>
-<li><p>Dec 13, 2021 – Initial commit.</p></li>
-<li><p>Feb 21, 2022 – Rewrite with new functions.</p></li>
-<li><p>Mar 16, 2022 –</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Rewrite with piv_data class</p></li>
-<li><p>Use fps instead of dt as input argument</p></li>
-<li><p>Modify doc string</p></li>
-</ol>
-</div></blockquote>
-</li>
-<li><p>Mar 23, 2022 – add smoothn as an optional smoothing method</p></li>
-<li><p>Nov 15, 2022 – Make <code class="docutils literal notranslate"><span class="pre">fps</span></code> and <code class="docutils literal notranslate"><span class="pre">cutoff</span></code> real <em>keyword</em> args.</p></li>
+<ul class="simple">
 <li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
 <li><p>Feb 08, 2023 – Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__==&quot;__main__&quot;</span></code> will be executed, causing problems)</p></li>
+<li><p>Mar 09, 2023 – (i) Use .nd2 as input image, (ii) do not save cropped images, instead generate a report, (iii) I’m trying to generate a real time report using matplotlib, but the performance was an issue. The plot window freezes, and the tracking efficiency decays over time. Therefore, I disable this report system and postpone the development to the future.</p></li>
+<li><p>Mar 14, 2023 – Remove the link step: link trajectories by nature is highly interactive, because one needs to actively check if the cutoff distance is chosen properly so that we don’t miss detected particles with the filtering.</p></li>
 </ul>
 </section>
 
@@ -361,20 +359,20 @@ ac_result 50 20</p>
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="track_droplets.html"
+       href="to_vid.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">track_droplets</p>
+        <p class="prev-next-title">to_vid</p>
       </div>
     </a>
     <a class="right-next"
-       href="wrap_piv.html"
+       href="velocity_autocorr.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">wrap_piv</p>
+        <p class="prev-next-title">velocity_autocorr</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

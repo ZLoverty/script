@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>velocity_autocorr &#8212; script 1.0 documentation</title>
+    <title>moving_mask_piv &#8212; script 1.0 documentation</title>
   
   
   
@@ -40,11 +40,11 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/velocity_autocorr';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/moving_mask_piv';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="wrap_piv" href="wrap_piv.html" />
-    <link rel="prev" title="track_droplets" href="track_droplets.html" />
+    <link rel="next" title="myautodoc" href="myautodoc.html" />
+    <link rel="prev" title="mean_velocity" href="mean_velocity.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -146,7 +146,7 @@
 <li class="toctree-l2"><a class="reference internal" href="ij_piv.html">ij_piv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="manual_entry_droplets.html">manual_entry_droplets</a></li>
 <li class="toctree-l2"><a class="reference internal" href="mean_velocity.html">mean_velocity</a></li>
-<li class="toctree-l2"><a class="reference internal" href="moving_mask_piv.html">moving_mask_piv</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">moving_mask_piv</a></li>
 <li class="toctree-l2"><a class="reference internal" href="myautodoc.html">myautodoc</a></li>
 <li class="toctree-l2"><a class="reference internal" href="network_monitor.html">network_monitor</a></li>
 <li class="toctree-l2"><a class="reference internal" href="piv_drop.html">piv_drop</a></li>
@@ -158,7 +158,7 @@
 <li class="toctree-l2"><a class="reference internal" href="to_tif.html">to_tif</a></li>
 <li class="toctree-l2"><a class="reference internal" href="to_vid.html">to_vid</a></li>
 <li class="toctree-l2"><a class="reference internal" href="track_droplets.html">track_droplets</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocity_autocorr.html">velocity_autocorr</a></li>
 <li class="toctree-l2"><a class="reference internal" href="wrap_piv.html">wrap_piv</a></li>
 </ul>
 </li>
@@ -216,7 +216,7 @@
       
       
       
-      <li><a href="../_sources/scripts/velocity_autocorr.rst" target="_blank"
+      <li><a href="../_sources/scripts/moving_mask_piv.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -296,7 +296,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>velocity_autocorr</h1>
+    <h1>moving_mask_piv</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -310,39 +310,34 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="module-velocity_autocorr">
-<span id="velocity-autocorr"></span><h1>velocity_autocorr<a class="headerlink" href="#module-velocity_autocorr" title="Permalink to this heading">#</a></h1>
-<p>Apply autocorrelation analysis on sequential PIV data.</p>
+  <section id="module-moving_mask_piv">
+<span id="moving-mask-piv"></span><h1>moving_mask_piv<a class="headerlink" href="#module-moving_mask_piv" title="Permalink to this heading">#</a></h1>
+<p>This script performs PIV on the flow field in a moving droplet. In short, the job is done in 3 steps:</p>
+<ol class="arabic simple">
+<li><p>determine droplet trajectory</p></li>
+<li><p>generate cropped images</p></li>
+<li><p>perform normal PIV on cropped images</p></li>
+</ol>
+<p>For more information, see my note <a class="reference external" href="https://github.com/ZLoverty/DE/blob/main/Notes/2022-03-02_moving-mask-droplet-frame-piv.pdf">here</a>.</p>
 <p class="rubric">Syntax</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python velocity_autocorr.py piv_folder out_folder [fps=50] [cutoff=2000]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python moving_mask_piv.py image_folder save_folder winsize overlap dt mask x0 y0 maskw maskh</span>
 </pre></div>
 </div>
 <ul class="simple">
-<li><p>fps: the imaging frame rate</p></li>
-<li><p>cutoff: frame number above which the velocity data are not included in the analysis</p></li>
+<li><p>image_folder: folder containing tif images</p></li>
+<li><p>save_folder: folder to save .csv PIV data</p></li>
+<li><p>winsize, overlap, dt: PIV settings</p></li>
+<li><p>mask: dir of mask image (tif)</p></li>
+<li><p>x0, y0, maskw, maskh: initial mask information, for computing the offset of the trajectory. Can be read from positions.csv file.</p></li>
 </ul>
 <p class="rubric">Test</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python velocity_autocorr.py test_images</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python moving_mask_piv.py test_images\moving_mask_piv</span>
 </pre></div>
 </div>
-<p>elocity_autocorr test_images
-elocity_autocorr
-ac_result 50 20</p>
+<p>aw test_imagesmoving_mask_pivpiv_result 20 10 0.02 test_imagesmoving_mask_pivmask.tif 178 161 174 174</p>
 <p class="rubric">Edit</p>
-<ul>
-<li><p>Dec 13, 2021 – Initial commit.</p></li>
-<li><p>Feb 21, 2022 – Rewrite with new functions.</p></li>
-<li><p>Mar 16, 2022 –</p>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p>Rewrite with piv_data class</p></li>
-<li><p>Use fps instead of dt as input argument</p></li>
-<li><p>Modify doc string</p></li>
-</ol>
-</div></blockquote>
-</li>
-<li><p>Mar 23, 2022 – add smoothn as an optional smoothing method</p></li>
-<li><p>Nov 15, 2022 – Make <code class="docutils literal notranslate"><span class="pre">fps</span></code> and <code class="docutils literal notranslate"><span class="pre">cutoff</span></code> real <em>keyword</em> args.</p></li>
+<ul class="simple">
+<li><p>Mar 03, 2022 – Initial commit.</p></li>
 <li><p>Jan 05, 2023 – Adapt myimagelib import style.</p></li>
 <li><p>Feb 08, 2023 – Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__==&quot;__main__&quot;</span></code> will be executed, causing problems)</p></li>
 </ul>
@@ -361,20 +356,20 @@ ac_result 50 20</p>
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="track_droplets.html"
+       href="mean_velocity.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">track_droplets</p>
+        <p class="prev-next-title">mean_velocity</p>
       </div>
     </a>
     <a class="right-next"
-       href="wrap_piv.html"
+       href="myautodoc.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">wrap_piv</p>
+        <p class="prev-next-title">myautodoc</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
