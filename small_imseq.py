@@ -13,7 +13,7 @@ Concentration has always been derived from the bright field images. While images
 
 * img_folder -- folder of image sequence
 * out_folder -- folder to save the numpy array
-* wsize, step --  window size (int, assuming square) and step, parameter of :py:func:`corrLib.divide_windows()`
+* wsize, step --  window size (int, assuming square) and step, parameter of :py:func:`myimagelib.corrLib.divide_windows()`
 
 .. note::
 
@@ -23,12 +23,13 @@ Concentration has always been derived from the bright field images. While images
 
 * Sep 20, 2020 -- Initial commit.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
+* Apr 28, 2023 -- Update corrLib reference.
 """
 
 import numpy as np
 import os
 from skimage import io
-import corrLib
+import myimagelib.corrLib
 import sys
 import time
 
@@ -40,18 +41,18 @@ def down_size_imseq(folder, windowsize=[50, 50], step=25):
 
     Args:
     folder -- folder of image sequence
-    windowsize -- parameter of corrLib.divide_windows(), pixel
-    step -- parameter of corrLib.divide_windows(), pixel
+    windowsize -- parameter of myimagelib.corrLib.divide_windows(), pixel
+    step -- parameter of myimagelib.corrLib.divide_windows(), pixel
 
     Returns:
     stack -- numpy array of size k*m*n
     """
 
-    l = corrLib.readseq(folder)
+    l = myimagelib.corrLib.readseq(folder)
     I_list = []
     for num, i in l.iterrows():
         img = io.imread(i.Dir)
-        X, Y, I = corrLib.divide_windows(img, windowsize=windowsize, step=step)
+        X, Y, I = myimagelib.corrLib.divide_windows(img, windowsize=windowsize, step=step)
         I_list.append(I)
     stack = np.stack(I_list, axis=0)
 

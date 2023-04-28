@@ -86,7 +86,7 @@ def read_raw_image_info(info_file):
     return int(fps), int(h), int(w)
 
 # folder = '/home/zhengyang/data/test_extractor'
-if name == "__main__":
+if __name__ == "__main__":
     folder = sys.argv[1]
 
     sfL = next(os.walk(folder))[1]

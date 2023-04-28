@@ -6,3 +6,6 @@ opencv-python
 matplotlib
 scikit-image
 scipy
+trackpy
+imutils
+nd2reader
