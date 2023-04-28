@@ -1,5 +1,5 @@
 """
-Particle image velocimetry (PIV) analysis on an image sequence. This script utilize the ``extended_search_area_piv()`` function of the `openpiv-python <>`_ package. Every pair of frames will give a velocity field, which will be saved as a table of [x, y, u, v]. For example, a 3-frame sequence will lead to 2 velocity fields, namely 1-2 and 2-3. More generally, an n-frame image will result in an (n-1)-frame velocity field. 
+Particle image velocimetry (PIV) analysis on an image sequence. This script utilize the ``extended_search_area_piv()`` function of the `openpiv-python <https://github.com/OpenPIV/openpiv-python>`_ package. Every pair of frames will give a velocity field, which will be saved as a table of [x, y, u, v]. For example, a 3-frame sequence will lead to 2 velocity fields, namely 1-2 and 2-3. More generally, an n-frame image will result in an (n-1)-frame velocity field. 
 
 .. rubric:: Syntax
 
