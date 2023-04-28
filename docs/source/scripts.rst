@@ -15,18 +15,24 @@ Scripts
    batch_velocity_autocorr
    bpass
    bpass_mh
+   check_bif_piv
+   check_traj
    circulation_order_parameter
+   cleanup_tif
    collect_preview
    correction
    crop_channel
    de_piv_script
    extract
+   faster_cropping
    flowrate
    gen_preview
    ij_piv
+   manual_entry_droplets
    mean_velocity
    moving_mask_piv
    myautodoc
+   network_monitor
    piv_drop
    piv_overlay
    remove_background
@@ -35,6 +41,6 @@ Scripts
    spatial_correlation
    to_tif
    to_vid
-   tracking
+   track_droplets
    velocity_autocorr
    wrap_piv
