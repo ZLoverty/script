@@ -1,4 +1,0 @@
-﻿bpass
-=====
-
-.. automodule:: bpass
