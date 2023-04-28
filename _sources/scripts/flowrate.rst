@@ -1,0 +1,4 @@
+﻿flowrate
+========
+
+.. automodule:: flowrate
