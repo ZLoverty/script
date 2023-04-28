@@ -1,6 +1,6 @@
-sphinx<6
+sphinx<6,>5
 sphinx-book-theme
-myimagelib
+# myimagelib
 pandas
 numpy
 opencv-python
