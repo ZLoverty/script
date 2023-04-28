@@ -316,7 +316,7 @@ document.write(`
                   
   <div class="section" id="module-PIV">
 <span id="piv"></span><h1>PIV<a class="headerlink" href="#module-PIV" title="Permalink to this heading">#</a></h1>
-<p>Particle image velocimetry (PIV) analysis on an image sequence. This script utilize the <code class="docutils literal notranslate"><span class="pre">extended_search_area_piv()</span></code> function of the <a href="#id1"><span class="problematic" id="id2">`openpiv-python &lt;&gt;`_</span></a> package. Every pair of frames will give a velocity field, which will be saved as a table of [x, y, u, v]. For example, a 3-frame sequence will lead to 2 velocity fields, namely 1-2 and 2-3. More generally, an n-frame image will result in an (n-1)-frame velocity field.</p>
+<p>Particle image velocimetry (PIV) analysis on an image sequence. This script utilize the <code class="docutils literal notranslate"><span class="pre">extended_search_area_piv()</span></code> function of the <a class="reference external" href="https://github.com/OpenPIV/openpiv-python">openpiv-python</a> package. Every pair of frames will give a velocity field, which will be saved as a table of [x, y, u, v]. For example, a 3-frame sequence will lead to 2 velocity fields, namely 1-2 and 2-3. More generally, an n-frame image will result in an (n-1)-frame velocity field.</p>
 <p class="rubric">Syntax</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python PIV.py img [winsize piv_folder]</span>
 </pre></div>
