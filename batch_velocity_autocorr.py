@@ -22,13 +22,12 @@ Batch velocity autocorrelation computation.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import os
-import sys
-import time
-from myimagelib.myImageLib import readdata
-
-
 if __name__ == "__main__":
+
+    import os
+    import sys
+    import time
+    from myimagelib.myImageLib import readdata
 
     main_piv_folder = sys.argv[1].rstrip(os.sep)
     parent_folder = os.path.split(main_piv_folder)[0]

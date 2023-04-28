@@ -32,12 +32,7 @@ Apply autocorrelation analysis on sequential PIV data.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import pandas as pd
-import sys
-import os
-import time
-from myimagelib.pivLib import piv_data
-from myimagelib.myImageLib import readdata
+
 
 
 
@@ -66,6 +61,14 @@ def main(piv_folder, out_folder, **kwargs):
     ac.to_csv(os.path.join(out_folder, out_filename))
 
 if __name__=="__main__":
+    
+    import pandas as pd
+    import sys
+    import os
+    import time
+    from myimagelib.pivLib import piv_data
+    from myimagelib.myImageLib import readdata
+
     piv_folder = sys.argv[1]
     out_folder = sys.argv[2]
     main(piv_folder, out_folder, **dict(arg.split("=") for arg in sys.argv[3:]))

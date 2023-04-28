@@ -27,32 +27,34 @@ Apply mask on PIV data. It calls :py:func:`pivLib.apply_mask` to treat the input
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import pandas as pd
-import numpy as np
-import os
-import sys
-from skimage import io
-from myimagelib.myImageLib import readdata, show_progress
-from myimagelib.pivLib import apply_mask
-
-
-
-def main(piv_folder, mask_dir):
-   
-   mask = io.imread(mask_dir)
-
-   l = readdata(piv_folder, "csv")
-   numFiles = len(l)
-
-   print("applying mask to {}".format(piv_folder))
-
-   for num, i in l.iterrows():
-      show_progress((num+1)/numFiles, num+1)
-      pivData = pd.read_csv(i.Dir)
-      pivData = apply_mask(pivData, mask)
-      pivData.to_csv(i.Dir, index=False)
-
 if __name__=="__main__":
+
+   import pandas as pd
+   import numpy as np
+   import os
+   import sys
+   from skimage import io
+   from myimagelib.myImageLib import readdata, show_progress
+   from myimagelib.pivLib import apply_mask
+
+
+
+   def main(piv_folder, mask_dir):
+      
+      mask = io.imread(mask_dir)
+
+      l = readdata(piv_folder, "csv")
+      numFiles = len(l)
+
+      print("applying mask to {}".format(piv_folder))
+
+      for num, i in l.iterrows():
+         show_progress((num+1)/numFiles, num+1)
+         pivData = pd.read_csv(i.Dir)
+         pivData = apply_mask(pivData, mask)
+         pivData.to_csv(i.Dir, index=False)
+
+
    piv_folder = sys.argv[1]
    mask_dir = sys.argv[2]
    main(piv_folder, mask_dir)

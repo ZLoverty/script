@@ -16,19 +16,22 @@ A GUI miniapp to quickly define crop region for bifurcation experiment images.
 * Apr 28, 2023 -- Wrap in ``__name__=="__main__"``.
 """
 
-import matplotlib.pyplot as plt
-from skimage import io
-from matplotlib.backend_bases import MouseButton
-from matplotlib.patches import Rectangle
-import numpy as np
-import os
-import pandas as pd
-from scipy.ndimage import map_coordinates
-from tifffile import imwrite
-from myimagelib.myImageLib import to8bit
-import argparse
+
 
 if __name__=="__main__":
+
+    import matplotlib.pyplot as plt
+    from skimage import io
+    from matplotlib.backend_bases import MouseButton
+    from matplotlib.patches import Rectangle
+    import numpy as np
+    import os
+    import pandas as pd
+    from scipy.ndimage import map_coordinates
+    from tifffile import imwrite
+    from myimagelib.myImageLib import to8bit
+    import argparse
+    
     ### parse commandline arguments
 
     parser = argparse.ArgumentParser(prog="fastCropper", description="A GUI miniapp to quickly define crop region for bifurcation experiment images.")

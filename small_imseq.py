@@ -26,12 +26,7 @@ Concentration has always been derived from the bright field images. While images
 * Apr 28, 2023 -- Update corrLib reference.
 """
 
-import numpy as np
-import os
-from skimage import io
-import myimagelib.corrLib
-import sys
-import time
+
 
 
 def down_size_imseq(folder, windowsize=[50, 50], step=25):
@@ -59,6 +54,14 @@ def down_size_imseq(folder, windowsize=[50, 50], step=25):
     return stack
 
 if __name__ == "__main__":
+
+    import numpy as np
+    import os
+    from skimage import io
+    import myimagelib.corrLib
+    import sys
+    import time
+
     arg_length = len(sys.argv)
 
     img_folder = sys.argv[1]

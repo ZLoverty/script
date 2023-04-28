@@ -57,11 +57,7 @@ The resulting folder structure will be the following:
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import os
-import numpy as np
-from skimage import io
-from shutil import copyfile
-import sys
+
 
 
 
@@ -87,6 +83,13 @@ def read_raw_image_info(info_file):
 
 # folder = '/home/zhengyang/data/test_extractor'
 if __name__ == "__main__":
+
+    import os
+    import numpy as np
+    from skimage import io
+    from shutil import copyfile
+    import sys
+
     folder = sys.argv[1]
 
     sfL = next(os.walk(folder))[1]

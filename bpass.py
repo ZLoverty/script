@@ -18,19 +18,22 @@ Convert *\*.nd2* file to image sequence and apply bandpass filter to each image.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import numpy as np
-from nd2reader import ND2Reader
-import matplotlib.pyplot as plt
-import math
-import skimage.io
-from scipy import fftpack
-from myimagelib.myImageLib import dirrec, to8bit, bpass
-import trackpy as tp
-import time
-import os
-import sys
+
 
 if __name__ == "__main__":
+
+    import numpy as np
+    from nd2reader import ND2Reader
+    import matplotlib.pyplot as plt
+    import math
+    import skimage.io
+    from scipy import fftpack
+    from myimagelib.myImageLib import dirrec, to8bit, bpass
+    import trackpy as tp
+    import time
+    import os
+    import sys
+
     bpassLow = 2
     bpassHigh = 100
     nd2Dir = sys.argv[1]

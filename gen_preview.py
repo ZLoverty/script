@@ -38,13 +38,7 @@ The script will extract the images of each \*.nd2 file and save as a tif image w
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import sys
-import os
-from myimagelib.myImageLib import to8bit
-from skimage import io
-from tifffile import imwrite
-from nd2reader import ND2Reader
-import numpy as np
+
 
 
 
@@ -70,6 +64,15 @@ def extract_frames(nd2Dir, indices=[0, -1]):
     return np.stack(img)
 
 if __name__=="__main__":
+
+    import sys
+    import os
+    from myimagelib.myImageLib import to8bit
+    from skimage import io
+    from tifffile import imwrite
+    from nd2reader import ND2Reader
+    import numpy as np
+
     nd2Dir = sys.argv[1]
     indices = [0, -1]
     if len(sys.argv) > 2:

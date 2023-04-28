@@ -26,17 +26,18 @@ Compute correlation length of velocity and velocity orientation.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-from myimagelib.corrLib import corrS
-from myimagelib.myImageLib import readdata
-import numpy as np
-import pandas as pd
-import os
-import time
-import sys
-import pdb
-from myimagelib.pivLib import read_piv
-
 if __name__=="__main__":
+
+    from myimagelib.corrLib import corrS
+    from myimagelib.myImageLib import readdata
+    import numpy as np
+    import pandas as pd
+    import os
+    import time
+    import sys
+    import pdb
+    from myimagelib.pivLib import read_piv
+
     input_folder = sys.argv[1]
     output_folder = sys.argv[2]
 

@@ -30,14 +30,15 @@ Batch convert *\*.nd2* files to .tif images by calling ``to_tif.py``. The code a
 * Jan 05, 2023 -- Adapt myimagelib import style.
 * Mar 09, 2023 -- (i) add ``mode="r"`` for ``readdata``, which looks for target file recursively. (ii) use in other folders
 """
-import os
-from myimagelib.myImageLib import readdata
-import sys
-import time
-import pandas as pd
-
 
 if __name__=="__main__":
+
+    import os
+    from myimagelib.myImageLib import readdata
+    import sys
+    import time
+    import pandas as pd
+
 
     script_folder, script_name = os.path.split(sys.argv[0])
     main_folder = sys.argv[1]

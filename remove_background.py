@@ -30,14 +30,16 @@ By default, it replaces the original images with background removed images.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-from skimage import io
-import numpy as np
-import os
-import sys
-from myimagelib.myImageLib import readdata, show_progress, to8bit
-from tifffile import imwrite
-
 if __name__ == "__main__":
+
+   from skimage import io
+   import numpy as np
+   import os
+   import sys
+   from myimagelib.myImageLib import readdata, show_progress, to8bit
+   from tifffile import imwrite
+
+
 
    img_folder = sys.argv[1]
    l = readdata(img_folder, "tif")

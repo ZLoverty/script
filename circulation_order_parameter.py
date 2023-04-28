@@ -25,12 +25,7 @@ A folder of PIV files are used to generate a single order parameter data file.
 * Jan 05, 2023 -- Adapt myimagelib import style.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
-import numpy as np
-import pandas as pd
-import os
-import sys
-import time
-from myimagelib.myImageLib import readdata
+
 
 
 
@@ -81,6 +76,14 @@ def test():
     print("mean velocity is {:.2f}".format(v))
 
 if __name__=="__main__":
+
+    import numpy as np
+    import pandas as pd
+    import os
+    import sys
+    import time
+    from myimagelib.myImageLib import readdata
+
     piv_folder = sys.argv[1]
     out_folder = sys.argv[2]
     x = float(sys.argv[3])

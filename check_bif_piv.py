@@ -7,15 +7,15 @@ A slider bar application for checking bifurcation PIV data. The PIV results in 3
 * Apr 28, 2023 -- Wrap in ``__name__=="__main__"``.
 """
 
-# Import libraries using import keyword
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.widgets import Slider
-from skimage import io
-from scipy.io import loadmat
-import os
-
 if __name__=="__main__":
+
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from matplotlib.widgets import Slider
+    from skimage import io
+    from scipy.io import loadmat
+    import os
+
     # date and number of experiment
     folder = "/mnt/SYMMETRIC/19 jan 2023/"
     number = 1

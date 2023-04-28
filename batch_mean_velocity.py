@@ -23,12 +23,14 @@ Batch mean velocity computation from PIV data.
 * Feb 08, 2023 -- (i) import ``readdata`` from ``myImageLib`` instead. (ii) Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import os
-import sys
-import time
-from myimagelib.myImageLib import readdata
-
 if __name__=="__main__":
+
+    import os
+    import sys
+    import time
+    from myimagelib.myImageLib import readdata
+
+
     main_piv_folder = sys.argv[1].rstrip(os.sep)
     parent_folder = os.path.split(main_piv_folder)[0]
     main_save_folder = os.path.join(parent_folder, "mean_velocity")

@@ -16,15 +16,7 @@ Check trajectory data by plotting on top of raw images. Use scroll wheel to go b
 * Apr 03, 2023 -- Initial commit.
 """
 
-import matplotlib.pyplot as plt
-import sys
-import os
-import numpy as np
-import pandas as pd
-from matplotlib.image import AxesImage
-from nd2reader import ND2Reader
-from matplotlib.patches import Ellipse
-from matplotlib.backend_bases import MouseButton
+
 
 class TrajViewer:
     """
@@ -120,7 +112,16 @@ class TrajViewer:
 
 if __name__ == "__main__":
 
-    
+    import matplotlib.pyplot as plt
+    import sys
+    import os
+    import numpy as np
+    import pandas as pd
+    from matplotlib.image import AxesImage
+    from nd2reader import ND2Reader
+    from matplotlib.patches import Ellipse
+    from matplotlib.backend_bases import MouseButton
+
     nd2Dir = sys.argv[1]
     trajDir = sys.argv[2]
     radius = float(sys.argv[3])

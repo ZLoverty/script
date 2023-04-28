@@ -26,13 +26,13 @@ A script to run PIV on all the nd2 files in a given folder. In addition, it appl
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-from myimagelib.myImageLib import readdata
-import sys
-import os
-import time
-import pandas as pd
-
 if __name__ == "__main__":
+
+    from myimagelib.myImageLib import readdata
+    import sys
+    import os
+    import time
+    import pandas as pd
 
     folder = sys.argv[1]
 

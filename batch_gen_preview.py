@@ -34,12 +34,14 @@ Batch generate preview images from nd2 files. The code assumes the following fol
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import os
-from myimagelib.myImageLib import readdata
-import sys
-import time
-
 if __name__ == "__main__":
+    
+    import os
+    from myimagelib.myImageLib import readdata
+    import sys
+    import time
+
+
     main_folder = sys.argv[1].rstrip(os.sep)
     out_folder = os.path.join(main_folder, "preview")
     if os.path.exists(out_folder) == False:

@@ -22,9 +22,7 @@ Convert all the image sequence in a given folder to videos (avi). It is a wrappe
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import os
-from myimagelib.myImageLib import dirrec
-import sys
+
 
 
 def main(folder, **kwargs):
@@ -53,5 +51,10 @@ def main(folder, **kwargs):
             print("Cannot find 8-bit folder in {}".format(i))
 
 if __name__=="__main__":
+
+    import os
+    from myimagelib.myImageLib import dirrec
+    import sys
+
     folder = sys.argv[1]
     main(folder, **dict(arg.split('=') for arg in sys.argv[2:]))

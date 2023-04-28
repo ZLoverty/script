@@ -20,7 +20,7 @@ Particle image velocimetry (PIV) analysis on an image sequence. This script util
 .. code-block:: console
 
    python PIV.py test_images/piv_drop/ --piv_folder test_images/piv_drop/
-   
+
 .. rubric:: Edit
 
 * Nov 03, 2022 -- Initial commit.
@@ -32,17 +32,16 @@ Particle image velocimetry (PIV) analysis on an image sequence. This script util
 * Apr 28, 2023 -- (i) improve docstring, (ii) remove argument ``dt``, (iii) rewrite argument parser with argparse, (iv) make pair sampling consistent (every frame instead of every 2 frames).
 """
 
-from myimagelib.pivLib import PIV
-import sys
-import os
-from skimage import io
-from myimagelib.myImageLib import readdata, show_progress
-import pandas as pd
-from nd2reader import ND2Reader
-import argparse
-
-
 if __name__ == "__main__":
+
+    from myimagelib.pivLib import PIV
+    import sys
+    import os
+    from skimage import io
+    from myimagelib.myImageLib import readdata, show_progress
+    import pandas as pd
+    from nd2reader import ND2Reader
+    import argparse
 
     parser = argparse.ArgumentParser(prog="PIV")
     parser.add_argument("img")

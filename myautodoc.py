@@ -13,12 +13,15 @@ Extract docstrings from *\*.py* files and write them in *\*.rst* files in docs/s
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 * Feb 09, 2023 -- Repurpose this script to write "scripts.rst" file, which use ``autosummary`` to document all the scripts.
 """
-import pandas as pd
-from myimagelib.myImageLib import readdata
-import sys
-import os
+
 
 if __name__ == "__main__":
+    
+    import pandas as pd
+    from myimagelib.myImageLib import readdata
+    import sys
+    import os
+
     cwd = os.path.abspath(".")
     doc_folder = os.path.join(cwd, "docs", "source")
     index_string = "Scripts\n=======\n\n.. autosummary::\n   :template: mymodule.rst\n   :toctree: scripts\n\n"

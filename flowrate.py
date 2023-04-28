@@ -40,15 +40,17 @@ We assume the following folder structure. We will generate flow rate data files 
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-from myimagelib.pivLib import compact_PIV
-import numpy as np
-import pandas as pd
-from myimagelib.myImageLib import readdata, show_progress
-import sys
-import os
-from scipy.io import loadmat
-
 if __name__ == "__main__":
+
+    from myimagelib.pivLib import compact_PIV
+    import numpy as np
+    import pandas as pd
+    from myimagelib.myImageLib import readdata, show_progress
+    import sys
+    import os
+    from scipy.io import loadmat
+
+
 
     main_piv_folder = sys.argv[1]
     flowrate_folder = sys.argv[2]

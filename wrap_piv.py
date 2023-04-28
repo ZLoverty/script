@@ -25,12 +25,14 @@ Put PIV data from separated text files into a .mat file, in order to keep the nu
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-from myimagelib.myImageLib import readdata, show_progress
-from myimagelib.pivLib import compact_PIV
-import os
-import sys
+
 
 if __name__ == "__main__":
+
+   from myimagelib.myImageLib import readdata, show_progress
+   from myimagelib.pivLib import compact_PIV
+   import os
+   import sys
 
    piv_folder = sys.argv[1]
 

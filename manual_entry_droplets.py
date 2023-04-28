@@ -17,21 +17,17 @@ A simple graphical interface to manually input droplet coords which are not foun
 * Apr 03, 2023 -- (i) Implement circle cursor to better position the manual tracking, (ii) save data on the last image and exit, (iii) index should be saved.
 """
 
-import matplotlib.pyplot as plt
-import sys
-import os
-import numpy as np
-import pandas as pd
-from matplotlib.image import AxesImage
-from nd2reader import ND2Reader
-from matplotlib.patches import Ellipse
-from matplotlib.backend_bases import MouseButton
-
-
-            
-
-
 if __name__ == "__main__":
+
+    import matplotlib.pyplot as plt
+    import sys
+    import os
+    import numpy as np
+    import pandas as pd
+    from matplotlib.image import AxesImage
+    from nd2reader import ND2Reader
+    from matplotlib.patches import Ellipse
+    from matplotlib.backend_bases import MouseButton
 
     analysis_folder = sys.argv[1]
     nd2Dir = sys.argv[2]

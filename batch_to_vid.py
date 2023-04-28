@@ -39,13 +39,12 @@ The code assumes the following folder structure:
    Use ``to_vid.py`` instead.
 """
 
-import os
-from myimagelib.myImageLib import readdata
-import sys
-
-
-
 if __name__=="__main__":
+    
+    import os
+    from myimagelib.myImageLib import readdata
+    import sys
+
     main_folder = sys.argv[1]
     folders = next(os.walk(main_folder))[1]
     print(folders)

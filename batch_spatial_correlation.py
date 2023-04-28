@@ -22,14 +22,16 @@ Batch spatial correlation computation.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-import os
-import sys
-import time
-from myimagelib.corrLib import corrS
-from myimagelib.myImageLib import readdata
-from myimagelib.pivLib import read_piv
-
 if __name__=="__main__":
+
+    import os
+    import sys
+    import time
+    from myimagelib.corrLib import corrS
+    from myimagelib.myImageLib import readdata
+    from myimagelib.pivLib import read_piv
+
+
     main_piv_folder = sys.argv[1]
     parent_folder = os.path.split(main_piv_folder)[0]
     main_save_folder = os.path.join(parent_folder, "spatial_correlation")

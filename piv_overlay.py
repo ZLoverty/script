@@ -33,14 +33,7 @@ Generate PIV arrow overlayed images for PIV visual inspection and illustration.
 * Apr 28, 2023 -- (i) make avi videos and delete jpg files, (ii) no longer require output_folder. Instead, always store the .jpg files in piv_folder/output first, and then convert the .jpg stack into .avi movie. The .avi will be saved in the same folder as the .mat PIV data files. The .jpg images will be deleted after the .avi video is generated. 
 """
 
-import os
-import argparse
-import numpy as np
-from skimage import io
-import matplotlib.pyplot as plt
-from scipy.io import loadmat
-import shutil
-from myimagelib.myImageLib import show_progress
+
 
 
 
@@ -49,6 +42,16 @@ def determine_arrow_scale(u, v, sparcity):
     return max(np.nanmax(u), np.nanmax(v)) * col / sparcity / 1.5
 
 if __name__=="__main__": 
+
+    import os
+    import argparse
+    import numpy as np
+    from skimage import io
+    import matplotlib.pyplot as plt
+    from scipy.io import loadmat
+    import shutil
+    from myimagelib.myImageLib import show_progress
+
     parser = argparse.ArgumentParser(prog="pivOverlay", description="Generate PIV overlay images.", )
     parser.add_argument("matDir")
     parser.add_argument("imgDir")

@@ -38,16 +38,16 @@ For raw, output image sequences are saved in subfolders in the same folder as th
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
 
-from skimage import io
-from nd2reader import ND2Reader
-import time
-import os
-import sys
-import shutil
-from myimagelib.myImageLib import rawImage
-
-
 if __name__ == "__main__":
+    
+    from skimage import io
+    from nd2reader import ND2Reader
+    import time
+    import os
+    import sys
+    import shutil
+    from myimagelib.myImageLib import rawImage
+
     nd2Dir = sys.argv[1]
     remove = False
     if len(sys.argv) > 2:
