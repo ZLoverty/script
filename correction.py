@@ -12,28 +12,28 @@ Subpixel correction of droplet trajectory data, based on cross-boundary fitting 
 * Mar 13, 2023 -- (i) Adapt to nd2 images, (ii) apply only on inner trajectory, instead of on both inner and outer. It turns out that the outer trjectory can add more noise to the inner trajectory. 
 """
 
-import numpy as np
-from skimage import io, filters, draw
-import os
-import matplotlib.pyplot as plt
-import cv2
-import matplotlib.patches as mpatch
-import pandas as pd
-from myimagelib.myImageLib import to8bit, show_progress, bestcolor, gauss1, readdata
-import time
-import trackpy as tp
-import json
-from scipy.optimize import curve_fit
-from scipy.signal import savgol_filter
-import cv2
-from scipy.signal import argrelextrema, argrelmin
-from scipy.ndimage import gaussian_filter1d
-from myimagelib.deLib import subpixel_correction, circle_quality_std
-import sys
-from nd2reader import ND2Reader
-
-
 if __name__ == "__main__":
+    import numpy as np
+    from skimage import io, filters, draw
+    import os
+    import matplotlib.pyplot as plt
+    import cv2
+    import matplotlib.patches as mpatch
+    import pandas as pd
+    from myimagelib.myImageLib import to8bit, show_progress, bestcolor, gauss1, readdata
+    import time
+    import trackpy as tp
+    import json
+    from scipy.optimize import curve_fit
+    from scipy.signal import savgol_filter
+    import cv2
+    from scipy.signal import argrelextrema, argrelmin
+    from scipy.ndimage import gaussian_filter1d
+    from myimagelib.deLib import subpixel_correction, circle_quality_std
+    import sys
+    from nd2reader import ND2Reader
+
+
     analysis_folder = sys.argv[1]
     nd2Dir = sys.argv[2]
 

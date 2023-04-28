@@ -31,23 +31,21 @@ For more information, see my note `here <https://github.com/ZLoverty/DE/blob/mai
 * Jan 05, 2023 -- Adapt myimagelib import style.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
-import numpy as np
-import matplotlib.pyplot as plt
-from skimage import io
-import os
-# from scipy.signal import medfilt2d
-import pandas as pd
-import time
-# from xcorr_funcs import *
-from myimagelib.myImageLib import readdata
-import sys
-import time
-import matplotlib.pyplot as plt
-from myimagelib.deLib import droplet_image
-import json
-# %% codecell
 
 if __name__ == "__main__":
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from skimage import io
+    import os
+    import pandas as pd
+    import time
+    from myimagelib.myImageLib import readdata
+    import sys
+    import time
+    import matplotlib.pyplot as plt
+    from myimagelib.deLib import droplet_image
+    import json
+
     image_folder = sys.argv[1]
     save_folder = sys.argv[2]
     winsize = int(sys.argv[3])

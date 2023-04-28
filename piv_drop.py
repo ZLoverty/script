@@ -28,38 +28,38 @@ Perform PIV analysis on an image sequence of **bacteria in a droplet**.
 * Jan 05, 2023 -- Adapt myimagelib import style.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 """
-from myimagelib.pivLib import PIV_masked
-import numpy as np
-from skimage import io
-import os
-# from scipy.signal import medfilt2d
-import pandas as pd
-import sys
-from myimagelib.myImageLib import readdata
-import time
-from multiprocessing import Pool
-from itertools import repeat
-from myimagelib.deLib import droplet_image
 
-
-
-# temporarily deprecated
-def PIV_droplet(I0dir, I1dir, I0name, I1name, winsize, overlap, dt, mask, save_folder):
-    """Perform PIV analysis on the image sequence in given folder. Specific for images of droplets.
-    Args:
-    I0, I1 -- adjacent images in a sequence
-    winsize, overlap, dt -- regular PIV params
-    mask -- a binary image of the same size as I0 and I1
-    Returns:
-    None"""
-    # apply ROI
-    I0 = io.imread(I0dir)
-    I1 = io.imread(I1dir)
-    x, y, u, v = PIV_masked(I0, I1, winsize, overlap, dt, mask)
-    frame_data = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
-    frame_data.to_csv(os.path.join(save_folder, "{0}-{1}.csv".format(I0name, I1name)), index=False)
 
 if __name__=="__main__":
+    from myimagelib.pivLib import PIV_masked
+    import numpy as np
+    from skimage import io
+    import os
+    # from scipy.signal import medfilt2d
+    import pandas as pd
+    import sys
+    from myimagelib.myImageLib import readdata
+    import time
+    from multiprocessing import Pool
+    from itertools import repeat
+    from myimagelib.deLib import droplet_image
+
+    # temporarily deprecated
+    def PIV_droplet(I0dir, I1dir, I0name, I1name, winsize, overlap, dt, mask, save_folder):
+        """Perform PIV analysis on the image sequence in given folder. Specific for images of droplets.
+        Args:
+        I0, I1 -- adjacent images in a sequence
+        winsize, overlap, dt -- regular PIV params
+        mask -- a binary image of the same size as I0 and I1
+        Returns:
+        None"""
+        # apply ROI
+        I0 = io.imread(I0dir)
+        I1 = io.imread(I1dir)
+        x, y, u, v = PIV_masked(I0, I1, winsize, overlap, dt, mask)
+        frame_data = pd.DataFrame({"x": x.flatten(), "y": y.flatten(), "u": u.flatten(), "v": v.flatten()})
+        frame_data.to_csv(os.path.join(save_folder, "{0}-{1}.csv".format(I0name, I1name)), index=False)
+
     image_folder = sys.argv[1]
     save_folder = sys.argv[2]
     winsize = int(sys.argv[3])

@@ -46,67 +46,67 @@ The folder structure is illustrated below:
 * Mar 31, 2023 -- Explicitly convert image dtype to float32 when dividing median to reduce memory usage. 
 """
 
-import sys
-import os
-import cv2
-from skimage import io
-import pandas as pd
-from myimagelib.myImageLib import readdata, show_progress, to8bit
-from imutils import rotate
-from tifffile import imwrite
-from nd2reader import ND2Reader
-import numpy as np
-from scipy.ndimage import map_coordinates
-
-
-def rotate_crop(nd2Dir, crop_data):
-    """
-    Use the rotate-crop approach to generate image ROIs. This is the traditional method, where manual crop_data generated in ImageJ is required. For more information, see Section 1 of "bifurcation data analysis" notebook. 
-    """
-    crops = {}
-    for j in range(0, len(crop_data)//2):
-        crops[j] = []
-    with ND2Reader(nd2Dir) as images:
-        nImages = len(images)
-        for num, image in enumerate(images):
-            show_progress((num+1)/nImages, os.path.split(nd2Dir)[1])
-            for j in range(0, len(crop_data)//2): # loop over all possible croppings
-                # convert to angle, xy, wh
-                angle = 90 - crop_data.at[2*j, "Angle"]
-                x, y, w, h = crop_data.at[2*j+1, "BX"], crop_data.at[2*j+1, "BY"], crop_data.at[2*j+1, "Width"], crop_data.at[2*j+1, "Height"]
-                imgr = rotate(image, angle=angle) # rotate
-                crop = imgr[y:y+h, x:x+w] # crop
-                crops[j].append(crop)
-    return crops
-
-def map_crop(nd2Dir, crop_data):
-    """
-    Use ``scipy.ndimage.map_coordinates`` to generate image ROIs. This is a new method, which prevents the loss of image information due to rotation. The crop_data should be generated using the "faster_cropping.py" script and should contain [BX, BY, hu0, hu1, wu0, wu1, h, w].
-    """
-    crops = {}
-    X = {}
-    Y = {}
-    for j in range(0, len(crop_data)):
-        crops[j] = []
-        # read crop_data
-        x, y, hu0, hu1, wu0, wu1, h, w = crop_data[["BX", "BY", "hu0", "hu1", "wu0", "wu1", "h", "w"]].loc[j]
-        # xb = np.array([x, y])
-        # h_unit = np.array([hu0, hu1])
-        # w_unit = np.array([wu0, wu1])
-        YY, XX = np.mgrid[0:h, 0:w]
-        YY = np.flip(YY, axis=0)
-        X[j] = x + XX * wu0 + YY * hu0
-        Y[j] = y + XX * wu1 + YY * hu1
-
-    with ND2Reader(nd2Dir) as images:
-        nImages = len(images)
-        for num, image in enumerate(images):
-            show_progress((num+1)/nImages, os.path.split(nd2Dir)[1])
-            for j in range(0, len(crop_data)): # loop over all possible croppings
-                crops[j].append(map_coordinates(image, [Y[j], X[j]], order=0, mode="constant"))
-    return crops
-
 if __name__ == "__main__":
+    import sys
+    import os
+    import cv2
+    from skimage import io
+    import pandas as pd
+    from myimagelib.myImageLib import readdata, show_progress, to8bit
+    from imutils import rotate
+    from tifffile import imwrite
+    from nd2reader import ND2Reader
+    import numpy as np
+    from scipy.ndimage import map_coordinates
+
+    def rotate_crop(nd2Dir, crop_data):
+        """
+        Use the rotate-crop approach to generate image ROIs. This is the traditional method, where manual crop_data generated in ImageJ is required. For more information, see Section 1 of "bifurcation data analysis" notebook. 
+        """
+        crops = {}
+        for j in range(0, len(crop_data)//2):
+            crops[j] = []
+        with ND2Reader(nd2Dir) as images:
+            nImages = len(images)
+            for num, image in enumerate(images):
+                show_progress((num+1)/nImages, os.path.split(nd2Dir)[1])
+                for j in range(0, len(crop_data)//2): # loop over all possible croppings
+                    # convert to angle, xy, wh
+                    angle = 90 - crop_data.at[2*j, "Angle"]
+                    x, y, w, h = crop_data.at[2*j+1, "BX"], crop_data.at[2*j+1, "BY"], crop_data.at[2*j+1, "Width"], crop_data.at[2*j+1, "Height"]
+                    imgr = rotate(image, angle=angle) # rotate
+                    crop = imgr[y:y+h, x:x+w] # crop
+                    crops[j].append(crop)
+        return crops
+
+    def map_crop(nd2Dir, crop_data):
+        """
+        Use ``scipy.ndimage.map_coordinates`` to generate image ROIs. This is a new method, which prevents the loss of image information due to rotation. The crop_data should be generated using the "faster_cropping.py" script and should contain [BX, BY, hu0, hu1, wu0, wu1, h, w].
+        """
+        crops = {}
+        X = {}
+        Y = {}
+        for j in range(0, len(crop_data)):
+            crops[j] = []
+            # read crop_data
+            x, y, hu0, hu1, wu0, wu1, h, w = crop_data[["BX", "BY", "hu0", "hu1", "wu0", "wu1", "h", "w"]].loc[j]
+            # xb = np.array([x, y])
+            # h_unit = np.array([hu0, hu1])
+            # w_unit = np.array([wu0, wu1])
+            YY, XX = np.mgrid[0:h, 0:w]
+            YY = np.flip(YY, axis=0)
+            X[j] = x + XX * wu0 + YY * hu0
+            Y[j] = y + XX * wu1 + YY * hu1
+
+        with ND2Reader(nd2Dir) as images:
+            nImages = len(images)
+            for num, image in enumerate(images):
+                show_progress((num+1)/nImages, os.path.split(nd2Dir)[1])
+                for j in range(0, len(crop_data)): # loop over all possible croppings
+                    crops[j].append(map_coordinates(image, [Y[j], X[j]], order=0, mode="constant"))
+        return crops
+
+
     crop_data_dir = sys.argv[1]
     nd2Dir = sys.argv[2]
     method = sys.argv[3]

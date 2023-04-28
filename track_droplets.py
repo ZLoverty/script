@@ -31,79 +31,84 @@ This code is intended for tracking droplets using ``cv2.HoughCircle()`` algorith
 * Mar 14, 2023 -- Remove the link step: link trajectories by nature is highly interactive, because one needs to actively check if the cutoff distance is chosen properly so that we don't miss detected particles with the filtering. 
 """
 
-import numpy as np
-from skimage import io, filters, draw
-import os
-import matplotlib.pyplot as plt
-import cv2
-import matplotlib.patches as mpatch
-import pandas as pd
-from myimagelib.myImageLib import to8bit, show_progress, bestcolor, gauss1, readdata
-import time
-import trackpy as tp
-import json
-from scipy.optimize import curve_fit
-from scipy.signal import savgol_filter
-import cv2
-from scipy.signal import argrelextrema, argrelmin
-from scipy.ndimage import gaussian_filter1d
-import sys
-from nd2reader import ND2Reader
 
 
 
 
-def report(traj, hough_params, nd2Dir, num_images, number_of_circles_detected, fig, img):
-    # generate report (for a sketch, see https://drive.google.com/open?id=1DOkgLN8IF6_Pln0teigA82nlB-SXCexc&authuser=liux3141%40umn.edu&usp=drive_fs)
-    
-    plt.clf()
-    subfigs = fig.subfigures(3, 1, height_ratios=[0.2, 0.4, 0.4])
 
-    # - number / total frames where no circles are found
-    ax = subfigs[0].subplots()
-    ax.annotate("{0:d}/{1:d} droplets found".format(len(traj.dropna()), num_images), \
-                (0.5, 0.5), xycoords="axes fraction", fontsize=50,
-                verticalalignment="center", horizontalalignment="center")
-    ax.axis("off")
 
-    # - distribution of circle radius
-    ax = subfigs[1].subplots(1, 2, width_ratios=(3, 7))
-
-    hist, bin_edges = np.histogram(traj["r"], bins=np.linspace(hough_params["minRadius"], hough_params["maxRadius"], 5))
-    ax[0].bar(bin_edges[:-1], hist)
-    ax[0].set_title("radius distribution")
-    
-    # - number of circles over time
-    ax[1].plot(range(num_images), number_of_circles_detected)
-    ax[1].set_title("number of circles detected")
-
-    # - scatter plot
-    ax = subfigs[2].subplots(1, 4)
-
-    # - snapshots
-    # randomly sample 3 frames and draw
-    count = 0
-    # for num, i in traj.sample(3).iterrows():
-    #     with ND2Reader(nd2Dir) as images:
-    #         img = images[i.frame]
-    #     ax[count].imshow(img, cmap="gray")
-    #     circ = mpatch.Circle((i.x, i.y), i.r, fill=False, color="red")
-    #     ax[count].add_patch(circ)
-    #     ax[count].set_title("frame {:d}".format(i.frame.astype("int")))
-    #     count += 1
-
-    ax[count].imshow(img, cmap="gray")
-    ax[count].scatter(traj.x, traj.y, s=1)
-
-    fig.canvas.draw()
-    plt.pause(.001)
-
-    return fig
-    # fig.savefig(os.path.join(analysis_folder, "tracking_report.pdf"))
     
 
 
 if __name__ == "__main__":
+    import numpy as np
+    from skimage import io, filters, draw
+    import os
+    import matplotlib.pyplot as plt
+    import cv2
+    import matplotlib.patches as mpatch
+    import pandas as pd
+    from myimagelib.myImageLib import to8bit, show_progress, bestcolor, gauss1, readdata
+    import time
+    import trackpy as tp
+    import json
+    from scipy.optimize import curve_fit
+    from scipy.signal import savgol_filter
+    import cv2
+    from scipy.signal import argrelextrema, argrelmin
+    from scipy.ndimage import gaussian_filter1d
+    import sys
+    from nd2reader import ND2Reader
+
+    def report(traj, hough_params, nd2Dir, num_images, number_of_circles_detected, fig, img):
+        # generate report (for a sketch, see https://drive.google.com/open?id=1DOkgLN8IF6_Pln0teigA82nlB-SXCexc&authuser=liux3141%40umn.edu&usp=drive_fs)
+        
+        plt.clf()
+        subfigs = fig.subfigures(3, 1, height_ratios=[0.2, 0.4, 0.4])
+
+        # - number / total frames where no circles are found
+        ax = subfigs[0].subplots()
+        ax.annotate("{0:d}/{1:d} droplets found".format(len(traj.dropna()), num_images), \
+                    (0.5, 0.5), xycoords="axes fraction", fontsize=50,
+                    verticalalignment="center", horizontalalignment="center")
+        ax.axis("off")
+
+        # - distribution of circle radius
+        ax = subfigs[1].subplots(1, 2, width_ratios=(3, 7))
+
+        hist, bin_edges = np.histogram(traj["r"], bins=np.linspace(hough_params["minRadius"], hough_params["maxRadius"], 5))
+        ax[0].bar(bin_edges[:-1], hist)
+        ax[0].set_title("radius distribution")
+        
+        # - number of circles over time
+        ax[1].plot(range(num_images), number_of_circles_detected)
+        ax[1].set_title("number of circles detected")
+
+        # - scatter plot
+        ax = subfigs[2].subplots(1, 4)
+
+        # - snapshots
+        # randomly sample 3 frames and draw
+        count = 0
+        # for num, i in traj.sample(3).iterrows():
+        #     with ND2Reader(nd2Dir) as images:
+        #         img = images[i.frame]
+        #     ax[count].imshow(img, cmap="gray")
+        #     circ = mpatch.Circle((i.x, i.y), i.r, fill=False, color="red")
+        #     ax[count].add_patch(circ)
+        #     ax[count].set_title("frame {:d}".format(i.frame.astype("int")))
+        #     count += 1
+
+        ax[count].imshow(img, cmap="gray")
+        ax[count].scatter(traj.x, traj.y, s=1)
+
+        fig.canvas.draw()
+        plt.pause(.001)
+
+        return fig
+        # fig.savefig(os.path.join(analysis_folder, "tracking_report.pdf"))
+
+
     # system args
 
     analysis_folder = sys.argv[1]
