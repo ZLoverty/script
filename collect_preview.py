@@ -26,7 +26,7 @@ Collect all the tif files under preview folder into the main folder. Assume file
 
    python collect_preview main_folder
 
-* crop_data: the folder that contains subfolders named "preview".
+* main_folder: the folder that contains subfolders named "preview".
 
 .. note::
 

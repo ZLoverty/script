@@ -1,7 +1,4 @@
 """
-moving_mask_piv
-===============
-
 This script performs PIV on the flow field in a moving droplet. In short, the job is done in 3 steps:
 
 1. determine droplet trajectory
