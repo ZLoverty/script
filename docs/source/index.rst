@@ -9,6 +9,5 @@ Contents
 .. toctree:: 
    
    scripts
-   notebooks
 
 
