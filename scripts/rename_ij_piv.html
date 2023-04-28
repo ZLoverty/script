@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rename_ij_piv &#8212; script 1.0 documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'scripts/rename_ij_piv';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="small_imseq" href="small_imseq.html" />
+    <link rel="prev" title="remove_background" href="remove_background.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">script 1.0 documentation</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../scripts.html">Scripts</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="PIV.html">PIV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="apply_mask.html">apply_mask</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_gen_preview.html">batch_gen_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_mean_velocity.html">batch_mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_spatial_correlation.html">batch_spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_tif.html">batch_to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_to_vid.html">batch_to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="batch_velocity_autocorr.html">batch_velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bpass.html">bpass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bpass_mh.html">bpass_mh</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_bif_piv.html">check_bif_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="check_traj.html">check_traj</a></li>
+<li class="toctree-l2"><a class="reference internal" href="circulation_order_parameter.html">circulation_order_parameter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cleanup_tif.html">cleanup_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="collect_preview.html">collect_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="correction.html">correction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="crop_channel.html">crop_channel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="de_piv_script.html">de_piv_script</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extract.html">extract</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faster_cropping.html">faster_cropping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="flowrate.html">flowrate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gen_preview.html">gen_preview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ij_piv.html">ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual_entry_droplets.html">manual_entry_droplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mean_velocity.html">mean_velocity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="moving_mask_piv.html">moving_mask_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="myautodoc.html">myautodoc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="network_monitor.html">network_monitor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piv_drop.html">piv_drop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="piv_overlay.html">piv_overlay</a></li>
+<li class="toctree-l2"><a class="reference internal" href="remove_background.html">remove_background</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">rename_ij_piv</a></li>
+<li class="toctree-l2"><a class="reference internal" href="small_imseq.html">small_imseq</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spatial_correlation.html">spatial_correlation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_tif.html">to_tif</a></li>
+<li class="toctree-l2"><a class="reference internal" href="to_vid.html">to_vid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="track_droplets.html">track_droplets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="velocity_autocorr.html">velocity_autocorr</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wrap_piv.html">wrap_piv</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/scripts/rename_ij_piv.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>rename_ij_piv</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="section" id="module-rename_ij_piv">
+<span id="rename-ij-piv"></span><h1>rename_ij_piv<a class="headerlink" href="#module-rename_ij_piv" title="Permalink to this heading">#</a></h1>
+<p>Rename the PIV data file generated by the ImageJ macro <code class="docutils literal notranslate"><span class="pre">_0.txt</span></code> to my format <code class="docutils literal notranslate"><span class="pre">{:05d}.csv</span></code>. Keep only x, y, u, v columns and add mask column if applicable.</p>
+<p class="rubric">Syntax</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">python rename_ij_piv.py piv_folder</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>piv_folder: piv data folder containing .txt files</p></li>
+</ul>
+<p class="rubric">Edit</p>
+<ul class="simple">
+<li><p>Nov 30, 2022 – Initial commit.</p></li>
+<li><p>Dec 01, 2022 – Remove apply mask step, because it is not indicated in the script name and could be confusing.</p></li>
+<li><p>Dec 13, 2022 – Remove residual mask related code.</p></li>
+<li><p>Jan 05, 2023 – (i) Remove unused import. (ii) Adapt myimagelib import style.</p></li>
+<li><p>Feb 08, 2023 – Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__==&quot;__main__&quot;</span></code> will be executed, causing problems)</p></li>
+</ul>
+</div>
+
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="remove_background.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">remove_background</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="small_imseq.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">small_imseq</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Zhengyang Liu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022-2023, Zhengyang Liu.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
