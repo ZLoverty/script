@@ -6,4 +6,3 @@ opencv-python
 matplotlib
 scikit-image
 scipy
-trackpy
