@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath(os.path.join("..", "..")))
 # -- Project information -----------------------------------------------------
 
 project = 'script'
-copyright = '2022, Zhengyang Liu'
+copyright = '2022-2023, Zhengyang Liu'
 author = 'Zhengyang Liu'
 
 # The full version, including alpha/beta/rc tags
