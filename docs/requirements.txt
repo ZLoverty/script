@@ -1,9 +1,2 @@
-sphinx<6,>5
+sphinx
 sphinx-book-theme
-# myimagelib
-pandas
-numpy
-opencv-python
-matplotlib
-scikit-image
-scipy
