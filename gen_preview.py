@@ -36,11 +36,8 @@ The script will extract the images of each \*.nd2 file and save as a tif image w
 * Dec 06, 2022 -- Now save first and last frames for a single nd2. Change of default behavior!
 * Jan 05, 2023 -- Adapt myimagelib import style.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
+* Jun 01, 2023 -- (i) Use argparse for selecting preview frames, (ii) save preview images in the same folder as the nd2 images. 
 """
-
-
-
-
 
 def extract_first_frame(nd2Dir):
     """Extract the first image in .nd2 and convert to 8-bit.
@@ -53,7 +50,7 @@ def extract_first_frame(nd2Dir):
         img = to8bit(images[0])
     return img
 
-def extract_frames(nd2Dir, indices=[0, -1]):
+def extract_frames(nd2Dir, indices):
     """Extract multiple frames from nd2 images and return as a 3D array.
     nd2Dir -- dir of nd2 file
     indices -- indices of frames to preview"""
@@ -61,27 +58,34 @@ def extract_frames(nd2Dir, indices=[0, -1]):
     with ND2Reader(nd2Dir) as images:
         for i in indices:
             img.append(images[i])
-    return np.stack(img)
+    return to8bit(np.stack(img))
 
 if __name__=="__main__":
 
     import sys
     import os
     from myimagelib.myImageLib import to8bit
-    from skimage import io
     from tifffile import imwrite
     from nd2reader import ND2Reader
     import numpy as np
+    import argparse
 
-    nd2Dir = sys.argv[1]
-    indices = [0, -1]
-    if len(sys.argv) > 2:
-        indices = [int(sys.argv[2])]
-    # create preview folder
-    preview_folder = os.path.join(os.path.split(nd2Dir)[0], "preview")
-    outDir = os.path.join(preview_folder, os.path.split(nd2Dir)[1].split(".")[0] + ".tif")
-    if os.path.exists(preview_folder) == False:
-        os.makedirs(preview_folder)
-    img = extract_frames(nd2Dir, indices=indices)
+    parser = argparse.ArgumentParser(prog="gen_preview", description="Generate preview tif images from nd2 raw image.")
+    parser.add_argument("nd2Dir")
+    parser.add_argument("--frame", default=None, nargs="+", type=int)
+
+    args = parser.parse_args()
+    nd2Dir = args.nd2Dir
+    frame = args.frame
+
+    assert(nd2Dir.endswith(".nd2"))
+    # get parent folder
+    outDir = nd2Dir.replace(".nd2", ".tif")
+
+    if frame == None:
+        img = extract_first_frame(nd2Dir)
+    else:
+        img = extract_frames(nd2Dir, indices=frame)
+
     imwrite(outDir, img)
     print("{0} -> {1}".format(nd2Dir, outDir))
