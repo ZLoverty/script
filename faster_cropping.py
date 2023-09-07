@@ -14,6 +14,7 @@ A GUI miniapp to quickly define crop region for bifurcation experiment images.
 
 * Apr 27, 2023 -- Set commandline arguments.
 * Apr 28, 2023 -- Wrap in ``__name__=="__main__"``.
+* Sep 06, 2023 -- Add translation argument ``--xtranslate`` and ``--ytranslate``. Both are lists of integers, specifying the translation of the origins of the cropping regions. They should be in the same length as the ``angle`` argument. 
 """
 
 
@@ -46,6 +47,14 @@ if __name__=="__main__":
     parser.add_argument("--height",
                         type=int,
                         default=500)
+    parser.add_argument("--xtranslate",
+                        nargs="*",
+                        type=int,
+                        default=[0,0,0])
+    parser.add_argument("--ytranslate",
+                        nargs="*",
+                        type=int,
+                        default=[0,0,0])
     args = parser.parse_args()
 
     imgDir = args.imgDir
@@ -55,6 +64,8 @@ if __name__=="__main__":
     angles = args.angles
 
     w, h = args.width, args.height
+
+    xt, yt = args.xtranslate, args.ytranslate
 
     ### Settings above
 
@@ -145,9 +156,10 @@ if __name__=="__main__":
                 self.h_unit[i] = np.array((-np.sin(self.angles[i]/180*np.pi), np.cos(self.angles[i]/180*np.pi)))
                 self.w_unit[i] = np.array((np.cos(self.angles[i]/180*np.pi), np.sin(self.angles[i]/180*np.pi)))
                 # set lines
-                self.lines[i].set_data([self.xc[0], self.xc[0]+length*self.h_unit[i][0]], [self.xc[1], self.xc[1]+length*self.h_unit[i][1]])
+                self.lines[i].set_data([self.xc[0] + xt[i], self.xc[0]+length*self.h_unit[i][0] + xt[i]], 
+                                       [self.xc[1] + yt[i], self.xc[1]+length*self.h_unit[i][1] + yt[i]])
                 # compute rectangle base points
-                self.xy[i] = self.xc - w/2*self.w_unit[i] + w/4*self.h_unit[i]
+                self.xy[i] = self.xc - w/2*self.w_unit[i] + w/4*self.h_unit[i] + np.array([xt[i], yt[i]])
                 # set rectangles
                 self.rects[i].set(xy=self.xy[i], angle=self.angles[i], width=w, height=h)
 
