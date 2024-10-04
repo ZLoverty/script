@@ -36,6 +36,7 @@ For raw, output image sequences are saved in subfolders in the same folder as th
     4. Update the doc string.
 * Jan 05, 2023 -- Adapt myimagelib import style.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
+* Oct 04, 2024 -- Import rawImage from utils.py. No longer generate raw images. 
 """
 
 if __name__ == "__main__":
@@ -46,7 +47,7 @@ if __name__ == "__main__":
     import os
     import sys
     import shutil
-    from myimagelib.myImageLib import rawImage
+    from utils import rawImage
 
     nd2Dir = sys.argv[1]
     remove = False
