@@ -21,13 +21,19 @@ Convert all the image sequence in a given folder to videos (avi). It is a wrappe
 * Jan 05, 2023 -- Adapt myimagelib import style.
 * Feb 08, 2023 -- Rewrite in function wrapper form, to make autodoc work properly. (autodoc import the script and execute it, so anything outside ``if __name__=="__main__"`` will be executed, causing problems)
 * Oct 04, 2024 -- Add argument parser to make it more user-friendly. Only convert one video now, instead of all videos in the folder.
+* Oct 17, 2024 -- Add a filter to ensure the dimensions are divisible by 2.
 """
 
 def main(folder, fmt, fps):
     input_imseq = os.path.join(folder, fmt)
     name = os.path.basename(folder)
     output_file = os.path.join(os.path.dirname(folder), name+".mp4")
-    cmd = "ffmpeg -y -framerate {0:f} -i \"{1}\" -b:v 4M -minrate 4M -maxrate 4M -bufsize 4M -pix_fmt yuv420p \"{2}\"".format(fps, input_imseq, output_file)
+
+    cmd = (
+        "ffmpeg -y -framerate {0:f} -i \"{1}\" "
+        "-vf \"pad=ceil(iw/2)*2:ceil(ih/2)*2\" "
+        "-b:v 4M -minrate 4M -maxrate 4M -bufsize 4M -pix_fmt yuv420p \"{2}\""
+    ).format(fps, input_imseq, output_file)
     print("==============Start converting {} to video~~==============\n".format(name))
     os.system(cmd)
     print("\nConversion of {0} is successful!\nA video is saved at {1}\n\n".format(name, output_file))
